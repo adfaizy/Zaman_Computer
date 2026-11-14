@@ -117,7 +117,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-we
 img{max-width:100%;display:block}
 button{font-family:inherit;cursor:pointer}
 input,select,textarea{font-family:inherit}
-.container{width:min(1240px,100% - 2.5rem);margin-inline:auto}
+.container{width:min(1200px,100% - 2rem);margin-inline:auto}
 section{scroll-margin-top:calc(var(--nav-h) + 20px)}
 .skip-link{position:absolute;top:-60px;left:1rem;z-index:2000;background:var(--gold);color:#111;padding:.6rem 1.2rem;border-radius:8px;font-weight:600;text-decoration:none;transition:top .25s}
 .skip-link:focus{top:10px}
@@ -207,9 +207,9 @@ section{scroll-margin-top:calc(var(--nav-h) + 20px)}
 .text-link{color:var(--gold-2);text-decoration:none;font-size:.85rem;font-weight:600;display:inline-flex;align-items:center;gap:.4rem;border-bottom:1px solid var(--border-gold);padding-bottom:.15rem;white-space:nowrap}
 .text-link:hover{color:var(--gold-2)}
 /* ═══ Product grids & cards ═══ */
-.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem}
-.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
-.product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem}
+.grid-4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.4rem}
+.grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.4rem}
+.product-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.4rem}
 .product-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;transition:transform .35s,box-shadow .35s,border-color .35s;position:relative}
 .product-card:hover{transform:translateY(-6px);border-color:var(--border-gold);box-shadow:var(--shadow),var(--gold-glow)}
 .product-media{position:relative;aspect-ratio:4/3;overflow:hidden;background:#000}
@@ -237,7 +237,7 @@ section{scroll-margin-top:calc(var(--nav-h) + 20px)}
 .inquire[disabled]{background:var(--border);color:var(--muted);cursor:not-allowed;transform:none;box-shadow:none}
 
 /* ═══ Category tiles ═══ */
-.cat-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:1rem}
+.cat-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:1rem}
 .cat-tile{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.3rem .8rem 1.1rem;text-align:center;display:flex;flex-direction:column;align-items:center;gap:.55rem;transition:transform .3s,border-color .3s,background .3s;color:inherit;text-decoration:none;font:inherit;cursor:pointer}
 .cat-tile:hover{transform:translateY(-4px);border-color:var(--border-gold);background:var(--card-2)}
 .cat-icon{width:56px;height:56px;border-radius:14px;background:linear-gradient(160deg,var(--card-2),var(--card-2));border:1px solid var(--border-gold);display:flex;align-items:center;justify-content:center;color:var(--gold)}
@@ -245,7 +245,7 @@ section{scroll-margin-top:calc(var(--nav-h) + 20px)}
 .cat-tile small{color:var(--muted);font-size:.66rem;letter-spacing:.04em}
 
 /* ═══ Why choose ═══ */
-.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+.why-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.2rem}
 .why-card{background:linear-gradient(180deg,var(--card),var(--card));border:1px solid var(--border);border-radius:var(--radius);padding:1.6rem;position:relative;overflow:hidden;transition:transform .3s,border-color .3s}
 .why-card:hover{transform:translateY(-4px);border-color:var(--border-gold)}
 .why-card::after{content:"";position:absolute;top:-40px;right:-40px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(212,175,55,.14),transparent 70%)}
@@ -254,7 +254,7 @@ section{scroll-margin-top:calc(var(--nav-h) + 20px)}
 .why-card p{font-size:.84rem;color:var(--muted)}
 
 /* ═══ Offer coupons ═══ */
-.offer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+.offer-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.2rem}
 .coupon{border:1.5px dashed var(--border-gold);border-radius:var(--radius);padding:1.5rem 1.4rem;background:linear-gradient(160deg,var(--coupon),var(--coupon-2));position:relative;overflow:hidden}
 .coupon::before,.coupon::after{content:"";position:absolute;top:50%;width:26px;height:26px;border-radius:50%;background:var(--bg);transform:translateY(-50%)}
 .coupon::before{left:-14px}.coupon::after{right:-14px}
@@ -280,7 +280,7 @@ section{scroll-margin-top:calc(var(--nav-h) + 20px)}
 .t-dot::after{content:"";position:absolute;inset:6px;border-radius:50%;background:transparent;transition:background .3s}.t-dot.active::after{background:var(--gold)}.t-dot.active{transform:scale(1.15)}
 
 /* ═══ Services & prices ═══ */
-.services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.1rem}
+.services-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.1rem}
 .service-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.35rem 1.2rem 1.25rem;display:flex;flex-direction:column;gap:.4rem;transition:transform .3s,border-color .3s}
 .service-card:hover{transform:translateY(-5px);border-color:var(--border-gold);box-shadow:var(--gold-glow)}
 .service-icon{width:46px;height:46px;border-radius:12px;border:1px solid var(--border-gold);color:var(--gold);display:flex;align-items:center;justify-content:center;background:var(--card-2)}
@@ -336,11 +336,11 @@ section{scroll-margin-top:calc(var(--nav-h) + 20px)}
 .field input,.field select,.field textarea{background:var(--card-2);border:1px solid var(--border);border-radius:10px;padding:.75rem .85rem;color:var(--text);font-size:.92rem;transition:border-color .25s}
 .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--gold)}
 .field textarea{resize:vertical;min-height:96px}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.form-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem}
 .form-note{font-size:.75rem;color:var(--muted);margin-bottom:.8rem}
 
 /* ═══ Booking split ═══ */
-.book-wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:1.6rem;align-items:stretch}
+.book-wrap{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:1.6rem;align-items:stretch}
 .book-info{background:linear-gradient(160deg,var(--panel),var(--panel-2));border:1px solid var(--border-gold);border-radius:var(--radius);padding:1.8rem;display:flex;flex-direction:column;gap:1.1rem}
 .book-info h3{font-family:var(--font-display);font-size:1.35rem;color:var(--text)}
 .book-info ul{list-style:none;display:flex;flex-direction:column;gap:.65rem}
@@ -351,7 +351,7 @@ section{scroll-margin-top:calc(var(--nav-h) + 20px)}
 .book-step b{color:var(--gold-2);font-family:var(--font-display)}
 
 /* ═══ Contact ═══ */
-.contact-wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:1.6rem}
+.contact-wrap{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:1.6rem}
 .info-list{display:flex;flex-direction:column;gap:.9rem;margin:1.1rem 0}
 .info-item{display:flex;gap:.8rem;align-items:flex-start}
 .info-icon{flex:0 0 44px;width:44px;height:44px;border-radius:12px;border:1px solid var(--border-gold);color:var(--gold);display:flex;align-items:center;justify-content:center;background:var(--card-2)}
@@ -373,7 +373,7 @@ section{scroll-margin-top:calc(var(--nav-h) + 20px)}
 .invoice-tabs{display:flex;gap:.5rem;margin-bottom:1.2rem;border-bottom:1px solid var(--border)}
 .invoice-tab{background:transparent;border:1px solid transparent;color:var(--muted-2);border-radius:12px 12px 0 0;border-bottom:none;padding:.65rem 1.3rem;font-size:.85rem;font-weight:600;margin-bottom:-1px}
 .invoice-tab.active{background:var(--card-2);color:var(--gold-2);border-color:var(--border-gold);border-bottom-color:var(--card-2)}
-.invoice-wrap{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:start}
+.invoice-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1.5rem;align-items:start}
 .line-items{width:100%;border-collapse:collapse;font-size:.8rem;margin:.6rem 0}
 .line-items th,.line-items td{border-bottom:1px solid var(--border-2);padding:.4rem .4rem;text-align:left}
 .line-items th{color:var(--gold);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase}
@@ -385,7 +385,7 @@ section{scroll-margin-top:calc(var(--nav-h) + 20px)}
 .totals .grand{border-top:1px dashed var(--border-gold);padding-top:.35rem;margin-top:.1rem;color:var(--text);font-weight:700;font-size:1.02rem}
 .totals .grand span:last-child{color:var(--gold-2)}
 .invoice-paper, .invoice-paper *{print-color-adjust:exact;-webkit-print-color-adjust:exact}
-.invoice-paper{background:#fdfcf8;color:#1a1a1a;border-radius:12px;padding:1.3rem 1.3rem;box-shadow:var(--shadow)}
+.invoice-paper{background:#fdfcf8;color:#1a1a1a;border-radius:12px;padding:1.3rem 1.3rem;box-shadow:var(--shadow);width:100%;max-width:100%;overflow-wrap:anywhere}
 .invoice-paper h3{font-family:var(--font-display);font-size:1.3rem;margin:0;color:#111}
 .inv-shop small{display:block;color:#8f8f8a;font-size:.62rem;margin-top:.3rem;line-height:1.65}
 .inv-shop h3{font-family:var(--font-display);font-size:1.35rem;margin:0;color:#fff}
@@ -421,7 +421,7 @@ section{scroll-margin-top:calc(var(--nav-h) + 20px)}
 
 /* ═══ Footer ═══ */
 .footer{background:var(--footer-bg);border-top:1px solid var(--border)}
-.footer-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:2rem;padding:3.5rem 0 2rem}
+.footer-top{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr) minmax(0,1fr) minmax(0,1.2fr);gap:2rem;padding:3.5rem 0 2rem}
 .footer h3[data-fthead]{color:var(--gold-2);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:.8rem}
 .footer ul{list-style:none;display:flex;flex-direction:column;gap:.4rem}
 .footer a{color:var(--muted);text-decoration:none;font-size:.85rem}
@@ -471,7 +471,7 @@ section{scroll-margin-top:calc(var(--nav-h) + 20px)}
 .pe-close{background:none;border:1px solid var(--border);border-radius:10px;width:40px;height:40px;color:var(--gold-2);font-size:1.3rem}
 .pe-close:hover{border-color:var(--border-gold)}
 .pe-list{overflow-y:auto;padding:.6rem 1.3rem;display:flex;flex-direction:column}
-.pe-row{display:grid;grid-template-columns:1fr auto;gap:.8rem;align-items:center;padding:.45rem .2rem;border-bottom:1px solid var(--border-2)}
+.pe-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.8rem;align-items:center;padding:.45rem .2rem;border-bottom:1px solid var(--border-2)}
 .pe-row:last-child{border-bottom:none}
 .pe-info b{display:block;font-size:.8rem;color:var(--text);font-weight:500;line-height:1.4}
 .pe-info small{color:var(--muted);font-size:.65rem;letter-spacing:.04em}
@@ -487,7 +487,7 @@ section{scroll-margin-top:calc(var(--nav-h) + 20px)}
 .owner-btn{background:rgba(212,175,55,.08);border:1px solid var(--border-gold);border-radius:10px;width:42px;height:42px;color:var(--gold-2);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;transition:all .25s}
 .owner-btn:hover{background:rgba(212,175,55,.18);transform:translateY(-1px)}
 .owner-btn.on{background:var(--gold-grad);color:#1a1408;border-color:transparent}
-.owner-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem;margin-bottom:1rem}
+.owner-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.8rem;margin-bottom:1rem}
 .owner-stat{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:.85rem .95rem}
 .owner-stat b{display:block;font-family:var(--font-display);font-size:1.35rem;color:var(--gold-2)}
 .owner-stat small{color:var(--muted);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase}
@@ -845,57 +845,9 @@ section{scroll-margin-top:calc(var(--nav-h) + 20px)}
   </div>
 </section>
 
-<!-- ═══════════ OWNER DASHBOARD (Owner Mode only) ═══════════ -->
-<section class="section" id="ownerDash" hidden aria-labelledby="ownerTitle">
-  <div class="container">
-    <div class="section-head">
-      <div>
-        <span class="eyebrow">Owner Access</span>
-        <h2 id="ownerTitle">Owner <em>Dashboard</em></h2>
-        <p>Update prices, add or remove products, then <b>Publish</b> to push the catalog live for customers on GitHub Pages.</p>
-      </div>
-      <button class="btn btn-ghost btn-sm" id="ownerSignOutBtn" type="button">Sign Out</button>
-    </div>
 
-    <div class="owner-stats" id="ownerStats" aria-live="polite"></div>
 
-    <div class="owner-actions">
-      <button class="btn btn-gold btn-sm" id="ownerAddBtn" type="button">+ Add Product</button>
-      <button class="btn btn-ink btn-sm" id="ownerPublishBtn" type="button">&#11014; Publish to GitHub</button>
-      <button class="btn btn-ghost btn-sm" id="ownerExportBtn" type="button">&#8681; Export JSON</button>
-      <label class="btn btn-ghost btn-sm" for="ownerImportFile" style="cursor:pointer">&#8679; Import JSON</label>
-      <input type="file" id="ownerImportFile" accept="application/json,.json" hidden>
-    </div>
-
-    <details class="owner-publish">
-      <summary>Publish settings <small>(set once — stored only on this device)</small></summary>
-      <div class="form-row" style="margin-top:.6rem">
-        <div class="field"><label for="ghOwner">GitHub owner</label><input id="ghOwner" value="adfaizy" autocomplete="off"></div>
-        <div class="field"><label for="ghRepo">Repository</label><input id="ghRepo" value="Zaman_Computer" autocomplete="off"></div>
-      </div>
-      <div class="form-row">
-        <div class="field"><label for="ghBranch">Branch</label><input id="ghBranch" value="main" autocomplete="off"></div>
-        <div class="field"><label for="ghPath">Catalog file</label><input id="ghPath" value="products.json" autocomplete="off"></div>
-      </div>
-      <div class="field"><label for="ghToken">GitHub token (contents:write)</label><input id="ghToken" type="password" placeholder="ghp_…" autocomplete="off"></div>
-      <p class="form-note" style="margin:0">Create a <b>fine-grained PAT</b> on github.com → Settings → Developer settings → Personal access tokens → fine-grained → Repository access: only <code>Zaman_Computer</code> → Permissions: <code>Contents: Read and write</code>. It is stored only in this browser and never sent anywhere except github.com.</p>
-      <label class="checkline" style="margin-top:.6rem"><input type="checkbox" id="rememberToken"> Remember settings on this device</label>
-    </details>
-
-    <div class="owner-pin-row">
-      <input id="ownerNewPin" type="password" inputmode="numeric" maxlength="8" placeholder="New PIN (4–8 digits)" autocomplete="off" aria-label="New owner PIN">
-      <button class="btn btn-ghost btn-sm" id="ownerChangePinBtn" type="button">Change PIN</button>
-    </div>
-
-    <div class="table-scroll">
-      <table class="owner-table" aria-label="Edit product prices and stock">
-        <thead><tr><th>SKU</th><th>Product</th><th class="num">Price</th><th>Cond.</th><th>In Stock</th><th>★</th><th></th></tr></thead>
-        <tbody id="ownerTableBody"></tbody>
-      </table>
-    </div>
-    <p class="form-note" style="margin-top:.6rem">Edits save instantly on this device. Tap <b>Publish to GitHub</b> to make the catalog live for customers (GitHub Pages rebuilds in ~1 minute).</p>
-  </div>
-</section>
+<div id="ownerRoot"></div>
 
 <!-- ═══════════ CONTACT + FBR ═══════════ -->
 <section class="section" id="contact" aria-labelledby="contactTitle">
@@ -955,114 +907,7 @@ section{scroll-margin-top:calc(var(--nav-h) + 20px)}
     </div>
   </div>
 </section>
-<!-- ═══════════ INVOICE & QR CENTER ═══════════ -->
-<section class="section alt" id="invoice" aria-labelledby="invoiceTitle" hidden>
-  <div class="container">
-    <div class="section-head">
-      <div>
-        <span class="eyebrow">Shop Management</span>
-        <h2 id="invoiceTitle">Invoice &amp; <em>QR Code Center</em></h2>
-        <p>Bill customers in seconds — auto totals, amount in words, FBR/NTN footer and a printable bill. Also print QR labels for your stock. Works fully offline.</p>
-      </div>
-    </div>
 
-    <div class="invoice-tabs" role="tablist">
-      <button class="invoice-tab active" id="tabBtnInvoice" role="tab" aria-selected="true" aria-controls="tabInvoice" data-tab="tabInvoice">Create Invoice</button>
-      <button class="invoice-tab" id="tabBtnBarcode" role="tab" aria-selected="false" aria-controls="tabBarcode" data-tab="tabBarcode">QR Code</button>
-    </div>
-
-    <!-- TAB 1 · INVOICE BUILDER -->
-    <div class="tab-panel" id="tabInvoice" role="tabpanel" aria-labelledby="tabBtnInvoice">
-      <div class="invoice-wrap">
-        <form class="form-card" id="invoiceForm">
-          <div class="form-row">
-            <div class="field"><label for="invCustomer">Customer Name <b>*</b></label><input id="invCustomer" required placeholder="Walk-in customer / company"></div>
-            <div class="field"><label for="invPhone">Customer Phone <small style="color:var(--muted);text-transform:none;letter-spacing:0">(for WhatsApp — 03xx-xxxxxxx)</small></label><input id="invPhone" type="tel" inputmode="numeric" placeholder="0301-1234567"></div>
-          </div>
-          <div class="form-row">
-            <div class="field" style="grid-column:1/-1"><label for="invOrg">Customer Organization <small style="color:var(--muted);text-transform:none;letter-spacing:0">(optional — e.g. university, company)</small></label><input id="invOrg" placeholder="e.g. University of Lahore, XYZ (Pvt) Ltd"></div>
-          </div>
-          <div class="form-row">
-            <div class="field"><label for="invType">Bill Type</label><select id="invType"><option>Retail Sale</option><option>Service Job / Repair</option><option>Custom PC Build</option><option>Installation Service</option><option>CCTV Installation</option></select></div>
-            <div class="field"><label for="invPayment">Payment Method</label><select id="invPayment"><option>Cash</option><option>Bank Transfer</option><option>Easypaisa</option><option>JazzCash</option><option>Debit / Credit Card</option></select></div>
-          </div>
-          <div class="form-row">
-            <div class="field"><label for="invDate">Invoice Date</label><input id="invDate" type="date"></div>
-            <div class="field"><label for="invNo">Invoice No. (auto)</label><input id="invNo" readonly aria-readonly="true" style="opacity:.75"></div>
-          </div>
-
-          <div class="field">
-            <label for="invProduct">Add Product From Catalog</label>
-            <div style="display:flex;gap:.5rem">
-              <select id="invProduct" style="flex:1;background:var(--card-2);border:1px solid var(--border);border-radius:10px;color:var(--text);padding:.7rem .8rem;min-width:0"></select>
-              <input id="invQty" type="number" min="1" value="1" aria-label="Quantity" style="width:72px;background:var(--card-2);border:1px solid var(--border);border-radius:10px;color:var(--text);padding:.7rem .6rem;text-align:center">
-              <button type="button" class="btn btn-gold btn-sm" id="invAddProduct">Add</button>
-            </div>
-          </div>
-          <div class="field">
-            <label for="invCustomDesc">Or Add Custom Line (parts, labor, services)</label>
-            <div style="display:flex;gap:.5rem">
-              <input id="invCustomDesc" placeholder="e.g. Laptop keyboard replacement" style="flex:1;background:var(--card-2);border:1px solid var(--border);border-radius:10px;color:var(--text);padding:.7rem .8rem;min-width:0">
-              <input id="invCustomRate" type="number" min="0" placeholder="Rs." aria-label="Rate in rupees" style="width:110px;background:var(--card-2);border:1px solid var(--border);border-radius:10px;color:var(--text);padding:.7rem .6rem">
-              <button type="button" class="btn btn-ink btn-sm" id="invAddCustom">Add</button>
-            </div>
-          </div>
-
-          <table class="line-items" aria-label="Invoice line items">
-            <thead><tr><th>#</th><th>Item</th><th class="num">Qty</th><th class="num">Rate</th><th class="num">Amount</th><th></th></tr></thead>
-            <tbody id="invItemsBody"><tr id="invEmptyRow"><td colspan="6" style="color:var(--muted);text-align:center;padding:1.1rem">No items yet — add from catalog or a custom line.</td></tr></tbody>
-          </table>
-
-          <div class="totals">
-            <div class="row"><span>Subtotal</span><span id="invSubtotal">Rs. 0</span></div>
-            <div class="row"><span>Owner Discount</span><span style="display:flex;align-items:center;gap:.35rem"><input id="invDiscount" type="number" min="0" value="0" aria-label="Owner discount in rupees" style="width:104px;text-align:right;background:var(--card-2);border:1px solid var(--border);border-radius:8px;color:var(--text);padding:.2rem .5rem"><input id="invDiscountPct" class="pct-input" type="number" min="0" max="100" value="0" aria-label="Owner discount in percent" placeholder="%" style="background:var(--card-2);border:1px solid var(--border);border-radius:8px;color:var(--gold-2);padding:.2rem .35rem"></span></div>
-            <label class="checkline"><input type="checkbox" id="invTax"> Add Sales Tax 18% <small style="color:var(--muted)">(owner not registered for Sales Tax — leave off)</small></label>
-            <div class="row"><span>Sales Tax (GST)</span><span id="invTaxAmt">Rs. 0</span></div>
-            <div class="row grand"><span>Grand Total</span><span id="invGrand">Rs. 0</span></div>
-          </div>
-          <div class="field" style="margin-top:.6rem"><label for="invNotes">Notes / Warranty</label><textarea id="invNotes" rows="2" placeholder="e.g. 7-day shop warranty on repaired parts…"></textarea></div>
-          <div style="display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.2rem">
-            <button type="button" class="btn btn-gold" id="invPrint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg> Print Invoice</button>
-            <button type="button" class="btn btn-wa" id="invSharePdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg> Send PDF via WhatsApp</button>
-            <button type="button" class="btn btn-ink" id="invDownloadPdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg> Download PDF</button>
-            <button type="button" class="btn btn-ghost btn-sm" id="invWA"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5c-1.5 0-3-.4-4.2-1.1L3 20l1.2-5.1A8.5 8.5 0 1 1 21 11.5z"/></svg> Text Summary</button>
-            <button type="button" class="btn btn-ink btn-sm" id="invClear">Clear</button>
-          </div>
-        </form>
-
-        <div class="form-card" id="invoicePreviewWrap" aria-label="Invoice preview">
-          <div class="invoice-paper" id="invoicePreview"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- TAB 2 · QR CODE -->
-    <div class="tab-panel" id="tabBarcode" role="tabpanel" aria-labelledby="tabBtnBarcode" hidden>
-      <div class="invoice-wrap">
-        <form class="form-card" id="barcodeForm">
-          <p class="form-note">Generates a QR code any phone camera scans instantly — product SKU, a warranty link, or any custom text (max 80 characters).</p>
-          <div class="field"><label for="bcProduct">From Catalog (uses SKU)</label><select id="bcProduct"><option value="">— custom code below —</option></select></div>
-          <div class="field"><label for="bcCustom">Or Custom Text</label><input id="bcCustom" placeholder="e.g. ZC-L001 · wa.me/923084608380" maxlength="80" spellcheck="false"></div>
-          <label class="checkline"><input type="checkbox" id="bcShowName" checked> Show product name</label>
-          <label class="checkline"><input type="checkbox" id="bcShowPrice" checked> Show price (Rs.)</label>
-          <div style="display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.8rem">
-            <button type="button" class="btn btn-gold" id="bcRender">Preview QR Code</button>
-            <button type="button" class="btn btn-ink" id="bcDownload">Download PNG</button>
-            <button type="button" class="btn btn-ghost" id="bcPrint">Print Label</button>
-          </div>
-        </form>
-        <div class="form-card barcode-lab-preview" style="display:flex;justify-content:center" aria-label="QR code label preview">
-          <div style="text-align:center;background:#fdfcf8;color:#111;border-radius:10px;padding:1.2rem 1.6rem;box-shadow:var(--shadow);width:100%;max-width:360px">
-            <div style="font-family:var(--font-display);font-weight:800;letter-spacing:.08em">ZAMAN COMPUTER</div>
-            <div id="bcLabelName" style="font-size:.78rem;margin:.15rem 0 .4rem;min-height:1.2em">—</div>
-            <div class="barcode-row"><canvas id="barcodeCanvas" aria-label="QR code preview"></canvas></div>
-            <div id="bcLabelPrice" style="font-weight:700;margin-top:.35rem;font-size:.95rem">—</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 </main>
 
 <!-- ═══════════ FOOTER ═══════════ -->
@@ -1130,70 +975,11 @@ section{scroll-margin-top:calc(var(--nav-h) + 20px)}
   <button class="lb-btn lb-next" id="lbNext" aria-label="Next image"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
 </div>
 
-<!-- Price Manager (Owner) -->
-<div class="pe-overlay" id="priceEditor" hidden role="dialog" aria-modal="true" aria-labelledby="peTitle">
-  <div class="pe-card">
-    <div class="pe-head">
-      <h3 id="peTitle">Price Manager — Lahore Market</h3>
-      <button class="pe-close" id="closePriceEditor" aria-label="Close price manager">×</button>
-    </div>
-    <p class="form-note" style="padding:.7rem 1.3rem 0;margin:0">Enter today&rsquo;s market rates in PKR. Saved on this device and applied instantly across the shop, invoices and WhatsApp messages.</p>
-    <div class="pe-list" id="peList"></div>
-    <div class="pe-foot">
-      <button class="btn btn-ghost btn-sm" id="resetPricesBtn" type="button">Reset to defaults</button>
-      <button class="btn btn-gold" id="savePricesBtn" type="button">Save Today&rsquo;s Rates</button>
-    </div>
-  </div>
-</div>
 
-<!-- Owner Unlock -->
-<div class="pe-overlay" id="ownerUnlockModal" hidden role="dialog" aria-modal="true" aria-labelledby="unlockTitle">
-  <div class="pe-card" style="max-width:400px">
-    <div class="pe-head">
-      <h3 id="unlockTitle">Owner Access</h3>
-      <button class="pe-close" id="ownerUnlockClose" aria-label="Close">&times;</button>
-    </div>
-    <div class="pe-list" style="padding-top:.9rem">
-      <p class="form-note">Private area for the shop owner. Enter your PIN to manage products, prices and invoices. Customers never see this screen.</p>
-      <input id="ownerPinInput" class="pin-input" type="password" inputmode="numeric" maxlength="8" autocomplete="off" placeholder="PIN" aria-label="Owner PIN">
-      <button class="btn btn-gold btn-block" id="ownerUnlockBtn" type="button">Unlock Dashboard</button>
-      <p class="form-note" style="margin:0">First time? Default PIN is <b>1234</b> — change it immediately in the dashboard.</p>
-    </div>
-  </div>
-</div>
 
-<!-- Add Product -->
-<div class="pe-overlay" id="addProductModal" hidden role="dialog" aria-modal="true" aria-labelledby="addTitle">
-  <div class="pe-card">
-    <div class="pe-head">
-      <h3 id="addTitle">Add Product</h3>
-      <button class="pe-close" id="addProductClose" aria-label="Close">&times;</button>
-    </div>
-    <form id="addProductForm" class="pe-list" style="gap:.55rem;padding-top:.8rem">
-      <div class="form-row">
-        <div class="field"><label for="apSku">SKU</label><input id="apSku" required autocomplete="off" placeholder="ZC-L021"></div>
-        <div class="field"><label for="apCategory">Category</label><select id="apCategory" required><option value="desktops">Desktops &amp; Systems</option><option value="laptops">Laptops</option><option value="accessories">Accessories</option><option value="hardware">Hardware &amp; Components</option><option value="security">CCTV &amp; Security</option></select></div>
-      </div>
-      <div class="field"><label for="apName">Product Name <b>*</b></label><input id="apName" required placeholder="e.g. HP ProBook 440 G10 — Core i5"></div>
-      <div class="form-row">
-        <div class="field"><label for="apBrand">Brand</label><input id="apBrand" placeholder="HP"></div>
-        <div class="field"><label for="apCond">Condition</label><select id="apCond"><option>New</option><option>Used</option></select></div>
-      </div>
-      <div class="field"><label for="apSpecs">Key Specifications</label><input id="apSpecs" placeholder="i5-1335U · 16GB · 512GB NVMe · 14&quot; FHD"></div>
-      <div class="form-row">
-        <div class="field"><label for="apPrice">Price (Rs.) <b>*</b></label><input id="apPrice" type="number" min="0" step="100" required placeholder="165000" inputmode="numeric"></div>
-        <div class="field"><label for="apOldPrice">Old Price (Rs.) <small>(optional)</small></label><input id="apOldPrice" type="number" min="0" step="100" placeholder="192000" inputmode="numeric"></div>
-      </div>
-      <div class="field"><label for="apImg">Image URL <small>(optional — leave blank for chip image)</small></label><input id="apImg" type="url" placeholder="https://images.unsplash.com/photo-…" autocomplete="off"></div>
-      <div class="form-row" style="gap:1.2rem">
-        <label class="checkline"><input type="checkbox" id="apStock" checked> In stock</label>
-        <label class="checkline"><input type="checkbox" id="apFeatured"> ★ Featured</label>
-        <label class="checkline"><input type="checkbox" id="apIsNew"> New Arrival</label>
-      </div>
-      <button type="submit" class="btn btn-gold btn-block" style="margin-top:.2rem">Add to Catalog</button>
-    </form>
-  </div>
-</div>
+
+
+
 
 <!-- Print-only sheet (filled by JS before printing) -->
 <div id="printSheet" aria-hidden="true"></div>
@@ -1761,65 +1547,256 @@ tickerTrack.innerHTML += tickerTrack.innerHTML;
 
 /* Footer year */
 $('#footerYear').textContent = new Date().getFullYear();
-/* ───────── 16B. PRICE MANAGER (Owner) ───────── */
-function openPriceEditor(){
-  const stored = localStorage.getItem(DATE_STORE);
-  if (stored) $('#pricesUpdated').textContent = stored;
-  $('#peList').innerHTML = PRODUCTS.map(p =>
-    '<label class="pe-row"><span class="pe-info"><b>' + esc(p.name) + '</b><small>' + esc(p.sku) + ' · ' + esc(p.cond) + ' · ' + esc(CAT_LABEL[p.cat]) + '</small></span>' +
-    '<span class="pe-input"><em>Rs.</em><input type="number" min="0" step="100" value="' + p.price + '" data-sku="' + esc(p.sku) + '" inputmode="numeric" aria-label="Price for ' + esc(p.name) + '"></span></label>'
-  ).join('');
-  $('#priceEditor').hidden = false;
-  document.body.style.overflow = 'hidden';
-}
-function closePriceEditor(){ $('#priceEditor').hidden = true; document.body.style.overflow = ''; }
-$('#openPriceEditor').addEventListener('click', openPriceEditor);
-$('#closePriceEditor').addEventListener('click', closePriceEditor);
-$('#priceEditor').addEventListener('click', e => { if (e.target === e.currentTarget) closePriceEditor(); });
-$('#savePricesBtn').addEventListener('click', () => {
-  const o = {};
-  $$('#peList input').forEach(inp => { const v = Math.round(Number(inp.value)); if (v > 0) o[inp.dataset.sku] = v; });
-  localStorage.setItem(PRICE_STORE, JSON.stringify(o));
-  const stamp = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
-  localStorage.setItem(DATE_STORE, stamp);
-  PRODUCTS.forEach(p => { if (o[p.sku]) p.price = o[p.sku]; });
-  $('#pricesUpdated').textContent = stamp;
-  closePriceEditor();
-  renderProducts(); renderInvoice();
-  showToast('Market rates saved — ' + stamp);
-});
-$('#resetPricesBtn').addEventListener('click', () => {
-  localStorage.removeItem(PRICE_STORE);
-  localStorage.removeItem(DATE_STORE);
-  location.reload();
-});
-document.addEventListener('keydown', e => { if (e.key === 'Escape' && !$('#priceEditor').hidden) closePriceEditor(); });
-
-/* ───────── 16C. OWNER MODE — PIN unlock + dashboard ───────── */
+/* ═══════════════════════════════════════════════════════════════════
+   16B/16C. OWNER SECURITY — password-gated, UI injected on unlock only
+   ───────────────────────────────────────────────────────────────────
+   The customer page ships with NO owner markup in the source.
+   Invoice creation, product editing and stock publishing exist in the
+   DOM only after a correct password is entered on this device.
+   Password is stored as a PBKDF2-SHA256 hash; nothing is in the code.
+   ═══════════════════════════════════════════════════════════════════ */
 const OWNER_KEY = 'zaman_owner';
-const PIN_STORE = 'zaman_owner_pin';
-const DEFAULT_PIN = '1234';              // owner must change this
-const PUBLISH_STORE = 'zaman_publish';
+const PASS_STORE = 'zaman_owner_pass';
+const LOCK_STORE = 'zaman_lockout';
 const LAST_PUBLISH = 'zaman_last_publish';
+const PUBLISH_STORE = 'zaman_publish';
+const MAX_ATTEMPTS = 5;
+const LOCK_MS = 30000;
 
-const sha256 = async (s) => {
-  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(String(s)));
-  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
-};
-const checkPin = async (pin) => {
-  const stored = localStorage.getItem(PIN_STORE);
-  const h = await sha256(String(pin));
-  return stored ? h === stored : String(pin) === DEFAULT_PIN;
-};
-
-function setOwnerMode(on){
-  document.body.classList.toggle('is-owner', !!on);
-  $$('.owner-only').forEach(el => { el.hidden = !on; });
-  const dash = $('#ownerDash'); if (dash) dash.hidden = !on;
-  const inv = $('#invoice');    if (inv)  inv.hidden  = !on;
-  $('#ownerUnlockBtnNav').classList.toggle('on', !!on);
-  if (on) renderOwnerTable();
+const b64 = buf => btoa(String.fromCharCode(...new Uint8Array(buf)));
+const fromB64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+async function deriveBits(pass, salt){
+  const key = await crypto.subtle.importKey('raw', new TextEncoder().encode(pass), 'PBKDF2', false, ['deriveBits']);
+  const bits = await crypto.subtle.deriveBits({ name:'PBKDF2', hash:'SHA-256', salt, iterations: 120000 }, key, 256);
+  return new Uint8Array(bits);
 }
+async function createOwnerPassword(pass){
+  const salt = crypto.getRandomValues(new Uint8Array(16));
+  const hash = await deriveBits(pass, salt);
+  localStorage.setItem(PASS_STORE, JSON.stringify({ salt: b64(salt), hash: b64(hash) }));
+}
+async function verifyOwnerPassword(pass){
+  const raw = localStorage.getItem(PASS_STORE);
+  if (!raw) return 'setup';
+  try {
+    const { salt, hash } = JSON.parse(raw);
+    const got = await deriveBits(pass, fromB64(salt));
+    return b64(got) === hash ? 'ok' : 'wrong';
+  } catch { return 'wrong'; }
+}
+const getLock = () => { try { return JSON.parse(localStorage.getItem(LOCK_STORE) || '{"n":0,"until":0}'); } catch { return {n:0, until:0}; } };
+const setLock = o => localStorage.setItem(LOCK_STORE, JSON.stringify(o));
+
+/* Owner bundle — exists here in SOURCE only as one string constant.
+   Parsed into the DOM solely by injectOwnerUI() after authentication. */
+const OWNER_HTML = `<div id="ownerBundle">
+<!-- ═══════════ OWNER DASHBOARD (Owner Mode only) ═══════════ -->
+<section class="section" id="ownerDash" aria-labelledby="ownerTitle">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Owner Access</span>
+        <h2 id="ownerTitle">Owner <em>Dashboard</em></h2>
+        <p>Update prices, add or remove products, then <b>Publish</b> to push the catalog live for customers on GitHub Pages.</p>
+      </div>
+      <button class="btn btn-ghost btn-sm" id="ownerSignOutBtn" type="button">Sign Out</button>
+    </div>
+
+    <div class="owner-stats" id="ownerStats" aria-live="polite"></div>
+
+    <div class="owner-actions">
+      <button class="btn btn-gold btn-sm" id="ownerAddBtn" type="button">+ Add Product</button>
+      <button class="btn btn-ink btn-sm" id="ownerPublishBtn" type="button">&#11014; Publish to GitHub</button>
+      <button class="btn btn-ghost btn-sm" id="ownerExportBtn" type="button">&#8681; Export JSON</button>
+      <label class="btn btn-ghost btn-sm" for="ownerImportFile" style="cursor:pointer">&#8679; Import JSON</label>
+      <input type="file" id="ownerImportFile" accept="application/json,.json">
+    </div>
+
+    <details class="owner-publish">
+      <summary>Publish settings <small>(set once — stored only on this device)</small></summary>
+      <div class="form-row" style="margin-top:.6rem">
+        <div class="field"><label for="ghOwner">GitHub owner</label><input id="ghOwner" value="adfaizy" autocomplete="off"></div>
+        <div class="field"><label for="ghRepo">Repository</label><input id="ghRepo" value="Zaman_Computer" autocomplete="off"></div>
+      </div>
+      <div class="form-row">
+        <div class="field"><label for="ghBranch">Branch</label><input id="ghBranch" value="main" autocomplete="off"></div>
+        <div class="field"><label for="ghPath">Catalog file</label><input id="ghPath" value="products.json" autocomplete="off"></div>
+      </div>
+      <div class="field"><label for="ghToken">GitHub token (contents:write)</label><input id="ghToken" type="password" placeholder="ghp_…" autocomplete="off"></div>
+      <p class="form-note" style="margin:0">Create a <b>fine-grained PAT</b> on github.com → Settings → Developer settings → Personal access tokens → fine-grained → Repository access: only <code>Zaman_Computer</code> → Permissions: <code>Contents: Read and write</code>. It is stored only in this browser and never sent anywhere except github.com.</p>
+      <label class="checkline" style="margin-top:.6rem"><input type="checkbox" id="rememberToken"> Remember settings on this device</label>
+    </details>
+
+    <div class="owner-pin-row">
+      <input id="ownerNewPin" type="password" inputmode="numeric" maxlength="8" placeholder="New PIN (4–8 digits)" autocomplete="off" aria-label="New owner PIN">
+      <button class="btn btn-ghost btn-sm" id="ownerChangePinBtn" type="button">Change PIN</button>
+    </div>
+
+    <div class="table-scroll">
+      <table class="owner-table" aria-label="Edit product prices and stock">
+        <thead><tr><th>SKU</th><th>Product</th><th class="num">Price</th><th>Cond.</th><th>In Stock</th><th>★</th><th></th></tr></thead>
+        <tbody id="ownerTableBody"></tbody>
+      </table>
+    </div>
+    <p class="form-note" style="margin-top:.6rem">Edits save instantly on this device. Tap <b>Publish to GitHub</b> to make the catalog live for customers (GitHub Pages rebuilds in ~1 minute).</p>
+  </div>
+</section>
+<!-- ═══════════ INVOICE & QR CENTER ═══════════ -->
+<section class="section alt" id="invoice" aria-labelledby="invoiceTitle">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Shop Management</span>
+        <h2 id="invoiceTitle">Invoice &amp; <em>QR Code Center</em></h2>
+        <p>Bill customers in seconds — auto totals, amount in words, FBR/NTN footer and a printable bill. Also print QR labels for your stock. Works fully offline.</p>
+      </div>
+    </div>
+
+    <div class="invoice-tabs" role="tablist">
+      <button class="invoice-tab active" id="tabBtnInvoice" role="tab" aria-selected="true" aria-controls="tabInvoice" data-tab="tabInvoice">Create Invoice</button>
+      <button class="invoice-tab" id="tabBtnBarcode" role="tab" aria-selected="false" aria-controls="tabBarcode" data-tab="tabBarcode">QR Code</button>
+    </div>
+
+    <!-- TAB 1 · INVOICE BUILDER -->
+    <div class="tab-panel" id="tabInvoice" role="tabpanel" aria-labelledby="tabBtnInvoice">
+      <div class="invoice-wrap">
+        <form class="form-card" id="invoiceForm">
+          <div class="form-row">
+            <div class="field"><label for="invCustomer">Customer Name <b>*</b></label><input id="invCustomer" required placeholder="Walk-in customer / company"></div>
+            <div class="field"><label for="invPhone">Customer Phone <small style="color:var(--muted);text-transform:none;letter-spacing:0">(for WhatsApp — 03xx-xxxxxxx)</small></label><input id="invPhone" type="tel" inputmode="numeric" placeholder="0301-1234567"></div>
+          </div>
+          <div class="form-row">
+            <div class="field" style="grid-column:1/-1"><label for="invOrg">Customer Organization <small style="color:var(--muted);text-transform:none;letter-spacing:0">(optional — e.g. university, company)</small></label><input id="invOrg" placeholder="e.g. University of Lahore, XYZ (Pvt) Ltd"></div>
+          </div>
+          <div class="form-row">
+            <div class="field"><label for="invType">Bill Type</label><select id="invType"><option>Retail Sale</option><option>Service Job / Repair</option><option>Custom PC Build</option><option>Installation Service</option><option>CCTV Installation</option></select></div>
+            <div class="field"><label for="invPayment">Payment Method</label><select id="invPayment"><option>Cash</option><option>Bank Transfer</option><option>Easypaisa</option><option>JazzCash</option><option>Debit / Credit Card</option></select></div>
+          </div>
+          <div class="form-row">
+            <div class="field"><label for="invDate">Invoice Date</label><input id="invDate" type="date"></div>
+            <div class="field"><label for="invNo">Invoice No. (auto)</label><input id="invNo" readonly aria-readonly="true" style="opacity:.75"></div>
+          </div>
+
+          <div class="field">
+            <label for="invProduct">Add Product From Catalog</label>
+            <div style="display:flex;gap:.5rem">
+              <select id="invProduct" style="flex:1;background:var(--card-2);border:1px solid var(--border);border-radius:10px;color:var(--text);padding:.7rem .8rem;min-width:0"></select>
+              <input id="invQty" type="number" min="1" value="1" aria-label="Quantity" style="width:72px;background:var(--card-2);border:1px solid var(--border);border-radius:10px;color:var(--text);padding:.7rem .6rem;text-align:center">
+              <button type="button" class="btn btn-gold btn-sm" id="invAddProduct">Add</button>
+            </div>
+          </div>
+          <div class="field">
+            <label for="invCustomDesc">Or Add Custom Line (parts, labor, services)</label>
+            <div style="display:flex;gap:.5rem">
+              <input id="invCustomDesc" placeholder="e.g. Laptop keyboard replacement" style="flex:1;background:var(--card-2);border:1px solid var(--border);border-radius:10px;color:var(--text);padding:.7rem .8rem;min-width:0">
+              <input id="invCustomRate" type="number" min="0" placeholder="Rs." aria-label="Rate in rupees" style="width:110px;background:var(--card-2);border:1px solid var(--border);border-radius:10px;color:var(--text);padding:.7rem .6rem">
+              <button type="button" class="btn btn-ink btn-sm" id="invAddCustom">Add</button>
+            </div>
+          </div>
+
+          <table class="line-items" aria-label="Invoice line items">
+            <thead><tr><th>#</th><th>Item</th><th class="num">Qty</th><th class="num">Rate</th><th class="num">Amount</th><th></th></tr></thead>
+            <tbody id="invItemsBody"><tr id="invEmptyRow"><td colspan="6" style="color:var(--muted);text-align:center;padding:1.1rem">No items yet — add from catalog or a custom line.</td></tr></tbody>
+          </table>
+
+          <div class="totals">
+            <div class="row"><span>Subtotal</span><span id="invSubtotal">Rs. 0</span></div>
+            <div class="row"><span>Owner Discount</span><span style="display:flex;align-items:center;gap:.35rem"><input id="invDiscount" type="number" min="0" value="0" aria-label="Owner discount in rupees" style="width:104px;text-align:right;background:var(--card-2);border:1px solid var(--border);border-radius:8px;color:var(--text);padding:.2rem .5rem"><input id="invDiscountPct" class="pct-input" type="number" min="0" max="100" value="0" aria-label="Owner discount in percent" placeholder="%" style="background:var(--card-2);border:1px solid var(--border);border-radius:8px;color:var(--gold-2);padding:.2rem .35rem"></span></div>
+            <label class="checkline"><input type="checkbox" id="invTax"> Add Sales Tax 18% <small style="color:var(--muted)">(owner not registered for Sales Tax — leave off)</small></label>
+            <div class="row"><span>Sales Tax (GST)</span><span id="invTaxAmt">Rs. 0</span></div>
+            <div class="row grand"><span>Grand Total</span><span id="invGrand">Rs. 0</span></div>
+          </div>
+          <div class="field" style="margin-top:.6rem"><label for="invNotes">Notes / Warranty</label><textarea id="invNotes" rows="2" placeholder="e.g. 7-day shop warranty on repaired parts…"></textarea></div>
+          <div style="display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.2rem">
+            <button type="button" class="btn btn-gold" id="invPrint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg> Print Invoice</button>
+            <button type="button" class="btn btn-wa" id="invSharePdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg> Send PDF via WhatsApp</button>
+            <button type="button" class="btn btn-ink" id="invDownloadPdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg> Download PDF</button>
+            <button type="button" class="btn btn-ghost btn-sm" id="invWA"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5c-1.5 0-3-.4-4.2-1.1L3 20l1.2-5.1A8.5 8.5 0 1 1 21 11.5z"/></svg> Text Summary</button>
+            <button type="button" class="btn btn-ink btn-sm" id="invClear">Clear</button>
+          </div>
+        </form>
+
+        <div class="form-card" id="invoicePreviewWrap" aria-label="Invoice preview">
+          <div class="invoice-paper" id="invoicePreview"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2 · QR CODE -->
+    <div class="tab-panel" id="tabBarcode" role="tabpanel" aria-labelledby="tabBtnBarcode">
+      <div class="invoice-wrap">
+        <form class="form-card" id="barcodeForm">
+          <p class="form-note">Generates a QR code any phone camera scans instantly — product SKU, a warranty link, or any custom text (max 80 characters).</p>
+          <div class="field"><label for="bcProduct">From Catalog (uses SKU)</label><select id="bcProduct"><option value="">— custom code below —</option></select></div>
+          <div class="field"><label for="bcCustom">Or Custom Text</label><input id="bcCustom" placeholder="e.g. ZC-L001 · wa.me/923084608380" maxlength="80" spellcheck="false"></div>
+          <label class="checkline"><input type="checkbox" id="bcShowName" checked> Show product name</label>
+          <label class="checkline"><input type="checkbox" id="bcShowPrice" checked> Show price (Rs.)</label>
+          <div style="display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.8rem">
+            <button type="button" class="btn btn-gold" id="bcRender">Preview QR Code</button>
+            <button type="button" class="btn btn-ink" id="bcDownload">Download PNG</button>
+            <button type="button" class="btn btn-ghost" id="bcPrint">Print Label</button>
+          </div>
+        </form>
+        <div class="form-card barcode-lab-preview" style="display:flex;justify-content:center" aria-label="QR code label preview">
+          <div style="text-align:center;background:#fdfcf8;color:#111;border-radius:10px;padding:1.2rem 1.6rem;box-shadow:var(--shadow);width:100%;max-width:360px">
+            <div style="font-family:var(--font-display);font-weight:800;letter-spacing:.08em">ZAMAN COMPUTER</div>
+            <div id="bcLabelName" style="font-size:.78rem;margin:.15rem 0 .4rem;min-height:1.2em">—</div>
+            <div class="barcode-row"><canvas id="barcodeCanvas" aria-label="QR code preview"></canvas></div>
+            <div id="bcLabelPrice" style="font-weight:700;margin-top:.35rem;font-size:.95rem">—</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Price Manager (Owner) -->
+<div class="pe-overlay" id="priceEditor" role="dialog" aria-modal="true" aria-labelledby="peTitle">
+  <div class="pe-card">
+    <div class="pe-head">
+      <h3 id="peTitle">Price Manager — Lahore Market</h3>
+      <button class="pe-close" id="closePriceEditor" aria-label="Close price manager">×</button>
+    </div>
+    <p class="form-note" style="padding:.7rem 1.3rem 0;margin:0">Enter today&rsquo;s market rates in PKR. Saved on this device and applied instantly across the shop, invoices and WhatsApp messages.</p>
+    <div class="pe-list" id="peList"></div>
+    <div class="pe-foot">
+      <button class="btn btn-ghost btn-sm" id="resetPricesBtn" type="button">Reset to defaults</button>
+      <button class="btn btn-gold" id="savePricesBtn" type="button">Save Today&rsquo;s Rates</button>
+    </div>
+  </div>
+</div>
+<!-- Add Product -->
+<div class="pe-overlay" id="addProductModal" role="dialog" aria-modal="true" aria-labelledby="addTitle">
+  <div class="pe-card">
+    <div class="pe-head">
+      <h3 id="addTitle">Add Product</h3>
+      <button class="pe-close" id="addProductClose" aria-label="Close">&times;</button>
+    </div>
+    <form id="addProductForm" class="pe-list" style="gap:.55rem;padding-top:.8rem">
+      <div class="form-row">
+        <div class="field"><label for="apSku">SKU</label><input id="apSku" required autocomplete="off" placeholder="ZC-L021"></div>
+        <div class="field"><label for="apCategory">Category</label><select id="apCategory" required><option value="desktops">Desktops &amp; Systems</option><option value="laptops">Laptops</option><option value="accessories">Accessories</option><option value="hardware">Hardware &amp; Components</option><option value="security">CCTV &amp; Security</option></select></div>
+      </div>
+      <div class="field"><label for="apName">Product Name <b>*</b></label><input id="apName" required placeholder="e.g. HP ProBook 440 G10 — Core i5"></div>
+      <div class="form-row">
+        <div class="field"><label for="apBrand">Brand</label><input id="apBrand" placeholder="HP"></div>
+        <div class="field"><label for="apCond">Condition</label><select id="apCond"><option>New</option><option>Used</option></select></div>
+      </div>
+      <div class="field"><label for="apSpecs">Key Specifications</label><input id="apSpecs" placeholder="i5-1335U · 16GB · 512GB NVMe · 14&quot; FHD"></div>
+      <div class="form-row">
+        <div class="field"><label for="apPrice">Price (Rs.) <b>*</b></label><input id="apPrice" type="number" min="0" step="100" required placeholder="165000" inputmode="numeric"></div>
+        <div class="field"><label for="apOldPrice">Old Price (Rs.) <small>(optional)</small></label><input id="apOldPrice" type="number" min="0" step="100" placeholder="192000" inputmode="numeric"></div>
+      </div>
+      <div class="field"><label for="apImg">Image URL <small>(optional — leave blank for chip image)</small></label><input id="apImg" type="url" placeholder="https://images.unsplash.com/photo-…" autocomplete="off"></div>
+      <div class="form-row" style="gap:1.2rem">
+        <label class="checkline"><input type="checkbox" id="apStock" checked> In stock</label>
+        <label class="checkline"><input type="checkbox" id="apFeatured"> ★ Featured</label>
+        <label class="checkline"><input type="checkbox" id="apIsNew"> New Arrival</label>
+      </div>
+      <button type="submit" class="btn btn-gold btn-block" style="margin-top:.2rem">Add to Catalog</button>
+    </form>
+  </div>
+</div>
+</div>`;
 
 function renderOwnerStats(){
   const total = PRODUCTS.length;
@@ -1827,7 +1804,8 @@ function renderOwnerStats(){
   const used = PRODUCTS.filter(p => p.cond === 'Used').length;
   const cats = new Set(PRODUCTS.map(p => p.cat)).size;
   const last = localStorage.getItem(LAST_PUBLISH) || 'never published';
-  $('#ownerStats').innerHTML =
+  const el = document.getElementById('ownerStats');
+  if (el) el.innerHTML =
     '<div class="owner-stat"><b>' + total + '</b><small>Products</small></div>' +
     '<div class="owner-stat"><b>' + inStock + '</b><small>In Stock</small></div>' +
     '<div class="owner-stat"><b>' + used + '</b><small>Used Items</small></div>' +
@@ -1836,189 +1814,126 @@ function renderOwnerStats(){
 }
 function renderOwnerTable(){
   renderOwnerStats();
-  const rows = PRODUCTS.map((p, i) =>
+  const tbody = document.getElementById('ownerTableBody');
+  if (!tbody) return;
+  tbody.innerHTML = PRODUCTS.map((p, i) =>
     '<tr data-i="' + i + '"><td>' + esc(p.sku) + '</td><td>' + esc(p.name) + '</td>' +
-      '<td class="num"><input type="number" min="0" step="100" class="ot-price" value="' + p.price + '" aria-label="Price for ' + esc(p.name) + '" inputmode="numeric"></td>' +
+      '<td class="num"><input type="number" min="0" step="100" class="ot-price" value="' + p.price + '" inputmode="numeric" aria-label="Price for ' + esc(p.name) + '"></td>' +
       '<td><button type="button" class="ot-stock' + (p.stock ? '' : ' out') + '" aria-pressed="' + p.stock + '">' + (p.stock ? 'In Stock' : 'Out') + '</button></td>' +
-      '<td><select class="ot-cond" aria-label="Condition"><option' + (p.cond === 'New' ? ' selected' : '') + '>New</option><option' + (p.cond === 'Used' ? ' selected' : '') + '>Used</option></select></td>' +
+      '<td><select class="ot-cond"><option' + (p.cond === 'New' ? ' selected' : '') + '>New</option><option' + (p.cond === 'Used' ? ' selected' : '') + '>Used</option></select></td>' +
       '<td><label class="checkline"><input type="checkbox" class="ot-featured"' + (p.featured ? ' checked' : '') + ' aria-label="Featured"> ★</label></td>' +
       '<td><button type="button" class="ot-del" aria-label="Delete product">×</button></td>' +
     '</tr>'
   ).join('');
-  $('#ownerTableBody').innerHTML = rows;
 }
 function refreshCatalog(){
   persistProducts();
   renderFeatured(); renderLatest(); renderChips(); renderProducts(); renderInvSelects();
 }
 
-/* unlock / lock */
-$('#ownerUnlockBtnMobile') && $('#ownerUnlockBtnMobile').addEventListener('click', () => { $('#mobilePanel').classList.remove('open'); $('#hamburger').setAttribute('aria-expanded', 'false'); $('#ownerUnlockBtnNav').click(); });
-$('#ownerUnlockBtnNav').addEventListener('click', () => { $('#ownerPinInput').value = ''; $('#ownerUnlockModal').hidden = false; setTimeout(() => $('#ownerPinInput').focus(), 50); });
-$('#ownerUnlockClose').addEventListener('click', () => { $('#ownerUnlockModal').hidden = true; });
-$('#ownerUnlockModal').addEventListener('click', e => { if (e.target.id === 'ownerUnlockModal') $('#ownerUnlockModal').hidden = true; });
-$('#ownerUnlockBtn').addEventListener('click', async () => {
-  const pin = $('#ownerPinInput').value;
-  if (!pin || !(await checkPin(pin))) { showToast('Wrong PIN.'); return; }
-  localStorage.setItem(OWNER_KEY, '1');
-  $('#ownerUnlockModal').hidden = true;
-  setOwnerMode(true);
-  showToast('Welcome back, Owner.');
-});
-$('#ownerPinInput').addEventListener('keydown', e => { if (e.key === 'Enter') $('#ownerUnlockBtn').click(); });
-$('#ownerSignOutBtn').addEventListener('click', () => { localStorage.removeItem(OWNER_KEY); setOwnerMode(false); showToast('Signed out.'); });
-$('#ownerChangePinBtn').addEventListener('click', async () => {
-  const v = $('#ownerNewPin').value.trim();
-  if (!/^\d{4,8}$/.test(v)) { showToast('PIN must be 4–8 digits.'); return; }
-  localStorage.setItem(PIN_STORE, await sha256(v));
-  $('#ownerNewPin').value = '';
-  showToast('PIN changed ✓');
-});
-
-/* table edits (delegated) */
-$('#ownerTableBody').addEventListener('change', e => {
-  const tr = e.target.closest('tr'); if (!tr) return;
-  const i = +tr.dataset.i, p = PRODUCTS[i]; if (!p) return;
-  if (e.target.classList.contains('ot-price')) {
-    const v = Math.max(0, Math.round(Number(e.target.value)));
-    if (!Number.isFinite(v) || v <= 0) { showToast('Invalid price.'); e.target.value = p.price; return; }
-    p.price = v;
-  } else if (e.target.classList.contains('ot-cond')) {
-    p.cond = e.target.value;
-  } else if (e.target.classList.contains('ot-featured')) {
-    p.featured = e.target.checked;
-  }
-  refreshCatalog();
-});
-$('#ownerTableBody').addEventListener('click', e => {
-  const tr = e.target.closest('tr'); if (!tr) return;
-  const i = +tr.dataset.i, p = PRODUCTS[i]; if (!p) return;
-  if (e.target.classList.contains('ot-stock')) {
-    p.stock = !p.stock;
-    e.target.classList.toggle('out', !p.stock);
-    e.target.textContent = p.stock ? 'In Stock' : 'Out';
-    e.target.setAttribute('aria-pressed', String(p.stock));
-    refreshCatalog();
-  } else if (e.target.classList.contains('ot-del')) {
-    if (confirm('Remove “' + p.name + '” from the catalog?')) {
-      PRODUCTS.splice(i, 1);
-      persistProducts();
-      renderOwnerTable();
-      refreshCatalog();
-    }
-  }
-});
-
-/* add product */
-$('#ownerAddBtn').addEventListener('click', () => {
-  $('#apSku').value = 'ZC-' + Math.random().toString(36).slice(2, 6).toUpperCase();
-  $('#addProductForm').reset();
-  $('#apStock').checked = true;
-  $('#addProductModal').hidden = false;
-  setTimeout(() => $('#apName').focus(), 50);
-});
-$('#addProductClose').addEventListener('click', () => { $('#addProductModal').hidden = true; });
-$('#addProductModal').addEventListener('click', e => { if (e.target.id === 'addProductModal') $('#addProductModal').hidden = true; });
-$('#addProductForm').addEventListener('submit', e => {
-  e.preventDefault();
-  const name = $('#apName').value.trim();
-  const price = Math.round(Number($('#apPrice').value));
-  if (!name || !Number.isFinite(price) || price <= 0) { showToast('Enter a name and a valid price.'); return; }
-  let img = $('#apImg').value.trim();
-  if (!img) img = u('photo-1518770660439-4636190af475', 640);
-  PRODUCTS.unshift({
-    sku: $('#apSku').value.trim().toUpperCase() || ('ZC-' + Date.now().toString(36).toUpperCase()),
-    name, brand: $('#apBrand').value.trim() || 'Zaman',
-    specs: $('#apSpecs').value.trim() || '—',
-    price, oldPrice: Number($('#apOldPrice').value) || undefined,
-    cat: $('#apCategory').value, cond: $('#apCond').value,
-    stock: $('#apStock').checked, featured: $('#apFeatured').checked, isNew: $('#apIsNew').checked,
-    img
-  });
-  persistProducts();
-  refreshCatalog();
+function injectOwnerUI(){
+  const slot = document.getElementById('ownerRoot');
+  if (!slot) return;
+  if (!document.getElementById('invoice')) slot.innerHTML = OWNER_HTML;
+  wireOwnerUI();
+  document.body.classList.add('is-owner');
+  document.querySelectorAll('.owner-only').forEach(el => { el.hidden = false; });
+  const nav = document.getElementById('ownerUnlockBtnNav');
+  if (nav) nav.classList.add('on');
+  const pe = document.getElementById('openPriceEditor'); if (pe) pe.hidden = false;
   renderOwnerTable();
-  $('#addProductModal').hidden = true;
-  showToast('Product added ✓ — remember to Publish to GitHub.');
-});
-
-/* export / import */
-$('#ownerExportBtn').addEventListener('click', () => {
-  const blob = new Blob([JSON.stringify(PRODUCTS, null, 2)], { type: 'application/json' });
-  downloadBlob(blob, 'zaman-products-' + new Date().toISOString().slice(0, 10) + '.json');
-  showToast('Catalog exported (' + PRODUCTS.length + ' products).');
-});
-$('#ownerImportFile').addEventListener('change', e => {
-  const file = e.target.files[0]; if (!file) return;
-  const reader = new FileReader();
-  reader.onload = () => {
-    try {
-      const arr = JSON.parse(reader.result);
-      if (!Array.isArray(arr) || arr.length < 1 || !arr.every(p => p.sku && p.name && typeof p.price === 'number')) {
-        showToast('Invalid catalog file.'); return;
-      }
-      PRODUCTS.length = 0; PRODUCTS.push(...arr);
-      persistProducts(); refreshCatalog(); renderOwnerTable();
-      showToast('Imported ' + PRODUCTS.length + ' products ✓');
-    } catch (err) { showToast('Could not read that file.'); }
-    e.target.value = '';
-  };
-  reader.readAsText(file);
-});
-
-/* publish to GitHub */
-const readPublish = () => ({
-  owner: ($('#ghOwner').value || 'adfaizy').trim(),
-  repo: ($('#ghRepo').value || 'Zaman_Computer').trim(),
-  branch: ($('#ghBranch').value || 'main').trim(),
-  path: ($('#ghPath').value || 'products.json').trim(),
-  token: $('#ghToken').value.trim()
-});
-(function restorePublish(){
-  try {
-    const saved = JSON.parse(localStorage.getItem(PUBLISH_STORE) || '{}');
-    if (saved.owner) $('#ghOwner').value = saved.owner;
-    if (saved.repo) $('#ghRepo').value = saved.repo;
-    if (saved.branch) $('#ghBranch').value = saved.branch;
-    if (saved.path) $('#ghPath').value = saved.path;
-    if (saved.token && $('#rememberToken')) { $('#ghToken').value = saved.token; $('#rememberToken').checked = true; }
-  } catch (e) { /* ignore */ }
-})();
-$$('#ghOwner,#ghRepo,#ghBranch,#ghPath').forEach(el => el.addEventListener('change', savePublish));
-$('#ghToken').addEventListener('change', savePublish);
-$('#rememberToken').addEventListener('change', savePublish);
-function savePublish(){
-  const remember = $('#rememberToken').checked;
-  const p = readPublish();
-  const out = { owner: p.owner, repo: p.repo, branch: p.branch, path: p.path };
-  if (remember) out.token = p.token;
-  localStorage.setItem(PUBLISH_STORE, JSON.stringify(out));
 }
-$('#ownerPublishBtn').addEventListener('click', async () => {
-  const p = readPublish();
-  if (!p.token) { showToast('Paste the GitHub token in Publish settings first.'); $('.owner-publish summary').click(); return; }
-  savePublish();
-  const api = 'https://api.github.com/repos/' + encodeURIComponent(p.owner) + '/' + encodeURIComponent(p.repo) + '/contents/' + p.path.split('/').map(encodeURIComponent).join('/');
-  const headers = { 'Authorization': 'Bearer ' + p.token, 'Accept': 'application/vnd.github+json' };
-  try {
-    let sha = null;
-    const g = await fetch(api + '?ref=' + encodeURIComponent(p.branch), { headers });
-    if (g.ok) { const j = await g.json(); sha = j.sha; }
-    const content = btoa(unescape(encodeURIComponent(JSON.stringify(PRODUCTS, null, 1))));
-    const body = { message: 'Owner: update product catalog', content, branch: p.branch };
-    if (sha) body.sha = sha;
-    const put = await fetch(api, { method: 'PUT', headers, body: JSON.stringify(body) });
-    if (!put.ok) { const t2 = await put.text(); console.error('Publish failed', put.status, t2); showToast('Publish failed (HTTP ' + put.status + '). Check token permissions.'); return; }
-    const stamp = new Date().toLocaleString('en-PK', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
-    localStorage.setItem(LAST_PUBLISH, stamp);
-    renderOwnerStats();
-    showToast('Published ✓ — customers will see it in ~1 minute.');
-  } catch (e) { console.error(e); showToast('Publish failed — check internet and token.'); }
+function signOutOwner(){ localStorage.removeItem(OWNER_KEY); location.reload(); }
+
+function openOwnerGate(){
+  if (document.getElementById('ownerGateModal')) return;
+  const setup = !localStorage.getItem(PASS_STORE);
+  const lock = getLock();
+  const remaining = Math.max(0, Math.ceil((lock.until - Date.now()) / 1000));
+
+  const modal = document.createElement('div');
+  modal.className = 'pe-overlay';
+  modal.id = 'ownerGateModal';
+  modal.setAttribute('role', 'dialog');
+  modal.setAttribute('aria-modal', 'true');
+  modal.setAttribute('aria-label', setup ? 'Create admin password' : 'Admin sign in');
+  modal.innerHTML =
+    '<div class="pe-card" style="max-width:420px">' +
+      '<div class="pe-head">' +
+        '<h3>' + (setup ? 'Create Admin Password' : 'Admin / Owner Login') + '</h3>' +
+        '<button class="pe-close" data-close aria-label="Close">&times;</button>' +
+      '</div>' +
+      '<div class="pe-list" style="padding-top:.8rem">' +
+        '<p class="form-note">' + (setup
+          ? 'This unlocks invoice creation, product &amp; price editing and publishing. Customers never see these tools. Password stays only on this device.'
+          : 'Enter the admin password to unlock the shop tools.') + '</p>' +
+        (remaining ? '<p class="form-note" style="color:var(--red)">Too many attempts — locked for ' + remaining + 's.</p>' : '') +
+        '<label class="field" for="gatePassword"><span>Password</span>' +
+          '<input id="gatePassword" type="password" autocomplete="' + (setup ? 'new-password' : 'current-password') + '" style="letter-spacing:.18em"' + (remaining ? ' disabled' : '') + '></label>' +
+        (setup ? '<label class="field" for="gateConfirm"><span>Confirm password</span><input id="gateConfirm" type="password" autocomplete="new-password" style="letter-spacing:.18em"></label>' : '') +
+        '<button class="btn btn-gold btn-block" id="gateSubmit" type="button"' + (remaining ? ' disabled' : '') + '>' + (setup ? 'Create Password &amp; Unlock' : 'Unlock') + '</button>' +
+        '<p class="form-note" style="margin:0;text-align:center">Zaman Computer — authorized access only</p>' +
+      '</div>' +
+    '</div>';
+  document.body.appendChild(modal);
+
+  const close = () => modal.remove();
+  modal.querySelector('[data-close]').addEventListener('click', close);
+  modal.addEventListener('click', e => { if (e.target === modal) close(); });
+
+  const passEl = modal.querySelector('#gatePassword');
+  const confirmEl = modal.querySelector('#gateConfirm');
+  const submit = modal.querySelector('#gateSubmit');
+  const fail = () => {
+    const l = getLock();
+    const n = (l.n || 0) + 1;
+    if (n >= MAX_ATTEMPTS) setLock({ n: 0, until: Date.now() + LOCK_MS });
+    else setLock({ n, until: 0 });
+    showToast(n >= MAX_ATTEMPTS ? 'Too many attempts — locked for 30s.' : 'Wrong password — ' + (MAX_ATTEMPTS - n) + ' attempt' + (MAX_ATTEMPTS - n === 1 ? '' : 's') + ' left.');
+  };
+  const tryPassword = async () => {
+    if (getLock().until && Date.now() < getLock().until) { showToast('Locked — wait 30 seconds.'); return; }
+    const pass = passEl.value;
+    if (setup) {
+      if (pass.length < 4) { showToast('Password must be at least 4 characters.'); return; }
+      if (confirmEl && pass !== confirmEl.value) { showToast('Passwords do not match.'); return; }
+      await createOwnerPassword(pass);
+      localStorage.setItem(OWNER_KEY, '1');
+      modal.remove(); injectOwnerUI(); showToast('Admin password created ✓ — welcome, Owner.');
+      return;
+    }
+    const res = await verifyOwnerPassword(pass);
+    if (res === 'ok') {
+      localStorage.setItem(OWNER_KEY, '1');
+      setLock({ n: 0, until: 0 });
+      modal.remove(); injectOwnerUI(); showToast('Welcome back, Owner.');
+    } else { fail(); passEl.value = ''; passEl.focus(); }
+  };
+  submit.addEventListener('click', tryPassword);
+  passEl.addEventListener('keydown', e => { if (e.key === 'Enter') tryPassword(); });
+  if (confirmEl) confirmEl.addEventListener('keydown', e => { if (e.key === 'Enter') tryPassword(); });
+  setTimeout(() => passEl.focus(), 60);
+}
+
+/* Nav / menu unlock buttons → gate */
+const gateNavBtn = document.getElementById('ownerUnlockBtnNav');
+if (gateNavBtn) gateNavBtn.addEventListener('click', openOwnerGate);
+const gateMobileBtn = document.getElementById('ownerUnlockBtnMobile');
+if (gateMobileBtn) gateMobileBtn.addEventListener('click', () => {
+  document.getElementById('mobilePanel').classList.remove('open');
+  const hb = document.getElementById('hamburger');
+  if (hb) hb.setAttribute('aria-expanded', 'false');
+  openOwnerGate();
 });
 
-/* boot: restore owner mode if previously unlocked */
-if (localStorage.getItem(OWNER_KEY) === '1') setOwnerMode(true);
+/* Auto-restore previous session on this device */
+if (localStorage.getItem(OWNER_KEY) === '1') injectOwnerUI();
 
+/* ═══════════════════════════════════════════════════════════════
+   OWNER-ONLY CODE — injected after the admin gate unlocks.
+   Nothing in this function exists in the customer build until then.
+   ═══════════════════════════════════════════════════════════════ */
+function wireOwnerUI(){
 /* ───────── 17. QR CODE ENGINE — ISO/IEC 18004 · byte mode · EC level M ─────────
    Straight transliteration of the reference encoder (qrcode, MIT):
    Reed–Solomon ECC over GF(256), best-mask selection via penalty rules,
@@ -2359,16 +2274,6 @@ function nextInvoiceNo(){ return 'ZC-' + new Date().getFullYear() + '-' + String
 function showInvoiceNo(){ invNoEl.value = nextInvoiceNo(); }
 
 /* Populate product dropdowns (grouped by category) */
-function renderInvSelects(){
-  const groups = Object.keys(CAT_LABEL).map(cat =>
-    '<optgroup label="' + CAT_LABEL[cat] + '">' +
-      PRODUCTS.filter(p => p.cat === cat).map(p =>
-        '<option value="' + esc(p.sku) + '">' + esc(p.name) + ' - ' + fmtRs(p.price) + '</option>'
-      ).join('') + '</optgroup>'
-  ).join('');
-  $('#invProduct').innerHTML = groups;
-  $('#bcProduct').innerHTML = '<option value="">- custom text below -</option>' + groups;
-}
 renderInvSelects();
 
 $('#invAddProduct').addEventListener('click', () => {
@@ -2937,6 +2842,8 @@ $('#invSharePdf').addEventListener('click', async () => {
   window.open(link, '_blank', 'noopener');
   showToast('PDF downloaded — attach ' + filename + ' in the customer chat that just opened.');
 });
+
+}
 
 /* ───────── 20. PWA — Service Worker & Install ───────── */
 if ('serviceWorker' in navigator) {

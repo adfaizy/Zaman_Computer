@@ -1,0 +1,920 @@
+17. QR CODE ENGINE — ISO/IEC 18004 · byte mode · EC level M ─────────
+   Straight transliteration of the reference encoder (qrcode, MIT):
+   Reed–Solomon ECC over GF(256), best-mask selection via penalty rules,
+   BCH format information. 100% offline, zero libraries.              */
+const QR = (() => {
+const RS_BLOCKS = [
+  /* v1 (L,M,Q,H) */ [[[1,26,19]],[[1,26,16]],[[1,26,13]],[[1,26,9]]],
+  /* v2 (L,M,Q,H) */ [[[1,44,34]],[[1,44,28]],[[1,44,22]],[[1,44,16]]],
+  /* v3 (L,M,Q,H) */ [[[1,70,55]],[[1,70,44]],[[2,35,17]],[[2,35,13]]],
+  /* v4 (L,M,Q,H) */ [[[1,100,80]],[[2,50,32]],[[2,50,24]],[[4,25,9]]],
+  /* v5 (L,M,Q,H) */ [[[1,134,108]],[[2,67,43]],[[2,33,15],[2,34,16]],[[2,33,11],[2,34,12]]],
+  /* v6 (L,M,Q,H) */ [[[2,86,68]],[[4,43,27]],[[4,43,19]],[[4,43,15]]],
+  /* v7 (L,M,Q,H) */ [[[2,98,78]],[[4,49,31]],[[2,32,14],[4,33,15]],[[4,39,13],[1,40,14]]],
+  /* v8 (L,M,Q,H) */ [[[2,121,97]],[[2,60,38],[2,61,39]],[[4,40,18],[2,41,19]],[[4,40,14],[2,41,15]]],
+  /* v9 (L,M,Q,H) */ [[[2,146,116]],[[3,58,36],[2,59,37]],[[4,36,16],[4,37,17]],[[4,36,12],[4,37,13]]],
+  /* v10 (L,M,Q,H) */ [[[2,86,68],[2,87,69]],[[4,69,43],[1,70,44]],[[6,43,19],[2,44,20]],[[6,43,15],[2,44,16]]],
+  /* v11 (L,M,Q,H) */ [[[4,101,81]],[[1,80,50],[4,81,51]],[[4,50,22],[4,51,23]],[[3,36,12],[8,37,13]]],
+  /* v12 (L,M,Q,H) */ [[[2,116,92],[2,117,93]],[[6,58,36],[2,59,37]],[[4,46,20],[6,47,21]],[[7,42,14],[4,43,15]]],
+  /* v13 (L,M,Q,H) */ [[[4,133,107]],[[8,59,37],[1,60,38]],[[8,44,20],[4,45,21]],[[12,33,11],[4,34,12]]],
+  /* v14 (L,M,Q,H) */ [[[3,145,115],[1,146,116]],[[4,64,40],[5,65,41]],[[11,36,16],[5,37,17]],[[11,36,12],[5,37,13]]],
+  /* v15 (L,M,Q,H) */ [[[5,109,87],[1,110,88]],[[5,65,41],[5,66,42]],[[5,54,24],[7,55,25]],[[11,36,12],[7,37,13]]],
+  /* v16 (L,M,Q,H) */ [[[5,122,98],[1,123,99]],[[7,73,45],[3,74,46]],[[15,43,19],[2,44,20]],[[3,45,15],[13,46,16]]],
+  /* v17 (L,M,Q,H) */ [[[1,135,107],[5,136,108]],[[10,74,46],[1,75,47]],[[1,50,22],[15,51,23]],[[2,42,14],[17,43,15]]],
+  /* v18 (L,M,Q,H) */ [[[5,150,120],[1,151,121]],[[9,69,43],[4,70,44]],[[17,50,22],[1,51,23]],[[2,42,14],[19,43,15]]],
+  /* v19 (L,M,Q,H) */ [[[3,141,113],[4,142,114]],[[3,70,44],[11,71,45]],[[17,47,21],[4,48,22]],[[9,39,13],[16,40,14]]],
+  /* v20 (L,M,Q,H) */ [[[3,135,107],[5,136,108]],[[3,67,41],[13,68,42]],[[15,54,24],[5,55,25]],[[15,43,15],[10,44,16]]],
+  /* v21 (L,M,Q,H) */ [[[4,144,116],[4,145,117]],[[17,68,42]],[[17,50,22],[6,51,23]],[[19,46,16],[6,47,17]]],
+  /* v22 (L,M,Q,H) */ [[[2,139,111],[7,140,112]],[[17,74,46]],[[7,54,24],[16,55,25]],[[34,37,13]]],
+  /* v23 (L,M,Q,H) */ [[[4,151,121],[5,152,122]],[[4,75,47],[14,76,48]],[[11,54,24],[14,55,25]],[[16,45,15],[14,46,16]]],
+  /* v24 (L,M,Q,H) */ [[[6,147,117],[4,148,118]],[[6,73,45],[14,74,46]],[[11,54,24],[16,55,25]],[[30,46,16],[2,47,17]]],
+  /* v25 (L,M,Q,H) */ [[[8,132,106],[4,133,107]],[[8,75,47],[13,76,48]],[[7,54,24],[22,55,25]],[[22,45,15],[13,46,16]]],
+  /* v26 (L,M,Q,H) */ [[[10,142,114],[2,143,115]],[[19,74,46],[4,75,47]],[[28,50,22],[6,51,23]],[[33,46,16],[4,47,17]]],
+  /* v27 (L,M,Q,H) */ [[[8,152,122],[4,153,123]],[[22,73,45],[3,74,46]],[[8,53,23],[26,54,24]],[[12,45,15],[28,46,16]]],
+  /* v28 (L,M,Q,H) */ [[[3,147,117],[10,148,118]],[[3,73,45],[23,74,46]],[[4,54,24],[31,55,25]],[[11,45,15],[31,46,16]]],
+  /* v29 (L,M,Q,H) */ [[[7,146,116],[7,147,117]],[[21,73,45],[7,74,46]],[[1,53,23],[37,54,24]],[[19,45,15],[26,46,16]]],
+  /* v30 (L,M,Q,H) */ [[[5,145,115],[10,146,116]],[[19,75,47],[10,76,48]],[[15,54,24],[25,55,25]],[[23,45,15],[25,46,16]]],
+  /* v31 (L,M,Q,H) */ [[[13,145,115],[3,146,116]],[[2,74,46],[29,75,47]],[[42,54,24],[1,55,25]],[[23,45,15],[28,46,16]]],
+  /* v32 (L,M,Q,H) */ [[[17,145,115]],[[10,74,46],[23,75,47]],[[10,54,24],[35,55,25]],[[19,45,15],[35,46,16]]],
+  /* v33 (L,M,Q,H) */ [[[17,145,115],[1,146,116]],[[14,74,46],[21,75,47]],[[29,54,24],[19,55,25]],[[11,45,15],[46,46,16]]],
+  /* v34 (L,M,Q,H) */ [[[13,145,115],[6,146,116]],[[14,74,46],[23,75,47]],[[44,54,24],[7,55,25]],[[59,46,16],[1,47,17]]],
+  /* v35 (L,M,Q,H) */ [[[12,151,121],[7,152,122]],[[12,75,47],[26,76,48]],[[39,54,24],[14,55,25]],[[22,45,15],[41,46,16]]],
+  /* v36 (L,M,Q,H) */ [[[6,151,121],[14,152,122]],[[6,75,47],[34,76,48]],[[46,54,24],[10,55,25]],[[2,45,15],[64,46,16]]],
+  /* v37 (L,M,Q,H) */ [[[17,152,122],[4,153,123]],[[29,74,46],[14,75,47]],[[49,54,24],[10,55,25]],[[24,45,15],[46,46,16]]],
+  /* v38 (L,M,Q,H) */ [[[4,152,122],[18,153,123]],[[13,74,46],[32,75,47]],[[48,54,24],[14,55,25]],[[42,45,15],[32,46,16]]],
+  /* v39 (L,M,Q,H) */ [[[20,147,117],[4,148,118]],[[40,75,47],[7,76,48]],[[43,54,24],[22,55,25]],[[10,45,15],[67,46,16]]],
+  /* v40 (L,M,Q,H) */ [[[19,148,118],[6,149,119]],[[18,75,47],[31,76,48]],[[34,54,24],[34,55,25]],[[20,45,15],[61,46,16]]],
+];
+const PATTERN_POSITION = [[],[6,18],[6,22],[6,26],[6,30],[6,34],[6,22,38],[6,24,42],[6,26,46],[6,28,50],[6,30,54],[6,32,58],[6,34,62],[6,26,46,66],[6,26,48,70],[6,26,50,74],[6,30,54,78],[6,30,56,82],[6,30,58,86],[6,34,62,90],[6,28,50,72,94],[6,26,50,74,98],[6,30,54,78,102],[6,28,54,80,106],[6,32,58,84,110],[6,30,58,86,114],[6,34,62,90,118],[6,26,50,74,98,122],[6,30,54,78,102,126],[6,26,52,78,104,130],[6,30,56,82,108,134],[6,34,60,86,112,138],[6,30,58,86,114,142],[6,34,62,90,118,146],[6,30,54,78,102,126,150],[6,24,50,76,102,128,154],[6,28,54,80,106,132,158],[6,32,58,84,110,136,162],[6,26,54,82,110,138,166],[6,30,58,86,114,142,170]];
+
+const EC_L = 1, EC_M = 0, EC_Q = 3, EC_H = 2;   /* error-correction level ids */
+const EC_SLOT = { 1: 0, 0: 1, 3: 2, 2: 3 };      /* EC id -> RS_BLOCKS slot (L,M,Q,H) */
+function rsBlocks(version, ec){
+  const groups = RS_BLOCKS[version - 1][EC_SLOT[ec]];
+  const blocks = [];
+  for (const [count, total, data] of groups)
+    for (let i = 0; i < count; i++) blocks.push({ total, data });
+  return blocks;
+}
+const BIT_LIMIT = [0, 1, 2, 3].map(ec => {
+  const arr = [0];
+  for (let v = 1; v <= 40; v++) arr.push(8 * rsBlocks(v, ec).reduce((s, b) => s + b.data, 0));
+  return arr;
+});
+const sizeClass = v => (v < 10 ? 0 : v < 27 ? 1 : 2);
+const modeByteBits = v => [8, 16, 16][sizeClass(v)];
+const PAD0 = 0xEC, PAD1 = 0x11;
+
+/* ---- GF(256) tables ---- */
+const EXP = new Array(512).fill(0), LOG = new Array(256).fill(0);
+EXP[0] = 1;
+for (let i = 1; i < 8; i++) EXP[i] = EXP[i - 1] << 1;
+for (let i = 8; i < 256; i++) EXP[i] = EXP[i - 4] ^ EXP[i - 5] ^ EXP[i - 6] ^ EXP[i - 8];
+for (let i = 0; i < 255; i++) LOG[EXP[i]] = i;
+const gexp = n => EXP[n % 255], glog = n => LOG[n];
+
+class Poly {
+  constructor(num, shift){
+    let offset = 0;
+    while (offset < num.length && num[offset] === 0) offset++;
+    this.num = num.slice(offset).concat(new Array(shift).fill(0));
+  }
+  get length(){ return this.num.length; }
+  mul(other){
+    const num = new Array(this.length + other.length - 1).fill(0);
+    for (let i = 0; i < this.length; i++)
+      for (let j = 0; j < other.length; j++)
+        num[i + j] ^= gexp(glog(this.num[i]) + glog(other.num[j]));
+    return new Poly(num, 0);
+  }
+  mod(other){
+    const difference = this.length - other.length;
+    if (difference < 0) return this;
+    const ratio = glog(this.num[0]) - glog(other.num[0]);
+    const num = new Array(other.length);
+    for (let i = 0; i < other.length; i++) num[i] = this.num[i] ^ gexp(glog(other.num[i]) + ratio);
+    return new Poly(num.concat(this.num.slice(other.length)), 0).mod(other);
+  }
+}
+
+class BitBuffer {
+  constructor(){ this.buffer = []; this.length = 0; }
+  put(num, len){ for (let i = len - 1; i >= 0; i--) this.putBit(((num >>> i) & 1) === 1); }
+  putBit(bit){
+    const idx = Math.floor(this.length / 8);
+    if (this.buffer.length <= idx) this.buffer.push(0);
+    if (bit) this.buffer[idx] |= 0x80 >>> (this.length % 8);
+    this.length++;
+  }
+}
+
+function createBytes(buffer, rsBlks){
+  let offset = 0, maxDc = 0, maxEc = 0;
+  const dcdata = [], ecdata = [];
+  for (const blk of rsBlks){
+    const dcCount = blk.data, ecCount = blk.total - blk.data;
+    maxDc = Math.max(maxDc, dcCount); maxEc = Math.max(maxEc, ecCount);
+    const currentDc = buffer.slice(offset, offset + dcCount).map(b => b & 0xff); offset += dcCount;
+    let rsPoly = new Poly([1], 0);
+    for (let i = 0; i < ecCount; i++) rsPoly = rsPoly.mul(new Poly([1, gexp(i)], 0));
+    const raw = new Poly(currentDc, rsPoly.length - 1);
+    const mod = raw.mod(rsPoly);
+    const currentEc = new Array(ecCount).fill(0);
+    const modOffset = mod.num.length - ecCount;
+    for (let i = 0; i < ecCount; i++){ const idx = i + modOffset; currentEc[i] = idx >= 0 ? mod.num[idx] : 0; }
+    dcdata.push(currentDc); ecdata.push(currentEc);
+  }
+  const data = [];
+  for (let i = 0; i < maxDc; i++) for (const dc of dcdata) if (i < dc.length) data.push(dc[i]);
+  for (let i = 0; i < maxEc; i++) for (const ec of ecdata) if (i < ec.length) data.push(ec[i]);
+  return data;
+}
+
+function createData(version, ec, dataBytes){
+  const buffer = new BitBuffer();
+  buffer.put(4, 4);                                   /* mode: byte */
+  buffer.put(dataBytes.length, modeByteBits(version));
+  for (const b of dataBytes) buffer.put(b, 8);
+  const blks = rsBlocks(version, ec);
+  const bitLimit = blks.reduce((s, b) => s + b.data * 8, 0);
+  for (let i = 0; i < Math.min(bitLimit - buffer.length, 4); i++) buffer.putBit(false);
+  while (buffer.length % 8) buffer.putBit(false);
+  const bytesToFill = (bitLimit - buffer.length) / 8;
+  for (let i = 0; i < bytesToFill; i++) buffer.put(i % 2 === 0 ? PAD0 : PAD1, 8);
+  return createBytes(buffer.buffer, blks);
+}
+
+const bitLen = n => { let d = 0; while (n !== 0){ d++; n >>>= 1; } return d; };
+const G15 = (1 << 10) | (1 << 8) | (1 << 5) | (1 << 4) | (1 << 2) | (1 << 1) | (1 << 0);
+const G18 = (1 << 12) | (1 << 11) | (1 << 10) | (1 << 9) | (1 << 8) | (1 << 5) | (1 << 2) | (1 << 0);
+const G15_MASK = (1 << 14) | (1 << 12) | (1 << 10) | (1 << 4) | (1 << 1);
+function bchTypeInfo(data){
+  let d = data << 10;
+  while (bitLen(d) - bitLen(G15) >= 0) d ^= G15 << (bitLen(d) - bitLen(G15));
+  return ((data << 10) | d) ^ G15_MASK;
+}
+function bchTypeNumber(data){
+  let d = data << 12;
+  while (bitLen(d) - bitLen(G18) >= 0) d ^= G18 << (bitLen(d) - bitLen(G18));
+  return (data << 12) | d;
+}
+const MASK_FNS = [
+  (i, j) => (i + j) % 2 === 0, (i, j) => i % 2 === 0, (i, j) => j % 3 === 0, (i, j) => (i + j) % 3 === 0,
+  (i, j) => (Math.floor(i / 2) + Math.floor(j / 3)) % 2 === 0, (i, j) => (i * j) % 2 + (i * j) % 3 === 0,
+  (i, j) => ((i * j) % 2 + (i * j) % 3) % 2 === 0, (i, j) => ((i * j) % 3 + (i + j) % 2) % 2 === 0
+];
+function buildBlank(version){
+  const size = version * 4 + 17;
+  const m = Array.from({ length: size }, () => new Array(size).fill(null));
+  const probe = (row, col) => {
+    for (let r = -1; r < 8; r++) for (let c = -1; c < 8; c++){
+      const rr = row + r, cc = col + c;
+      if (rr < 0 || rr >= size || cc < 0 || cc >= size) continue;
+      m[rr][cc] = (r >= 0 && r <= 6 && (c === 0 || c === 6)) ||
+                  (c >= 0 && c <= 6 && (r === 0 || r === 6)) ||
+                  (r >= 2 && r <= 4 && c >= 2 && c <= 4);
+    }
+  };
+  probe(0, 0); probe(0, size - 7); probe(size - 7, 0);
+  const pos = PATTERN_POSITION[version - 1];
+  for (const r of pos) for (const c of pos){
+    if (m[r][c] !== null) continue;
+    for (let dr = -2; dr <= 2; dr++) for (let dc = -2; dc <= 2; dc++){
+      if (Math.abs(dr) === 2 || Math.abs(dc) === 2 || (dr === 0 && dc === 0)) m[r + dr][c + dc] = true; else m[r + dr][c + dc] = false;
+    }
+  }
+  for (let i = 8; i < size - 8; i++){
+    if (m[i][6] === null) m[i][6] = i % 2 === 0;
+    if (m[6][i] === null) m[6][i] = i % 2 === 0;
+  }
+  return m;
+}
+function setupTypeInfo(m, ec, maskPattern, test){
+  const size = m.length;
+  const bits = bchTypeInfo((ec << 3) | maskPattern);
+  const bit = i => !test && ((bits >> i) & 1) === 1;
+  for (let i = 0; i < 15; i++){
+    const mod = bit(i);
+    if (i < 6) m[i][8] = mod; else if (i < 8) m[i + 1][8] = mod; else m[size - 15 + i][8] = mod;
+  }
+  for (let i = 0; i < 15; i++){
+    const mod = bit(i);
+    if (i < 8) m[8][size - i - 1] = mod; else if (i === 8) m[8][7] = mod; else m[8][14 - i] = mod;
+  }
+  m[size - 8][8] = !test;
+}
+function setupTypeNumber(m, version, test){
+  const size = m.length;
+  const bits = bchTypeNumber(version);
+  for (let i = 0; i < 18; i++){
+    const mod = !test && ((bits >> i) & 1) === 1;
+    m[Math.floor(i / 3)][i % 3 + size - 8 - 3] = mod;
+  }
+  for (let i = 0; i < 18; i++){
+    const mod = !test && ((bits >> i) & 1) === 1;
+    m[i % 3 + size - 8 - 3][Math.floor(i / 3)] = mod;
+  }
+}
+function mapData(m, data, maskPattern){
+  const size = m.length;
+  const maskFn = MASK_FNS[maskPattern];
+  let inc = -1, row = size - 1, bitIndex = 7, byteIndex = 0;
+  for (let col = size - 1; col > 0; col -= 2){
+    if (col <= 6) col--;
+    for (;;){
+      for (const c of [col, col - 1]){
+        if (m[row][c] === null){
+          let dark = false;
+          if (byteIndex < data.length) dark = ((data[byteIndex] >> bitIndex) & 1) === 1;
+          if (maskFn(row, c)) dark = !dark;
+          m[row][c] = dark;
+          bitIndex--;
+          if (bitIndex === -1){ byteIndex++; bitIndex = 7; }
+        }
+      }
+      row += inc;
+      if (row < 0 || row >= size){ row -= inc; inc = -inc; break; }
+    }
+  }
+}
+function buildModules(version, ec, dataCodewords, maskPattern, test){
+  const m = buildBlank(version);
+  setupTypeInfo(m, ec, maskPattern, test);
+  if (version >= 7) setupTypeNumber(m, version, test);
+  mapData(m, dataCodewords, maskPattern);
+  return m;
+}
+function lostPoint(m){
+  const n = m.length;
+  let lost = 0;
+  /* level 1: runs of 5+ same color */
+  for (let r = 0; r < n; r++){
+    let run = 1;
+    for (let c = 1; c < n; c++){
+      if (m[r][c] === m[r][c - 1]) run++;
+      else { if (run >= 5) lost += run - 2; run = 1; }
+    }
+    if (run >= 5) lost += run - 2;
+  }
+  for (let c = 0; c < n; c++){
+    let run = 1;
+    for (let r = 1; r < n; r++){
+      if (m[r][c] === m[r - 1][c]) run++;
+      else { if (run >= 5) lost += run - 2; run = 1; }
+    }
+    if (run >= 5) lost += run - 2;
+  }
+  /* level 2: 2x2 blocks */
+  for (let r = 0; r < n - 1; r++) for (let c = 0; c < n - 1; c++){
+    const v = m[r][c];
+    if (v === m[r][c + 1] && v === m[r + 1][c] && v === m[r + 1][c + 1]) lost += 3;
+  }
+  /* level 3: finder-like 1:1:3:1:1 patterns with quiet zone */
+  const P1 = [true, false, true, true, true, false, true, false, false, false, false];
+  const P2 = [false, false, false, false, true, false, true, true, true, false, true];
+  for (let r = 0; r < n; r++) for (let c = 0; c + 10 < n; c++){
+    const seg = [m[r][c], m[r][c+1], m[r][c+2], m[r][c+3], m[r][c+4], m[r][c+5], m[r][c+6], m[r][c+7], m[r][c+8], m[r][c+9], m[r][c+10]];
+    if (seg.every((v, i) => v === P1[i]) || seg.every((v, i) => v === P2[i])) lost += 40;
+  }
+  for (let c = 0; c < n; c++) for (let r = 0; r + 10 < n; r++){
+    const seg = [m[r][c], m[r+1][c], m[r+2][c], m[r+3][c], m[r+4][c], m[r+5][c], m[r+6][c], m[r+7][c], m[r+8][c], m[r+9][c], m[r+10][c]];
+    if (seg.every((v, i) => v === P1[i]) || seg.every((v, i) => v === P2[i])) lost += 40;
+  }
+  /* level 4: dark module proportion */
+  const dark = m.flat().filter(Boolean).length;
+  lost += Math.floor(Math.abs(dark * 100 / (n * n) - 50) / 5) * 10;
+  return lost;
+}
+function pickVersion(ec, byteLen){
+  for (let v = 1; v <= 40; v++){
+    if (BIT_LIMIT[ec][v] >= 4 + modeByteBits(v) + byteLen * 8) return v;
+  }
+  throw new Error('QR data too long');
+}
+function qrMatrix(text, ec){
+  ec = ec === undefined ? EC_M : ec;
+  const dataBytes = Array.from(new TextEncoder().encode(String(text)));
+  if (!dataBytes.length || dataBytes.length > 2953) throw new Error('QR: bad length');
+  const version = pickVersion(ec, dataBytes.length);
+  const dataCodewords = createData(version, ec, dataBytes);
+  let bestMask = 0, bestLost = Infinity;
+  for (let i = 0; i < 8; i++){
+    const test = buildModules(version, ec, dataCodewords, i, true);
+    const lost = lostPoint(test);
+    if (i === 0 || bestLost > lost){ bestLost = lost; bestMask = i; }
+  }
+  return buildModules(version, ec, dataCodewords, bestMask, false);
+}
+function drawQR(canvas, text, opts){
+  opts = opts || {};
+  const module = opts.module || 4, border = 4 * module;
+  let matrix;
+  try { matrix = qrMatrix(text, EC_M); } catch (e) { return false; }
+  const n = matrix.length;
+  canvas.width = n * module + border * 2;
+  canvas.height = n * module + border * 2;
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = '#111111';
+  for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) if (matrix[r][c]) ctx.fillRect(border + c * module, border + r * module, module, module);
+  return true;
+}
+return { qrMatrix, drawQR, EC_M, EC_L, EC_Q, EC_H };
+})();
+const drawQR = QR.drawQR, qrMatrix = QR.qrMatrix;
+
+/* ───────── 17. INVOICE SYSTEM ─────────
+   Rebuilt — catalog picker, custom lines, live totals, printable
+   bill, PDF-able preview and proper-case customer names.        */
+const invoicePreview = $('#invoicePreview');
+const invItemsBody = $('#invItemsBody');
+let invItems = [];
+let invSeq = parseInt(localStorage.getItem('zaman_inv_seq') || '1', 10);
+if (!Number.isFinite(invSeq) || invSeq < 1) invSeq = 1;
+
+const invDateEl = $('#invDate'), invNoEl = $('#invNo');
+invDateEl.value = new Date().toISOString().slice(0, 10);
+function nextInvoiceNo(){ return 'ZC-' + new Date().getFullYear() + '-' + String(invSeq).padStart(4, '0'); }
+function showInvoiceNo(){ invNoEl.value = nextInvoiceNo(); }
+
+/* Populate product dropdowns (grouped by category) */
+function renderInvSelects(){
+  const groups = Object.keys(CAT_LABEL).map(cat =>
+    '<optgroup label="' + CAT_LABEL[cat] + '">' +
+      PRODUCTS.filter(p => p.cat === cat).map(p =>
+        '<option value="' + esc(p.sku) + '">' + esc(p.name) + ' - ' + fmtRs(p.price) + '</option>'
+      ).join('') + '</optgroup>'
+  ).join('');
+  $('#invProduct').innerHTML = groups;
+  $('#bcProduct').innerHTML = '<option value="">- custom text below -</option>' + groups;
+}
+renderInvSelects();
+
+$('#invAddProduct').addEventListener('click', () => {
+  const sku = $('#invProduct').value;
+  const p = PRODUCTS.find(x => x.sku === sku);
+  if (!p) return;
+  const qty = Math.max(1, parseInt($('#invQty').value, 10) || 1);
+  invItems.push({ desc: p.name + ' (' + p.cond + ')', sku: p.sku, qty: qty, rate: p.price });
+  $('#invQty').value = 1;
+  renderInvoice();
+});
+$('#invAddCustom').addEventListener('click', () => {
+  const desc = $('#invCustomDesc').value.trim();
+  const rate = parseFloat($('#invCustomRate').value);
+  if (!desc || !Number.isFinite(rate) || rate <= 0) { showToast('Enter a description and a valid rate.'); return; }
+  invItems.push({ desc: desc, sku: 'CUSTOM', qty: 1, rate: rate });
+  $('#invCustomDesc').value = ''; $('#invCustomRate').value = '';
+  renderInvoice();
+});
+
+invItemsBody.addEventListener('input', e => {
+  const input = e.target.closest('[data-qty]');
+  if (!input) return;
+  invItems[+input.dataset.qty].qty = Math.max(1, parseInt(input.value, 10) || 1);
+  renderInvoice();
+});
+invItemsBody.addEventListener('click', e => {
+  const rm = e.target.closest('[data-rm]');
+  if (!rm) return;
+  invItems.splice(+rm.dataset.rm, 1);
+  renderInvoice();
+});
+const invSubtotalCalc = () => invItems.reduce((s, it) => s + it.qty * it.rate, 0);
+$('#invDiscount').addEventListener('input', () => {
+  const sub = invSubtotalCalc();
+  const d = Math.max(0, parseFloat($('#invDiscount').value) || 0);
+  $('#invDiscountPct').value = sub > 0 ? String(Math.round((d / sub) * 100)) : '0';
+  renderInvoice();
+});
+$('#invDiscountPct').addEventListener('input', () => {
+  const pct = Math.min(100, Math.max(0, parseFloat($('#invDiscountPct').value) || 0));
+  $('#invDiscount').value = String(Math.round(invSubtotalCalc() * pct / 100));
+  renderInvoice();
+});
+$('#invTax').addEventListener('change', renderInvoiceTotals);
+
+function invoiceTotals(){
+  const subtotal = invItems.reduce((s, it) => s + it.qty * it.rate, 0);
+  const discount = Math.max(0, parseFloat($('#invDiscount').value) || 0);
+  const taxable = Math.max(0, subtotal - discount);
+  const gst = $('#invTax').checked ? taxable * SHOP.gstRate : 0;
+  return { subtotal, discount, gst, grand: taxable + gst };
+}
+function renderInvoiceTotals(){
+  const t = invoiceTotals();
+  $('#invSubtotal').textContent = fmtRs(t.subtotal);
+  $('#invTaxAmt').textContent = fmtRs(t.gst);
+  $('#invGrand').textContent = fmtRs(t.grand);
+}
+
+/* Amount in words (Pakistani numbering: lakh / crore) */
+const ONES_W = ['','One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten','Eleven','Twelve','Thirteen','Fourteen','Fifteen','Sixteen','Seventeen','Eighteen','Nineteen'];
+const TENS_W = ['','','Twenty','Thirty','Forty','Fifty','Sixty','Seventy','Eighty','Ninety'];
+const twoW = n => n < 20 ? ONES_W[n] : TENS_W[Math.floor(n / 10)] + (n % 10 ? ' ' + ONES_W[n % 10] : '');
+const threeW = n => { const h = Math.floor(n / 100), r = n % 100; return (h ? ONES_W[h] + ' Hundred' + (r ? ' ' : '') : '') + (r ? twoW(r) : ''); };
+function amountToWords(n){
+  n = Math.floor(Math.abs(Number(n) || 0));
+  if (!n) return 'Zero';
+  const crore = Math.floor(n / 1e7), lakh = Math.floor((n % 1e7) / 1e5), thou = Math.floor((n % 1e5) / 1e3), rem = n % 1000;
+  let s = '';
+  if (crore) s += threeW(crore) + ' Crore ';
+  if (lakh)  s += threeW(lakh) + ' Lakh ';
+  if (thou)  s += threeW(thou) + ' Thousand ';
+  if (rem)   s += threeW(rem);
+  return s.trim();
+}
+
+function renderItemsTable(){
+  if (!invItems.length){
+    invItemsBody.innerHTML = '<tr id="invEmptyRow"><td colspan="6" style="color:var(--muted);text-align:center;padding:1.1rem">No items yet — add from catalog or a custom line.</td></tr>';
+    return;
+  }
+  invItemsBody.innerHTML = invItems.map((it, i) =>
+    '<tr><td>' + (i + 1) + '</td><td>' + esc(it.desc) + '<br><small style="color:var(--muted)">' + esc(it.sku) + '</small></td>' +
+    '<td class="num"><input class="qty-input" type="number" min="1" value="' + it.qty + '" data-qty="' + i + '" aria-label="Quantity"></td>' +
+    '<td class="num">' + fmtRs(it.rate) + '</td><td class="num">' + fmtRs(it.qty * it.rate) + '</td>' +
+    '<td><button class="rm" data-rm="' + i + '" aria-label="Remove item">×</button></td></tr>'
+  ).join('');
+}
+
+/* The scan-to-verify QR opens WhatsApp to the shop with the invoice details prefilled. */
+const verifyPayload = () => 'https://wa.me/' + SHOP.whatsapp + '?text=' + encodeURIComponent(
+  'Zaman Computer — Verify invoice ' + invNoEl.value + ' · Grand total: Rs ' +
+  Math.round(invoiceTotals().grand).toLocaleString('en-PK') + ' · Date: ' + invDateEl.value +
+  ' · Customer: ' + (properCase($('#invCustomer').value) || 'walk-in'));
+
+function buildInvoiceHTML(){
+  const t = invoiceTotals();
+  const d = new Date(invDateEl.value || Date.now());
+  const dateStr = d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+  const no = invNoEl.value;
+  const customer = properCase($('#invCustomer').value) || 'Walk-in Customer';
+  const org = $('#invOrg').value.trim();
+  const phone = $('#invPhone').value.trim();
+  const rows = invItems.map((it, i) =>
+    '<tr><td>' + (i + 1) + '</td><td>' + esc(it.desc) + '<br><small>' + esc(it.sku) + '</small></td>' +
+    '<td class="num">' + it.qty + '</td><td class="num">' + fmtRs(it.rate) + '</td><td class="num">' + fmtRs(it.qty * it.rate) + '</td></tr>'
+  ).join('') || '<tr><td colspan="5" style="text-align:center;color:#555;padding:.8rem">No items</td></tr>';
+  return '' +
+  '<div class="inv-head"><div class="inv-shop"><h3>Zaman <span style="color:#c8a12e">Computer</span></h3>' +
+    '<small>Proprietor: ' + esc(SHOP.proprietor) + '<br>NTN: ' + esc(SHOP.ntn) + ' · Ref: ' + esc(SHOP.refNo) + '<br>' + esc(SHOP.address) + '<br>' + esc(SHOP.phoneDisplay) + ' · ' + esc(SHOP.email) + '</small></div>' +
+    '<div class="inv-qr"><canvas id="invVerifyQrCv" aria-label="Invoice QR code"></canvas>' +
+      '<div class="inv-paycap"><span style="color:#fff;font-weight:600;letter-spacing:.18em">INVOICE</span><br><b>' + esc(no) + '</b></div></div>' +
+  '</div>' +
+  '<div class="inv-metastrip">' +
+    '<div><b>Invoice No</b><span>' + esc(no) + '</span></div>' +
+    '<div><b>Bill Type</b><span>' + esc($('#invType').value) + '</span></div>' +
+    '<div><b>Date</b><span>' + esc(dateStr) + '</span></div>' +
+    '<div><b>Payment</b><span>' + esc($('#invPayment').value) + '</span></div>' +
+    '<div><b>Status</b><span>FBR Active</span></div>' +
+  '</div>' +
+  '<div class="inv-parties"><div><b>Billed To</b>' + esc(customer) + (org ? '<br>' + esc(org) : '') + (phone ? '<br>' + esc(phone) : '') + '</div>' +
+    '<div style="text-align:right"><b>From</b>' + esc(SHOP.name) + '<br>Gulberg Town, Raiwind<br>Lahore, Pakistan</div></div>' +
+  '<table class="inv-table"><thead><tr><th>#</th><th>Description</th><th class="num">Qty</th><th class="num">Rate</th><th class="num">Amount</th></tr></thead><tbody>' + rows + '</tbody></table>' +
+  '<div class="inv-bottom"><div class="inv-terms"><b>In words:</b> Rupees ' + esc(amountToWords(t.grand)) + ' only<br><br><b>Terms:</b> Check items at the counter. Warranty only with this bill + stamp. Goods once sold are not taken back.' +
+    ($('#invNotes').value.trim() ? '<br><br><b>Note:</b> ' + esc($('#invNotes').value.trim()) : '') + '</div>' +
+    '<div class="inv-totals"><div><span>Subtotal</span><span>' + fmtRs(t.subtotal) + '</span></div>' +
+      '<div><span>Owner Discount</span><span>- ' + fmtRs(t.discount) + '</span></div>' +
+      '<div><span>Sales Tax (' + Math.round(SHOP.gstRate * 100) + '%)</span><span>' + fmtRs(t.gst) + '</span></div>' +
+      '<div class="grand"><span>Grand Total</span><span>' + fmtRs(t.grand) + '</span></div></div></div>' +
+  '<div class="inv-ntn">NTN: ' + esc(SHOP.ntn) + ' · FBR — ' + esc(SHOP.fbrStatus) + ' · Reg. ' + esc(SHOP.registeredOn) + ' · ' + esc(SHOP.taxOffice) + ' · ' + esc(SHOP.principals) + '<br>This is not a sales-tax invoice (business not registered for Sales Tax). Thank you for your business!</div>';
+}
+
+function renderInvoice(){
+  renderItemsTable();
+  renderInvoiceTotals();
+  const sub = invItems.reduce((s, it) => s + it.qty * it.rate, 0);
+  const d = Math.max(0, parseFloat($('#invDiscount').value) || 0);
+  $('#invDiscountPct').value = sub > 0 ? String(Math.round((d / sub) * 100)) : '0';
+  invoicePreview.innerHTML = buildInvoiceHTML();
+  const cv = invoicePreview.querySelector('#invVerifyQrCv');
+  if (cv) drawQR(cv, verifyPayload(), { module: 2 });
+}
+
+$('#invPrint').addEventListener('click', () => {
+  renderInvoice();
+  const sheet = $('#printSheet');
+  sheet.innerHTML = '<div class="invoice-paper">' + invoicePreview.innerHTML + '</div>';
+  ['#invVerifyQrCv'].forEach(sel => {
+    const src = invoicePreview.querySelector(sel);
+    const dst = sheet.querySelector(sel);
+    if (src && dst){ dst.width = src.width; dst.height = src.height; dst.getContext('2d').drawImage(src, 0, 0); }
+  });
+  window.print();
+  invSeq += 1;
+  localStorage.setItem('zaman_inv_seq', String(invSeq));
+  showInvoiceNo();
+  showToast('Invoice printed & saved. Next invoice: ' + invNoEl.value);
+});
+
+function buildInvoiceWhatsAppText(){
+  const t = invoiceTotals();
+  const d = new Date(invDateEl.value || Date.now());
+  const dateStr = d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+  const customer = properCase($('#invCustomer').value) || 'Walk-in Customer';
+  const org = $('#invOrg').value.trim();
+  const phone = $('#invPhone').value.trim();
+  const L = 50;                       /* overall width of the “paper” */
+  const hr  = '─'.repeat(L);
+  const dbl = '═'.repeat(L);
+  const row = (l, r) => (l + ' '.repeat(Math.max(1, L - l.length - r.length)) + r);
+  const lines = [];
+  lines.push('ZAMAN COMPUTER');
+  lines.push('Premium Computer & Laptop Store');
+  lines.push('1, Mohal Street, Nazd Jamia Masjid Al Furqan,');
+  lines.push('Gulberg Town, Raiwind, Lahore');
+  lines.push('NTN: ' + SHOP.ntn + '  ·  FBR Income Tax: Active');
+  lines.push('Prop: ' + SHOP.proprietor + '  ·  ' + SHOP.phoneDisplay);
+  lines.push(hr);
+  lines.push('INVOICE ' + invNoEl.value + '   ·   ' + dateStr);
+  lines.push('Bill Type: ' + $('#invType').value + '  ·  Payment: ' + $('#invPayment').value);
+  lines.push('Customer: ' + customer + (org ? '  ·  Org: ' + org : '') + (phone ? '  ·  ' + phone : ''));
+  lines.push(hr);
+  lines.push(' #  Description            Qty  Amount');
+  lines.push(hr);
+  const descW = 24;
+  const wrapDesc = (text, width) => {
+    const out = [];
+    let cur = '';
+    for (const word of text.split(' ')) {
+      if (word.length > width) {
+        if (cur) { out.push(cur); cur = ''; }
+        for (let s = 0; s < word.length; s += width) out.push(word.slice(s, s + width));
+        continue;
+      }
+      if (!cur) cur = word;
+      else if ((cur + ' ' + word).length <= width) cur += ' ' + word;
+      else { out.push(cur); cur = word; }
+    }
+    if (cur) out.push(cur);
+    return out;
+  };
+  invItems.forEach((it, i) => {
+    const desc = it.desc + (it.sku && it.sku !== 'CUSTOM' ? ' (' + it.sku + ')' : '');
+    const amt = fmtRs(it.qty * it.rate);
+    const dLines = wrapDesc(desc, descW);
+    dLines.forEach((dLine, li) => {
+      const num = li === 0 ? ' ' + String(i + 1).padStart(2, ' ') : '    ';
+      if (li < dLines.length - 1) lines.push(num + '  ' + dLine);
+      else lines.push(num + '  ' + dLine.padEnd(descW, ' ') + '  ' + String(it.qty).padStart(3, ' ') + '  ' + amt.padStart(L - descW - 9, ' '));
+    });
+  });
+  if (!invItems.length) lines.push('     (No items on this bill)');
+  lines.push(hr);
+  lines.push('AMOUNT IN WORDS: Rupees ' + amountToWords(t.grand) + ' only');
+  lines.push(hr);
+  lines.push(row(' Subtotal', fmtRs(t.subtotal)));
+  lines.push(row(' Owner Discount', '- ' + fmtRs(t.discount)));
+  lines.push(row(' Sales Tax (' + Math.round(SHOP.gstRate * 100) + '%)', fmtRs(t.gst)));
+  lines.push(dbl);
+  lines.push(row(' GRAND TOTAL', fmtRs(t.grand)));
+  lines.push(dbl);
+  lines.push('NTN: ' + SHOP.ntn + ' · FBR — ' + SHOP.fbrStatus + ' · RTO-I Lahore · 478300 Retail sale via Shop');
+  lines.push('This is not a sales-tax invoice (business not registered for Sales Tax).');
+  lines.push('Thank you for your business!  —  Zaman Computer');
+  lines.push('Shop: ' + SHOP.address);
+  lines.push('Verify: https://wa.me/' + SHOP.whatsapp + '?text=' + encodeURIComponent('Zaman Computer — Verify invoice ' + invNoEl.value + ' · Grand total: Rs ' + Math.round(invoiceTotals().grand).toLocaleString('en-PK')));
+  return lines.join('\n');
+}
+$('#invWA').addEventListener('click', () => {
+  const link = waCustomerLink(buildInvoiceWhatsAppText());
+  if (!link) {
+    showToast('Enter a valid customer mobile first (e.g. 0301-1234567)');
+    $('#invPhone').focus();
+    return;
+  }
+  window.open(link, '_blank', 'noopener');
+  showToast('Sending invoice to customer on WhatsApp…');
+});
+
+$('#invClear').addEventListener('click', () => {
+  invItems = [];
+  $('#invoiceForm').reset();
+  invDateEl.value = new Date().toISOString().slice(0, 10);
+  showInvoiceNo();
+  renderInvoice();
+});
+['invCustomer','invPhone','invOrg','invType','invPayment','invDate','invNotes'].forEach(id => $('#' + id).addEventListener('input', renderInvoice));
+/* Live Proper Case on customer-name fields */
+[['invCustomer'], ['bfName'], ['cfName']].forEach(([id]) => {
+  document.getElementById(id).addEventListener('blur', e => {
+    const v = properCase(e.target.value);
+    if (v !== e.target.value) {
+      e.target.value = v;
+      if (id === 'invCustomer') renderInvoice();
+    }
+  });
+});
+
+/* ───────── 19. QR CODE LABEL TAB ───────── */
+$('.invoice-tabs').addEventListener('click', e => {
+  const btn = e.target.closest('.invoice-tab');
+  if (!btn) return;
+  $$('.invoice-tab').forEach(b => { b.classList.toggle('active', b === btn); b.setAttribute('aria-selected', String(b === btn)); });
+  ['tabInvoice', 'tabBarcode'].forEach(id => { document.getElementById(id).hidden = id !== btn.dataset.tab; });
+});
+
+const bcCanvas = $('#barcodeCanvas');
+function renderBarcodeLabel(){
+  const sku = $('#bcProduct').value;
+  const product = PRODUCTS.find(p => p.sku === sku);
+  const custom = $('#bcCustom').value.trim();
+  const code = custom || (product ? product.sku : '');
+  if (!code) { showToast('Pick a product or type your own text.'); return; }
+  if (code.length > 80) { showToast('Text too long — keep it under 80 characters.'); return; }
+  const ok = drawQR(bcCanvas, code, { module: 5 });
+  if (!ok) { showToast('Could not encode this text.'); return; }
+  $('#bcLabelName').textContent = $('#bcShowName').checked ? (product ? product.name : custom) : '';
+  $('#bcLabelPrice').textContent = $('#bcShowPrice').checked ? (product ? fmtRs(product.price) : 'ZAMAN COMPUTER') : '';
+  return code;
+}
+$('#bcRender').addEventListener('click', renderBarcodeLabel);
+$('#bcProduct').addEventListener('change', () => { if ($('#bcProduct').value) $('#bcCustom').value = ''; renderBarcodeLabel(); });
+$('#bcDownload').addEventListener('click', () => {
+  const code = renderBarcodeLabel();
+  if (!code) return;
+  const a = document.createElement('a');
+  a.download = code.replace(/[^\w.-]+/g, '_') + '.png';
+  a.href = bcCanvas.toDataURL('image/png');
+  a.click();
+});
+$('#bcPrint').addEventListener('click', () => {
+  const code = renderBarcodeLabel();
+  if (!code) return;
+  const sheet = $('#printSheet');
+  sheet.innerHTML = '<div style="text-align:center;font-family:Poppins,sans-serif;padding:24mm 8mm 0">' +
+    '<div style="font-weight:800;letter-spacing:.12em;font-size:14pt">ZAMAN COMPUTER</div>' +
+    '<div style="font-size:10pt;margin:2mm 0 4mm;min-height:5mm">' + esc($('#bcLabelName').textContent) + '</div>' +
+    '<img src="' + bcCanvas.toDataURL('image/png') + '" alt="QR code ' + esc(code) + '" style="max-width:70mm">' +
+    '<div style="font-weight:700;font-size:12pt;margin-top:3mm">' + esc($('#bcLabelPrice').textContent) + '</div></div>';
+  window.print();
+});
+
+/* Initial invoice render */
+showInvoiceNo();
+renderInvoice();
+
+/* ───────── 17B. PDF INVOICE — generated in-browser, no libraries ─────────
+   Produces a vector A4 PDF identical in layout to the printed invoice:
+   black/gold header band, FBR/NTN strip, item table, QR code, totals,
+   amount in words (lakh/crore). Fully offline-capable.            */
+const PDFW = 595.28, PDFH = 841.89, PDFML = 40, PDFMR = PDFW - 40;
+const INK = [17,17,17], GOLD = [212,175,55], GOLD_L = [240,214,117], GOLD_D = [138,109,31];
+const CREAM = [251,249,241], GREYT = [88,88,100], LGREY = [201,201,209], PAPERW = [253,252,248];
+const measCtx = document.createElement('canvas').getContext('2d');
+const twPt = (s, size, bold) => { measCtx.font = (bold ? '700 ' : '400 ') + size + 'px Helvetica, Arial, sans-serif'; return measCtx.measureText(String(s)).width; };
+const f2 = n => Number(n).toFixed(2);
+const rgbStr = c => c.map(v => (v/255).toFixed(3)).join(' ');
+
+function pdfSanitize(s){
+  return String(s)
+    .replace(/[\u2013\u2014]/g, '-').replace(/[\u2018\u2019\u201A]/g, "'")
+    .replace(/[\u201C\u201D\u201E]/g, '"').replace(/\u2026/g, '...')
+    .replace(/\u00D7/g, 'x').replace(/[\u00B7\u2022\u25C6\u2605\u2606]/g, '-')
+    .replace(/[^\x20-\x7E]/g, '');
+}
+const pdfEscape = s => pdfSanitize(s).replace(/\\/g, '\\\\').replace(/\(/g, '\\(').replace(/\)/g, '\\)');
+const fitText = (s, maxW, size, bold) => {
+  let t = pdfSanitize(s);
+  if (twPt(t, size, bold) <= maxW) return t;
+  while (t.length > 3 && twPt(t + '...', size, bold) > maxW) t = t.slice(0, -1);
+  return t + '...';
+};
+
+function buildInvoicePdf(){
+  const pagesOps = [];
+  let ops = [];
+  const newPage = () => { ops = []; pagesOps.push(ops); };
+  const Y = t => PDFH - t; // top-origin helper
+
+  const fillRect = (x, yTop, w, h, color) => { ops.push(rgbStr(color) + ' rg', f2(x) + ' ' + f2(Y(yTop) - h) + ' ' + f2(w) + ' ' + f2(h) + ' re f'); };
+  const strokeRect = (x, yTop, w, h, color, lw) => { ops.push(rgbStr(color) + ' RG', f2(lw || 0.7) + ' w', f2(x) + ' ' + f2(Y(yTop) - h) + ' ' + f2(w) + ' ' + f2(h) + ' re S'); };
+  const hline = (yTop, color, lw, x1, x2) => { ops.push(rgbStr(color) + ' RG', f2(lw) + ' w', f2(x1 == null ? PDFML : x1) + ' ' + f2(Y(yTop)) + ' m ' + f2(x2 == null ? PDFMR : x2) + ' ' + f2(Y(yTop)) + ' l S'); };
+  const text = (s, x, yBaseTop, size, font, color, charSpace) => {
+    ops.push(rgbStr(color || INK) + ' rg');
+    ops.push('BT /' + font + ' ' + size + ' Tf ' + (charSpace || 0) + ' Tc 1 0 0 1 ' + f2(x) + ' ' + f2(Y(yBaseTop)) + ' Tm (' + pdfEscape(s) + ') Tj ET');
+  };
+  const rightText = (s, xRight, yBaseTop, size, font, color) => text(s, xRight - twPt(pdfSanitize(s), size, font === 'F2'), yBaseTop, size, font, color);
+  const centerText = (s, yBaseTop, size, font, color) => text(s, (PDFW - twPt(pdfSanitize(s), size, font === 'F2')) / 2, yBaseTop, size, font, color);
+
+  const t = invoiceTotals();
+  const d = new Date(invDateEl.value || Date.now());
+  const dateStr = d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+  const no = invNoEl.value;
+  const customer = properCase($('#invCustomer').value) || 'Walk-in Customer';
+  const org = $('#invOrg').value.trim();
+  const phone = $('#invPhone').value.trim();
+  const type = $('#invType').value, payment = $('#invPayment').value;
+
+  /* ───────── PAGE SCAFFOLD ───────── */
+  const BAND_H = 132;
+  const drawBand = () => {
+    fillRect(0, 0, PDFW, BAND_H, INK);
+    fillRect(0, BAND_H, PDFW, 2.6, GOLD);
+    text('ZAMAN COMPUTER', PDFML, 37, 22.5, 'F2', [255,255,255], 1.1);
+    text('PREMIUM  COMPUTER  &  LAPTOP  STORE', PDFML, 53, 5.6, 'F2', GOLD, 1.6);
+    text('1, Mohal Street, Nazd Jamia Masjid Al Furqan,', PDFML, 62, 6.9, 'F1', [196,196,203]);
+    text('Gulberg Town, Raiwind, Lahore', PDFML, 73, 6.9, 'F1', [196,196,203]);
+    text('Proprietor: ' + SHOP.proprietor, PDFML, 84, 6.9, 'F1', [196,196,203]);
+    text('NTN: ' + SHOP.ntn + '   |   Ref: ' + SHOP.refNo, PDFML, 95, 6.9, 'F1', [196,196,203]);
+    text(SHOP.phoneDisplay + '   |   ' + SHOP.email, PDFML, 106, 6.9, 'F1', [196,196,203]);
+    /* invoice number + QR on the right, parallel to the brand block */
+    const vMat = qrMatrix(verifyPayload(), QR.EC_M);
+    const mSize = 0.82, qs = 4 * mSize;
+    const qrSize = vMat.length * mSize, boxSize = qrSize + 2 * qs;
+    const bx = PDFMR - boxSize, by = 38;
+    fillRect(bx, by, boxSize, boxSize, [255, 255, 255]);
+    ops.push(rgbStr(INK) + ' rg');
+    for (let r = 0; r < vMat.length; r++) for (let c = 0; c < vMat.length; c++){
+      if (vMat[r][c]){
+        const x = bx + qs + c * mSize, top = by + qs + r * mSize;
+        ops.push(f2(x) + ' ' + f2(Y(top) - mSize) + ' ' + f2(mSize) + ' ' + f2(mSize) + ' re f');
+      }
+    }
+    rightText('INVOICE', PDFMR, by + boxSize + 8, 6.2, 'F2', GOLD_L, 1.6);
+    rightText(no, PDFMR, by + boxSize + 16.5, 6.4, 'F2', [255,255,255]);
+  };
+  const drawSlimHeader = (pageNo) => {
+    fillRect(0, 0, PDFW, 30, INK);
+    fillRect(0, 30, PDFW, 1.8, GOLD);
+    text('ZAMAN COMPUTER  -  INVOICE ' + no + '  (page ' + pageNo + ')', PDFML, 19, 8, 'F2', GOLD);
+    rightText(dateStr, PDFMR, 19, 8, 'F1', [225,225,225]);
+  };
+  const drawTableHeader = (yTop) => {
+    fillRect(PDFML, yTop, PDFMR - PDFML, 20, INK);
+    text('#', PDFML + 6, yTop + 13.5, 7.5, 'F2', GOLD_L);
+    text('DESCRIPTION', 74, yTop + 13.5, 7.5, 'F2', GOLD_L, 0.8);
+    rightText('QTY', 331, yTop + 13.5, 7.5, 'F2', GOLD_L, 0.8);
+    rightText('RATE', 441, yTop + 13.5, 7.5, 'F2', GOLD_L, 0.8);
+    rightText('AMOUNT', 551, yTop + 13.5, 7.5, 'F2', GOLD_L, 0.8);
+  };
+
+  newPage();
+  drawBand();
+
+  /* ───────── META STRIP (light band under the header) ───────── */
+  const META_TOP = 140, META_H = 34;
+  fillRect(0, META_TOP, PDFW, META_H, CREAM);
+  hline(META_TOP, LGREY, 0.5);
+  hline(META_TOP + META_H, LGREY, 0.5);
+  const CELL = 99, GAP = 4, CELL_MX = PDFML + 2;
+  const metaCells = [
+    ['INVOICE NO', no], ['BILL TYPE', type], ['INVOICE DATE', dateStr],
+    ['PAYMENT', payment], ['FBR STATUS', 'Income Tax: Active']
+  ];
+  metaCells.forEach(([k, v], i) => {
+    const cx = CELL_MX + i * (CELL + GAP);
+    text(k, cx, META_TOP + 12.5, 5.2, 'F2', GOLD_D, 0.9);
+    text(fitText(v, CELL - 10, 7.6, true), cx, META_TOP + 24.5, 7.6, 'F2', INK);
+    if (i > 0) fillRect(cx - GAP / 2 - 0.25, META_TOP + 7, 0.5, META_H - 14, LGREY);
+  });
+
+  /* ───────── BILLED TO / FROM ───────── */
+  const pY = META_TOP + META_H + 12;
+  fillRect(PDFML, pY, 247, 44, CREAM);
+  fillRect(308, pY, 247, 44, CREAM);
+  fillRect(PDFML, pY, 3, 44, GOLD);
+  fillRect(308, pY, 3, 44, GOLD);
+  text('BILLED TO', PDFML + 10, pY + 11, 6, 'F2', GOLD_D, 1.4);
+  text(fitText(customer, 225, 9.5, true), PDFML + 10, pY + 23, 9.5, 'F2', INK);
+  if (org) text(fitText(org, 225, 6.8, false), PDFML + 10, pY + 33, 6.8, 'F1', GREYT);
+  if (phone) text(phone, PDFML + 10, pY + (org ? 41.5 : 35), 6.5, 'F1', GREYT);
+  text('FROM', 318, pY + 12, 6, 'F2', GOLD_D, 1.4);
+  text(SHOP.name, 318, pY + 25, 9, 'F2', INK);
+  text('Gulberg Town, Raiwind, Lahore', 318, pY + 37, 7, 'F1', GREYT);
+
+  /* ───────── TABLE ───────── */
+  let yCursor = pY + 56;
+  drawTableHeader(yCursor);
+  yCursor += 20;
+  const rowH = 19.5;
+  invItems.forEach((it, i) => {
+    if (yCursor + rowH > PDFH - 190) { // move rows continuation to a new page
+      newPage();
+      drawSlimHeader(pagesOps.length);
+      yCursor = 46;
+      drawTableHeader(yCursor);
+      yCursor += 20;
+    }
+    if (i % 2 === 0) fillRect(PDFML, yCursor, PDFMR - PDFML, rowH, PAPERW);
+    const amt = it.qty * it.rate;
+    text(String(i + 1), PDFML + 6, yCursor + 13, 8, 'F1', GREYT);
+    text(fitText(it.desc, 220, 7.6, false), 74, yCursor + 13, 7.6, 'F1', INK);
+    rightText(String(it.qty), 331, yCursor + 13, 8, 'F1', INK);
+    rightText(fmtRs(it.rate), 441, yCursor + 13, 8, 'F1', INK);
+    rightText(fmtRs(amt), 551, yCursor + 13, 8, 'F2', INK);
+    hline(yCursor + rowH, [228,226,214], 0.5);
+    yCursor += rowH;
+  });
+  if (!invItems.length){ text('(No items on this bill)', PDFML + 10, yCursor + 14, 8, 'F3', GREYT); yCursor += rowH; }
+
+  /* ───────── TOTALS + AMOUNT IN WORDS ───────── */
+  if (yCursor + 108 > PDFH - 96) { // not enough room on this page — fresh page for totals
+    newPage();
+    drawSlimHeader(pagesOps.length);
+    yCursor = 46;
+  }
+  const tx = 320, tw2 = PDFMR - tx;
+  const words = ('Rupees ' + amountToWords(t.grand) + ' only').split(' ');
+  text('AMOUNT IN WORDS', PDFML, yCursor + 10, 5.6, 'F2', GOLD_D, 1.2);
+  let wLine = '', wy = yCursor + 23;
+  words.forEach(w => {
+    if (twPt(wLine + ' ' + w, 8.6, true) > 250) { text(wLine.trim(), PDFML, wy, 8.6, 'F2', INK); wy += 12; wLine = ''; }
+    wLine += ' ' + w;
+  });
+  text(wLine.trim(), PDFML, wy, 8.6, 'F2', INK);
+  text('TERMS: Check items at the counter.', PDFML, wy + 17, 6.2, 'F1', GREYT);
+  text('Warranty only with this invoice + stamp.', PDFML, wy + 26, 6.2, 'F1', GREYT);
+  text('Goods once sold will not be taken back.', PDFML, wy + 35, 6.2, 'F1', GREYT);
+  if ($('#invNotes').value.trim()) text(fitText('Note: ' + $('#invNotes').value.trim(), 250, 6.2, false), PDFML, wy + 45, 6.2, 'F3', GREYT);
+
+  const tRow = (label, value, bold, band) => {
+    if (band) fillRect(tx, yCursor, tw2, 21, INK);
+    text(label, tx + 8, yCursor + 14, band ? 8.5 : 7.6, band ? 'F2' : 'F1', band ? GOLD_L : GREYT);
+    rightText(value, PDFMR - 8, yCursor + 14, band ? 9.5 : 8, band ? 'F2' : 'F1', band ? GOLD_L : INK);
+    yCursor += band ? 21 : 16.5;
+  };
+  tRow('Subtotal', fmtRs(t.subtotal), false, false);
+  tRow('Owner Discount', '- ' + fmtRs(t.discount), false, false);
+  tRow('Sales Tax (' + Math.round(SHOP.gstRate * 100) + '%)', fmtRs(t.gst), false, false);
+  tRow('GRAND TOTAL', fmtRs(t.grand), true, true);
+
+  /* ───────── FBR / NTN FOOTER STRIP ───────── */
+  const fy = PDFH - 66;
+  hline(fy - 12, GOLD, 1.4);
+  centerText('NTN: ' + SHOP.ntn + '  -  FBR - ' + SHOP.fbrStatus + '  -  Reg. ' + SHOP.registeredOn + '  -  ' + SHOP.taxOffice + '  -  ' + SHOP.principals, fy - 1, 6.1, 'F1', GREYT);
+  centerText('This is not a sales-tax invoice (business not registered for Sales Tax).', fy + 9, 6.1, 'F3', GREYT);
+  centerText('Thank you for your business!  -  Zaman Computer', fy + 19, 6.8, 'F2', GOLD_D);
+
+  /* ───────── ASSEMBLE PDF FILE ───────── */
+  const objects = {};
+  const setObj = (id, body) => { objects[id] = body; };
+  pagesOps.forEach((pageOps, idx) => {
+    const cid = 100 + idx * 2, pid = 101 + idx * 2;
+    const stream = pageOps.join('\n');
+    setObj(cid, '<< /Length ' + stream.length + ' >>\nstream\n' + stream + '\nendstream');
+    setObj(pid, '<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ' + f2(PDFW) + ' ' + f2(PDFH) + '] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents ' + cid + ' 0 R >>');
+  });
+  setObj(1, '<< /Type /Catalog /Pages 2 0 R >>');
+  setObj(2, '<< /Type /Pages /Kids [' + pagesOps.map((_, i) => (101 + i * 2) + ' 0 R').join(' ') + '] /Count ' + pagesOps.length + ' >>');
+  setObj(3, '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>');
+  setObj(4, '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>');
+  setObj(5, '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Oblique >>');
+
+  let pdf = '%PDF-1.4\n';
+  const ids = Object.keys(objects).map(Number).sort((a, b) => a - b);
+  const maxId = ids[ids.length - 1];
+  const offsets = new Array(maxId + 1).fill(0);
+  ids.forEach(id => { offsets[id] = pdf.length; pdf += id + ' 0 obj\n' + objects[id] + '\nendobj\n'; });
+  const xref = pdf.length;
+  pdf += 'xref\n0 ' + (maxId + 1) + '\n';
+  pdf += '0000000000 65535 f \n';
+  for (let i = 1; i <= maxId; i++) pdf += String(offsets[i] || 0).padStart(10, '0') + ' 00000 n \n';
+  pdf += 'trailer\n<< /Size ' + (maxId + 1) + ' /Root 1 0 R >>\nstartxref\n' + xref + '\n%%EOF';
+  return pdf;
+}
+
+function invoicePdfBlob(){ return new Blob([buildInvoicePdf()], { type: 'application/pdf' }); }
+function downloadBlob(blob, filename){
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 4000);
+}
+function invoicePdfFilename(){ return 'Zaman-Computer-' + invNoEl.value + '.pdf'; }
+
+$('#invDownloadPdf').addEventListener('click', () => {
+  renderInvoice();
+  downloadBlob(invoicePdfBlob(), invoicePdfFilename());
+  showToast('Invoice PDF downloaded.');
+});
+$('#invSharePdf').addEventListener('click', async () => {
+  renderInvoice();
+  const filename = invoicePdfFilename();
+  const file = new File([invoicePdfBlob()], filename, { type: 'application/pdf' });
+  const customer = properCase($('#invCustomer').value) || 'Walk-in Customer';
+  const shareText = 'Zaman Computer — Invoice ' + invNoEl.value + ' — ' + customer + ' — Grand Total: ' + fmtRs(invoiceTotals().grand);
+  if (navigator.canShare && navigator.canShare({ files: [file] })) {
+    try {
+      await navigator.share({ files: [file], title: 'Zaman Computer — Invoice ' + invNoEl.value, text: shareText });
+      showToast('Invoice PDF shared via WhatsApp.');
+      return;
+    } catch (err) {
+      if (err && err.name === 'AbortError') return; // user cancelled the share sheet
+    }
+  }
+  /* Desktop / unsupported browsers: download the PDF, then open WhatsApp on the CUSTOMER's number */
+  downloadBlob(invoicePdfBlob(), filename);
+  const link = waCustomerLink(buildInvoiceWhatsAppText());
+  if (!link) {
+    showToast('PDF downloaded. Customer mobile invalid — attach it to the customer chat manually.');
+    return;
+  }
+  window.open(link, '_blank', 'noopener');
+  showToast('PDF downloaded — attach ' + filename + ' in the customer chat that just opened.');
+});
+
+/* ───────── 
