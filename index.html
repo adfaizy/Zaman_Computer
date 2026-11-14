@@ -452,6 +452,41 @@ section{scroll-margin-top:calc(var(--nav-h) + 20px)}
 .pe-foot{display:flex;justify-content:space-between;gap:.7rem;padding:.9rem 1.3rem;border-top:1px solid var(--border)}
 .pct-input{width:64px !important;text-align:center !important}
 
+/* ═══ Owner mode ═══ */
+[hidden]{display:none !important}
+.owner-btn{background:rgba(212,175,55,.08);border:1px solid var(--border-gold);border-radius:10px;width:42px;height:42px;color:var(--gold-2);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;transition:all .25s}
+.owner-btn:hover{background:rgba(212,175,55,.18);transform:translateY(-1px)}
+.owner-btn.on{background:var(--gold-grad);color:#1a1408;border-color:transparent}
+.owner-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem;margin-bottom:1rem}
+.owner-stat{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:.85rem .95rem}
+.owner-stat b{display:block;font-family:var(--font-display);font-size:1.35rem;color:var(--gold-2)}
+.owner-stat small{color:var(--muted);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase}
+.owner-actions{display:flex;gap:.6rem;flex-wrap:wrap;margin:.9rem 0 1rem}
+.owner-publish{border:1px solid var(--border-gold);border-radius:var(--radius);padding:.7rem 1rem;margin-bottom:1rem;background:#141109}
+.owner-publish summary{cursor:pointer;color:var(--gold-2);font-size:.85rem;display:flex;align-items:center;gap:.5rem;user-select:none}
+.owner-publish summary small{color:var(--muted)}
+.owner-pin-row{display:flex;gap:.6rem;margin-bottom:1rem;max-width:420px}
+.owner-pin-row input{flex:1;background:var(--card-2);border:1px solid var(--border);border-radius:10px;color:var(--text);padding:.65rem .8rem;font-size:.9rem;letter-spacing:.15em}
+.owner-pin-row input:focus{outline:none;border-color:var(--gold)}
+.table-scroll{overflow-x:auto;border:1px solid var(--border);border-radius:var(--radius)}
+.owner-table{width:100%;border-collapse:collapse;font-size:.8rem;min-width:760px}
+.owner-table th,.owner-table td{padding:.45rem .55rem;border-bottom:1px solid #23232b;text-align:left}
+.owner-table th{color:var(--gold);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;background:var(--surface)}
+.owner-table td.num,.owner-table th.num{text-align:right}
+.ot-price{width:110px;background:var(--card-2);border:1px solid var(--border);border-radius:8px;color:var(--gold-2);padding:.32rem .4rem;text-align:right;font-weight:600}
+.ot-price:focus{outline:none;border-color:var(--gold)}
+.ot-stock{background:#241f0d;border:1px solid var(--border-gold);color:#f0d675;border-radius:8px;padding:.28rem .6rem;font-size:.7rem;font-weight:600;cursor:pointer;min-width:76px}
+.ot-stock.out{background:#331313;border-color:#7f3535;color:#f0a1a1}
+.ot-cond{background:var(--card-2);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:.3rem .35rem;font-size:.8rem}
+.ot-del{background:none;border:1px solid #4a2b2b;color:#ff9c9c;border-radius:8px;width:30px;height:30px;font-size:1rem;cursor:pointer}
+.ot-del:hover{background:#3a1a1a}
+.owner-drawer-link{display:block;width:100%;background:rgba(212,175,55,.08);border:1px solid var(--border-gold);color:var(--gold-2);border-radius:10px;padding:.8rem;font-size:.9rem;font-weight:600;margin-top:.6rem;cursor:pointer;text-align:left;display:flex;align-items:center;gap:.55rem}
+.owner-drawer-link:hover{background:rgba(212,175,55,.18)}
+.pin-input{width:100%;background:var(--card-2);border:1px solid var(--border);border-radius:12px;color:var(--gold-2);font-size:1.6rem;letter-spacing:.6em;text-align:center;padding:.7rem .5rem .7rem 1.1rem;margin-bottom:.7rem;outline:none}
+.pin-input:focus{border-color:var(--gold)}
+@media(max-width:900px){.owner-stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.owner-stats{grid-template-columns:repeat(2,1fr)}.owner-pin-row{max-width:none}}
+
 /* ═══ Responsive ═══ */
 @media (max-width:1100px){
   .grid-4,.product-grid{grid-template-columns:repeat(3,1fr)}
@@ -516,11 +551,14 @@ section{scroll-margin-top:calc(var(--nav-h) + 20px)}
         <li><a href="#shop">Shop</a></li>
         <li><a href="#services">Services</a></li>
         <li><a href="#gallery">Gallery</a></li>
-        <li><a href="#invoice">Invoice</a></li>
+        <li><a href="#invoice" class="owner-only" id="invoiceNavLink" hidden>Invoice</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
     <div class="nav-cta">
+      <button class="owner-btn" id="ownerUnlockBtnNav" type="button" aria-label="Owner login" title="Owner login">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </button>
       <!-- EDIT: wa.me number -->
       <a class="btn btn-wa btn-sm" href="https://wa.me/923084608380?text=Hello%20Zaman%20Computer!" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 11.91a16 16 0 0 0 6 6l3.27-1.27a2 2 0 0 1 2.11.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
@@ -532,7 +570,9 @@ section{scroll-margin-top:calc(var(--nav-h) + 20px)}
     </div>
   </div>
   <div class="mobile-panel" id="mobilePanel">
-    <a href="#home">Home</a><a href="#shop">Shop / Products</a><a href="#services">Services &amp; Prices</a><a href="#gallery">Gallery</a><a href="#invoice">Invoice &amp; Barcode</a><a href="#book">Book Appointment</a><a href="#contact">Contact</a>
+    <a href="#home">Home</a><a href="#shop">Shop / Products</a><a href="#services">Services &amp; Prices</a><a href="#gallery">Gallery</a><a href="#invoice" class="owner-only" hidden>Invoice</a><a href="#book">Book Appointment</a><a href="#contact">Contact</a>
+  
+    <button type="button" class="owner-drawer-link" id="ownerUnlockBtnMobile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Shop / Owner Login (PIN)</button>
   </div>
 </header>
 
@@ -772,6 +812,58 @@ section{scroll-margin-top:calc(var(--nav-h) + 20px)}
   </div>
 </section>
 
+<!-- ═══════════ OWNER DASHBOARD (Owner Mode only) ═══════════ -->
+<section class="section" id="ownerDash" hidden aria-labelledby="ownerTitle">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Owner Access</span>
+        <h2 id="ownerTitle">Owner <em>Dashboard</em></h2>
+        <p>Update prices, add or remove products, then <b>Publish</b> to push the catalog live for customers on GitHub Pages.</p>
+      </div>
+      <button class="btn btn-ghost btn-sm" id="ownerSignOutBtn" type="button">Sign Out</button>
+    </div>
+
+    <div class="owner-stats" id="ownerStats" aria-live="polite"></div>
+
+    <div class="owner-actions">
+      <button class="btn btn-gold btn-sm" id="ownerAddBtn" type="button">+ Add Product</button>
+      <button class="btn btn-ink btn-sm" id="ownerPublishBtn" type="button">&#11014; Publish to GitHub</button>
+      <button class="btn btn-ghost btn-sm" id="ownerExportBtn" type="button">&#8681; Export JSON</button>
+      <label class="btn btn-ghost btn-sm" for="ownerImportFile" style="cursor:pointer">&#8679; Import JSON</label>
+      <input type="file" id="ownerImportFile" accept="application/json,.json" hidden>
+    </div>
+
+    <details class="owner-publish">
+      <summary>Publish settings <small>(set once — stored only on this device)</small></summary>
+      <div class="form-row" style="margin-top:.6rem">
+        <div class="field"><label for="ghOwner">GitHub owner</label><input id="ghOwner" value="adfaizy" autocomplete="off"></div>
+        <div class="field"><label for="ghRepo">Repository</label><input id="ghRepo" value="Zaman_Computer" autocomplete="off"></div>
+      </div>
+      <div class="form-row">
+        <div class="field"><label for="ghBranch">Branch</label><input id="ghBranch" value="main" autocomplete="off"></div>
+        <div class="field"><label for="ghPath">Catalog file</label><input id="ghPath" value="products.json" autocomplete="off"></div>
+      </div>
+      <div class="field"><label for="ghToken">GitHub token (contents:write)</label><input id="ghToken" type="password" placeholder="ghp_…" autocomplete="off"></div>
+      <p class="form-note" style="margin:0">Create a <b>fine-grained PAT</b> on github.com → Settings → Developer settings → Personal access tokens → fine-grained → Repository access: only <code>Zaman_Computer</code> → Permissions: <code>Contents: Read and write</code>. It is stored only in this browser and never sent anywhere except github.com.</p>
+      <label class="checkline" style="margin-top:.6rem"><input type="checkbox" id="rememberToken"> Remember settings on this device</label>
+    </details>
+
+    <div class="owner-pin-row">
+      <input id="ownerNewPin" type="password" inputmode="numeric" maxlength="8" placeholder="New PIN (4–8 digits)" autocomplete="off" aria-label="New owner PIN">
+      <button class="btn btn-ghost btn-sm" id="ownerChangePinBtn" type="button">Change PIN</button>
+    </div>
+
+    <div class="table-scroll">
+      <table class="owner-table" aria-label="Edit product prices and stock">
+        <thead><tr><th>SKU</th><th>Product</th><th class="num">Price</th><th>Cond.</th><th>In Stock</th><th>★</th><th></th></tr></thead>
+        <tbody id="ownerTableBody"></tbody>
+      </table>
+    </div>
+    <p class="form-note" style="margin-top:.6rem">Edits save instantly on this device. Tap <b>Publish to GitHub</b> to make the catalog live for customers (GitHub Pages rebuilds in ~1 minute).</p>
+  </div>
+</section>
+
 <!-- ═══════════ CONTACT + FBR ═══════════ -->
 <section class="section" id="contact" aria-labelledby="contactTitle">
   <div class="container">
@@ -831,7 +923,7 @@ section{scroll-margin-top:calc(var(--nav-h) + 20px)}
   </div>
 </section>
 <!-- ═══════════ INVOICE & QR CENTER ═══════════ -->
-<section class="section alt" id="invoice" aria-labelledby="invoiceTitle">
+<section class="section alt" id="invoice" aria-labelledby="invoiceTitle" hidden>
   <div class="container">
     <div class="section-head">
       <div>
@@ -959,7 +1051,7 @@ section{scroll-margin-top:calc(var(--nav-h) + 20px)}
       </div>
       <nav aria-label="Quick links">
         <h3 data-fthead style="color:var(--gold-2);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:.8rem">Quick Links</h3>
-        <ul><li><a href="#home">Home</a></li><li><a href="#shop">Shop / Products</a></li><li><a href="#services">Services &amp; Prices</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#invoice">Invoice &amp; Barcode</a></li><li><a href="#book">Book Appointment</a></li></ul>
+        <ul><li><a href="#home">Home</a></li><li><a href="#shop">Shop / Products</a></li><li><a href="#services">Services &amp; Prices</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#invoice" class="owner-only" hidden>Invoice &amp; QR</a></li><li><a href="#book">Book Appointment</a></li></ul>
       </nav>
       <nav aria-label="Category links">
         <h3 data-fthead style="color:var(--gold-2);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:.8rem">Categories</h3>
@@ -1018,6 +1110,55 @@ section{scroll-margin-top:calc(var(--nav-h) + 20px)}
       <button class="btn btn-ghost btn-sm" id="resetPricesBtn" type="button">Reset to defaults</button>
       <button class="btn btn-gold" id="savePricesBtn" type="button">Save Today&rsquo;s Rates</button>
     </div>
+  </div>
+</div>
+
+<!-- Owner Unlock -->
+<div class="pe-overlay" id="ownerUnlockModal" hidden role="dialog" aria-modal="true" aria-labelledby="unlockTitle">
+  <div class="pe-card" style="max-width:400px">
+    <div class="pe-head">
+      <h3 id="unlockTitle">Owner Access</h3>
+      <button class="pe-close" id="ownerUnlockClose" aria-label="Close">&times;</button>
+    </div>
+    <div class="pe-list" style="padding-top:.9rem">
+      <p class="form-note">Private area for the shop owner. Enter your PIN to manage products, prices and invoices. Customers never see this screen.</p>
+      <input id="ownerPinInput" class="pin-input" type="password" inputmode="numeric" maxlength="8" autocomplete="off" placeholder="PIN" aria-label="Owner PIN">
+      <button class="btn btn-gold btn-block" id="ownerUnlockBtn" type="button">Unlock Dashboard</button>
+      <p class="form-note" style="margin:0">First time? Default PIN is <b>1234</b> — change it immediately in the dashboard.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Add Product -->
+<div class="pe-overlay" id="addProductModal" hidden role="dialog" aria-modal="true" aria-labelledby="addTitle">
+  <div class="pe-card">
+    <div class="pe-head">
+      <h3 id="addTitle">Add Product</h3>
+      <button class="pe-close" id="addProductClose" aria-label="Close">&times;</button>
+    </div>
+    <form id="addProductForm" class="pe-list" style="gap:.55rem;padding-top:.8rem">
+      <div class="form-row">
+        <div class="field"><label for="apSku">SKU</label><input id="apSku" required autocomplete="off" placeholder="ZC-L021"></div>
+        <div class="field"><label for="apCategory">Category</label><select id="apCategory" required><option value="desktops">Desktops &amp; Systems</option><option value="laptops">Laptops</option><option value="accessories">Accessories</option><option value="hardware">Hardware &amp; Components</option><option value="security">CCTV &amp; Security</option></select></div>
+      </div>
+      <div class="field"><label for="apName">Product Name <b>*</b></label><input id="apName" required placeholder="e.g. HP ProBook 440 G10 — Core i5"></div>
+      <div class="form-row">
+        <div class="field"><label for="apBrand">Brand</label><input id="apBrand" placeholder="HP"></div>
+        <div class="field"><label for="apCond">Condition</label><select id="apCond"><option>New</option><option>Used</option></select></div>
+      </div>
+      <div class="field"><label for="apSpecs">Key Specifications</label><input id="apSpecs" placeholder="i5-1335U · 16GB · 512GB NVMe · 14&quot; FHD"></div>
+      <div class="form-row">
+        <div class="field"><label for="apPrice">Price (Rs.) <b>*</b></label><input id="apPrice" type="number" min="0" step="100" required placeholder="165000" inputmode="numeric"></div>
+        <div class="field"><label for="apOldPrice">Old Price (Rs.) <small>(optional)</small></label><input id="apOldPrice" type="number" min="0" step="100" placeholder="192000" inputmode="numeric"></div>
+      </div>
+      <div class="field"><label for="apImg">Image URL <small>(optional — leave blank for chip image)</small></label><input id="apImg" type="url" placeholder="https://images.unsplash.com/photo-…" autocomplete="off"></div>
+      <div class="form-row" style="gap:1.2rem">
+        <label class="checkline"><input type="checkbox" id="apStock" checked> In stock</label>
+        <label class="checkline"><input type="checkbox" id="apFeatured"> ★ Featured</label>
+        <label class="checkline"><input type="checkbox" id="apIsNew"> New Arrival</label>
+      </div>
+      <button type="submit" class="btn btn-gold btn-block" style="margin-top:.2rem">Add to Catalog</button>
+    </form>
   </div>
 </div>
 
@@ -1085,7 +1226,7 @@ const $$     = (sel, ctx) => Array.from((ctx || document).querySelectorAll(sel))
 const esc    = (s) => String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 
 /* ───────── 2. PRODUCTS (EDIT / ADD YOUR STOCK) ───────── */
-const PRODUCTS = [
+const DEFAULT_PRODUCTS = [
   /* Desktops & Systems */
   { sku:'ZC-D001', name:'Office Computer Package — i3 + 22″ LED', brand:'Zaman Build', specs:'Core i3-12100 · 8GB DDR4 · 512GB NVMe · 22″ LED · Win 11', price:95000, cat:'desktops', cond:'New', stock:true, img:u('photo-1587831990711-23ca6441447b') },
   { sku:'ZC-D002', name:'HP ProDesk 400 G9 — Core i5', brand:'HP', specs:'i5-12500 · 16GB DDR4 · 512GB NVMe · Win 11 Pro', price:145000, oldPrice:160000, cat:'desktops', cond:'New', stock:true, isNew:true, img:u('photo-1499951360447-b19be8fe80f5') },
@@ -1162,6 +1303,37 @@ const PRODUCTS = [
   { sku:'ZC-A020', name:'Used Epson L120 InkTank', brand:'Epson', specs:'Inkjet · 12 ppm mono · USB · Low print count', price:14500, cat:'accessories', cond:'Used', stock:true, img:u('photo-1499951360447-b19be8fe80f5', 700) }
 ];
 const CAT_LABEL = { desktops:'Desktops & Systems', laptops:'Laptops', accessories:'Accessories', hardware:'Hardware & Components', security:'CCTV & Security' };
+
+/* ───────── 2A. PRODUCT STORE — published catalog (products.json) ─────────
+   Customers load ./products.json (published from the Owner dashboard).
+   Falls back to the built-in catalog above when missing/offline.
+   Owner edits persist on this device in localStorage.               */
+const PRODUCT_STORE = 'zaman_products_v1';
+let PRODUCTS = JSON.parse(JSON.stringify(DEFAULT_PRODUCTS));
+(function loadLocalProducts(){
+  try {
+    const raw = localStorage.getItem(PRODUCT_STORE);
+    if (!raw) return;
+    const arr = JSON.parse(raw);
+    if (Array.isArray(arr) && arr.length >= 8) PRODUCTS = arr;
+  } catch (e) { /* ignore */ }
+})();
+function persistProducts(){
+  try { localStorage.setItem(PRODUCT_STORE, JSON.stringify(PRODUCTS)); return true; }
+  catch (e) { showToast('Device storage full — use Export JSON as backup.'); return false; }
+}
+async function loadPublishedProducts(){
+  try {
+    const r = await fetch('./products.json?v=' + Date.now(), { cache: 'no-store' });
+    if (!r.ok) return;
+    const arr = await r.json();
+    if (Array.isArray(arr) && arr.length >= 8 && arr.every(p => p.sku && p.name && typeof p.price === 'number')) {
+      PRODUCTS = arr;
+      applyPriceOverrides();
+      renderFeatured(); renderLatest(); renderChips(); renderProducts(); renderInvSelects();
+    }
+  } catch (e) { /* offline — keep local catalog */ }
+}
 
 /* ───── 2B. MARKET PRICES — Lahore rates, refreshed daily ─────
    Default prices are baked into PRODUCTS above (PKR, Lahore market).
@@ -1352,10 +1524,13 @@ document.addEventListener('click', e => {
 
 renderChips();
 renderProducts();
+loadPublishedProducts();
 
 /* Featured & latest */
-$('#featuredGrid').innerHTML = PRODUCTS.filter(p => p.featured).slice(0, 4).map(productCard).join('');
-$('#latestGrid').innerHTML   = PRODUCTS.filter(p => p.isNew).slice(0, 4).map(productCard).join('');
+function renderFeatured(){ $('#featuredGrid').innerHTML = PRODUCTS.filter(p => p.featured).slice(0, 4).map(productCard).join(''); }
+function renderLatest(){ $('#latestGrid').innerHTML   = PRODUCTS.filter(p => p.isNew).slice(0, 4).map(productCard).join(''); }
+renderFeatured();
+renderLatest();
 
 /* ───────── 10. CATEGORY TILES ───────── */
 $('#catGrid').innerHTML = CAT_TILES.map(t =>
@@ -1586,6 +1761,230 @@ $('#resetPricesBtn').addEventListener('click', () => {
   location.reload();
 });
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && !$('#priceEditor').hidden) closePriceEditor(); });
+
+/* ───────── 16C. OWNER MODE — PIN unlock + dashboard ───────── */
+const OWNER_KEY = 'zaman_owner';
+const PIN_STORE = 'zaman_owner_pin';
+const DEFAULT_PIN = '1234';              // owner must change this
+const PUBLISH_STORE = 'zaman_publish';
+const LAST_PUBLISH = 'zaman_last_publish';
+
+const sha256 = async (s) => {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(String(s)));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+};
+const checkPin = async (pin) => {
+  const stored = localStorage.getItem(PIN_STORE);
+  const h = await sha256(String(pin));
+  return stored ? h === stored : String(pin) === DEFAULT_PIN;
+};
+
+function setOwnerMode(on){
+  document.body.classList.toggle('is-owner', !!on);
+  $$('.owner-only').forEach(el => { el.hidden = !on; });
+  const dash = $('#ownerDash'); if (dash) dash.hidden = !on;
+  const inv = $('#invoice');    if (inv)  inv.hidden  = !on;
+  $('#ownerUnlockBtnNav').classList.toggle('on', !!on);
+  if (on) renderOwnerTable();
+}
+
+function renderOwnerStats(){
+  const total = PRODUCTS.length;
+  const inStock = PRODUCTS.filter(p => p.stock).length;
+  const used = PRODUCTS.filter(p => p.cond === 'Used').length;
+  const cats = new Set(PRODUCTS.map(p => p.cat)).size;
+  const last = localStorage.getItem(LAST_PUBLISH) || 'never published';
+  $('#ownerStats').innerHTML =
+    '<div class="owner-stat"><b>' + total + '</b><small>Products</small></div>' +
+    '<div class="owner-stat"><b>' + inStock + '</b><small>In Stock</small></div>' +
+    '<div class="owner-stat"><b>' + used + '</b><small>Used Items</small></div>' +
+    '<div class="owner-stat"><b>' + cats + '</b><small>Categories</small></div>' +
+    '<div class="owner-stat" style="grid-column:1/-1"><b style="font-size:.95rem">Last published: ' + esc(last) + '</b><small>GitHub Pages rebuilds ~1 min after publish</small></div>';
+}
+function renderOwnerTable(){
+  renderOwnerStats();
+  const rows = PRODUCTS.map((p, i) =>
+    '<tr data-i="' + i + '"><td>' + esc(p.sku) + '</td><td>' + esc(p.name) + '</td>' +
+      '<td class="num"><input type="number" min="0" step="100" class="ot-price" value="' + p.price + '" aria-label="Price for ' + esc(p.name) + '" inputmode="numeric"></td>' +
+      '<td><button type="button" class="ot-stock' + (p.stock ? '' : ' out') + '" aria-pressed="' + p.stock + '">' + (p.stock ? 'In Stock' : 'Out') + '</button></td>' +
+      '<td><select class="ot-cond" aria-label="Condition"><option' + (p.cond === 'New' ? ' selected' : '') + '>New</option><option' + (p.cond === 'Used' ? ' selected' : '') + '>Used</option></select></td>' +
+      '<td><label class="checkline"><input type="checkbox" class="ot-featured"' + (p.featured ? ' checked' : '') + ' aria-label="Featured"> ★</label></td>' +
+      '<td><button type="button" class="ot-del" aria-label="Delete product">×</button></td>' +
+    '</tr>'
+  ).join('');
+  $('#ownerTableBody').innerHTML = rows;
+}
+function refreshCatalog(){
+  persistProducts();
+  renderFeatured(); renderLatest(); renderChips(); renderProducts(); renderInvSelects();
+}
+
+/* unlock / lock */
+$('#ownerUnlockBtnMobile') && $('#ownerUnlockBtnMobile').addEventListener('click', () => { $('#mobilePanel').classList.remove('open'); $('#hamburger').setAttribute('aria-expanded', 'false'); $('#ownerUnlockBtnNav').click(); });
+$('#ownerUnlockBtnNav').addEventListener('click', () => { $('#ownerPinInput').value = ''; $('#ownerUnlockModal').hidden = false; setTimeout(() => $('#ownerPinInput').focus(), 50); });
+$('#ownerUnlockClose').addEventListener('click', () => { $('#ownerUnlockModal').hidden = true; });
+$('#ownerUnlockModal').addEventListener('click', e => { if (e.target.id === 'ownerUnlockModal') $('#ownerUnlockModal').hidden = true; });
+$('#ownerUnlockBtn').addEventListener('click', async () => {
+  const pin = $('#ownerPinInput').value;
+  if (!pin || !(await checkPin(pin))) { showToast('Wrong PIN.'); return; }
+  localStorage.setItem(OWNER_KEY, '1');
+  $('#ownerUnlockModal').hidden = true;
+  setOwnerMode(true);
+  showToast('Welcome back, Owner.');
+});
+$('#ownerPinInput').addEventListener('keydown', e => { if (e.key === 'Enter') $('#ownerUnlockBtn').click(); });
+$('#ownerSignOutBtn').addEventListener('click', () => { localStorage.removeItem(OWNER_KEY); setOwnerMode(false); showToast('Signed out.'); });
+$('#ownerChangePinBtn').addEventListener('click', async () => {
+  const v = $('#ownerNewPin').value.trim();
+  if (!/^\d{4,8}$/.test(v)) { showToast('PIN must be 4–8 digits.'); return; }
+  localStorage.setItem(PIN_STORE, await sha256(v));
+  $('#ownerNewPin').value = '';
+  showToast('PIN changed ✓');
+});
+
+/* table edits (delegated) */
+$('#ownerTableBody').addEventListener('change', e => {
+  const tr = e.target.closest('tr'); if (!tr) return;
+  const i = +tr.dataset.i, p = PRODUCTS[i]; if (!p) return;
+  if (e.target.classList.contains('ot-price')) {
+    const v = Math.max(0, Math.round(Number(e.target.value)));
+    if (!Number.isFinite(v) || v <= 0) { showToast('Invalid price.'); e.target.value = p.price; return; }
+    p.price = v;
+  } else if (e.target.classList.contains('ot-cond')) {
+    p.cond = e.target.value;
+  } else if (e.target.classList.contains('ot-featured')) {
+    p.featured = e.target.checked;
+  }
+  refreshCatalog();
+});
+$('#ownerTableBody').addEventListener('click', e => {
+  const tr = e.target.closest('tr'); if (!tr) return;
+  const i = +tr.dataset.i, p = PRODUCTS[i]; if (!p) return;
+  if (e.target.classList.contains('ot-stock')) {
+    p.stock = !p.stock;
+    e.target.classList.toggle('out', !p.stock);
+    e.target.textContent = p.stock ? 'In Stock' : 'Out';
+    e.target.setAttribute('aria-pressed', String(p.stock));
+    refreshCatalog();
+  } else if (e.target.classList.contains('ot-del')) {
+    if (confirm('Remove “' + p.name + '” from the catalog?')) {
+      PRODUCTS.splice(i, 1);
+      persistProducts();
+      renderOwnerTable();
+      refreshCatalog();
+    }
+  }
+});
+
+/* add product */
+$('#ownerAddBtn').addEventListener('click', () => {
+  $('#apSku').value = 'ZC-' + Math.random().toString(36).slice(2, 6).toUpperCase();
+  $('#addProductForm').reset();
+  $('#apStock').checked = true;
+  $('#addProductModal').hidden = false;
+  setTimeout(() => $('#apName').focus(), 50);
+});
+$('#addProductClose').addEventListener('click', () => { $('#addProductModal').hidden = true; });
+$('#addProductModal').addEventListener('click', e => { if (e.target.id === 'addProductModal') $('#addProductModal').hidden = true; });
+$('#addProductForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const name = $('#apName').value.trim();
+  const price = Math.round(Number($('#apPrice').value));
+  if (!name || !Number.isFinite(price) || price <= 0) { showToast('Enter a name and a valid price.'); return; }
+  let img = $('#apImg').value.trim();
+  if (!img) img = u('photo-1518770660439-4636190af475', 640);
+  PRODUCTS.unshift({
+    sku: $('#apSku').value.trim().toUpperCase() || ('ZC-' + Date.now().toString(36).toUpperCase()),
+    name, brand: $('#apBrand').value.trim() || 'Zaman',
+    specs: $('#apSpecs').value.trim() || '—',
+    price, oldPrice: Number($('#apOldPrice').value) || undefined,
+    cat: $('#apCategory').value, cond: $('#apCond').value,
+    stock: $('#apStock').checked, featured: $('#apFeatured').checked, isNew: $('#apIsNew').checked,
+    img
+  });
+  persistProducts();
+  refreshCatalog();
+  renderOwnerTable();
+  $('#addProductModal').hidden = true;
+  showToast('Product added ✓ — remember to Publish to GitHub.');
+});
+
+/* export / import */
+$('#ownerExportBtn').addEventListener('click', () => {
+  const blob = new Blob([JSON.stringify(PRODUCTS, null, 2)], { type: 'application/json' });
+  downloadBlob(blob, 'zaman-products-' + new Date().toISOString().slice(0, 10) + '.json');
+  showToast('Catalog exported (' + PRODUCTS.length + ' products).');
+});
+$('#ownerImportFile').addEventListener('change', e => {
+  const file = e.target.files[0]; if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      const arr = JSON.parse(reader.result);
+      if (!Array.isArray(arr) || arr.length < 1 || !arr.every(p => p.sku && p.name && typeof p.price === 'number')) {
+        showToast('Invalid catalog file.'); return;
+      }
+      PRODUCTS.length = 0; PRODUCTS.push(...arr);
+      persistProducts(); refreshCatalog(); renderOwnerTable();
+      showToast('Imported ' + PRODUCTS.length + ' products ✓');
+    } catch (err) { showToast('Could not read that file.'); }
+    e.target.value = '';
+  };
+  reader.readAsText(file);
+});
+
+/* publish to GitHub */
+const readPublish = () => ({
+  owner: ($('#ghOwner').value || 'adfaizy').trim(),
+  repo: ($('#ghRepo').value || 'Zaman_Computer').trim(),
+  branch: ($('#ghBranch').value || 'main').trim(),
+  path: ($('#ghPath').value || 'products.json').trim(),
+  token: $('#ghToken').value.trim()
+});
+(function restorePublish(){
+  try {
+    const saved = JSON.parse(localStorage.getItem(PUBLISH_STORE) || '{}');
+    if (saved.owner) $('#ghOwner').value = saved.owner;
+    if (saved.repo) $('#ghRepo').value = saved.repo;
+    if (saved.branch) $('#ghBranch').value = saved.branch;
+    if (saved.path) $('#ghPath').value = saved.path;
+    if (saved.token && $('#rememberToken')) { $('#ghToken').value = saved.token; $('#rememberToken').checked = true; }
+  } catch (e) { /* ignore */ }
+})();
+$$('#ghOwner,#ghRepo,#ghBranch,#ghPath').forEach(el => el.addEventListener('change', savePublish));
+$('#ghToken').addEventListener('change', savePublish);
+$('#rememberToken').addEventListener('change', savePublish);
+function savePublish(){
+  const remember = $('#rememberToken').checked;
+  const p = readPublish();
+  const out = { owner: p.owner, repo: p.repo, branch: p.branch, path: p.path };
+  if (remember) out.token = p.token;
+  localStorage.setItem(PUBLISH_STORE, JSON.stringify(out));
+}
+$('#ownerPublishBtn').addEventListener('click', async () => {
+  const p = readPublish();
+  if (!p.token) { showToast('Paste the GitHub token in Publish settings first.'); $('.owner-publish summary').click(); return; }
+  savePublish();
+  const api = 'https://api.github.com/repos/' + encodeURIComponent(p.owner) + '/' + encodeURIComponent(p.repo) + '/contents/' + p.path.split('/').map(encodeURIComponent).join('/');
+  const headers = { 'Authorization': 'Bearer ' + p.token, 'Accept': 'application/vnd.github+json' };
+  try {
+    let sha = null;
+    const g = await fetch(api + '?ref=' + encodeURIComponent(p.branch), { headers });
+    if (g.ok) { const j = await g.json(); sha = j.sha; }
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(PRODUCTS, null, 1))));
+    const body = { message: 'Owner: update product catalog', content, branch: p.branch };
+    if (sha) body.sha = sha;
+    const put = await fetch(api, { method: 'PUT', headers, body: JSON.stringify(body) });
+    if (!put.ok) { const t2 = await put.text(); console.error('Publish failed', put.status, t2); showToast('Publish failed (HTTP ' + put.status + '). Check token permissions.'); return; }
+    const stamp = new Date().toLocaleString('en-PK', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+    localStorage.setItem(LAST_PUBLISH, stamp);
+    renderOwnerStats();
+    showToast('Published ✓ — customers will see it in ~1 minute.');
+  } catch (e) { console.error(e); showToast('Publish failed — check internet and token.'); }
+});
+
+/* boot: restore owner mode if previously unlocked */
+if (localStorage.getItem(OWNER_KEY) === '1') setOwnerMode(true);
 
 /* ───────── 17. QR CODE ENGINE — ISO/IEC 18004 · byte mode · EC level M ─────────
    Straight transliteration of the reference encoder (qrcode, MIT):
@@ -1927,16 +2326,17 @@ function nextInvoiceNo(){ return 'ZC-' + new Date().getFullYear() + '-' + String
 function showInvoiceNo(){ invNoEl.value = nextInvoiceNo(); }
 
 /* Populate product dropdowns (grouped by category) */
-(function fillProductSelects(){
+function renderInvSelects(){
   const groups = Object.keys(CAT_LABEL).map(cat =>
     '<optgroup label="' + CAT_LABEL[cat] + '">' +
       PRODUCTS.filter(p => p.cat === cat).map(p =>
-        '<option value="' + esc(p.sku) + '">' + esc(p.name) + ' — ' + fmtRs(p.price) + '</option>'
+        '<option value="' + esc(p.sku) + '">' + esc(p.name) + ' - ' + fmtRs(p.price) + '</option>'
       ).join('') + '</optgroup>'
   ).join('');
   $('#invProduct').innerHTML = groups;
-  $('#bcProduct').innerHTML = '<option value="">— custom text below —</option>' + groups;
-})();
+  $('#bcProduct').innerHTML = '<option value="">- custom text below -</option>' + groups;
+}
+renderInvSelects();
 
 $('#invAddProduct').addEventListener('click', () => {
   const sku = $('#invProduct').value;
