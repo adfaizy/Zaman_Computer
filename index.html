@@ -1,0 +1,2531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- ════════════════════════════════════════════════════════════
+       ZAMAN COMPUTER — Premium Computer & Laptop Store
+       Pure HTML5 + CSS3 + Vanilla JS · PWA · No frameworks
+       ────────────────────────────────────────────────────────────
+       EASY CUSTOMIZATION GUIDE
+       Edit the <script> block at the bottom: SHOP_CONFIG, PRODUCTS,
+       SERVICES, GALLERY — everything else updates automatically.
+       To change WhatsApp number: edit SHOP.whatsapp AND the few
+       hard-coded wa.me links marked with "EDIT:" comments.
+       ════════════════════════════════════════════════════════════ -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zaman Computer — Your Trusted Technology Partner | Computers, Laptops &amp; Accessories, Lahore</title>
+  <meta name="description" content="Zaman Computer: Buy new & used computers, laptops, gaming PCs, monitors and accessories at the best prices in Pakistan. Laptop & desktop repair, custom PC building, data recovery, RAM/SSD upgrades. FBR registered — NTN 3520269614193. Raiwind, Lahore.">
+  <meta name="keywords" content="Zaman Computer, computers Pakistan, laptops Lahore, gaming PC, computer repair Lahore, custom PC build, used laptops, computer accessories, Core i5, Core i7, laptop shop Raiwind">
+  <meta name="author" content="Zaman Computer">
+  <meta name="theme-color" content="#0b0b0d">
+  <link rel="canonical" href="./index.html">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Zaman Computer">
+  <meta property="og:title" content="Zaman Computer — Your Trusted Technology Partner">
+  <meta property="og:description" content="Quality computers, laptops & accessories at the best prices. Gaming PCs, repairs, upgrades & data recovery.">
+  <meta property="og:image" content="./icon-512.png">
+  <meta property="og:locale" content="en_PK">
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png">
+  <link rel="apple-touch-icon" href="./icon-512.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Zaman Computer">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ElectronicsStore",
+    "name": "Zaman Computer",
+    "description": "Premium computer & laptop store — sales, repair and installation services. FBR registered (NTN 3520269614193).",
+    "image": "./icon-512.png",
+    "telephone": "+92-308-4608380",
+    "priceRange": "Rs. Rs.",
+    "taxID": "3520269614193",
+    "founder": "Muhammad Umer Ul Zaman",
+    "address": { "@type": "PostalAddress", "streetAddress": "1, Mohal Street, Nazd Jamia Masjid Al Furqan, Gulberg Town, Raiwind", "addressLocality": "Lahore", "addressRegion": "Punjab", "addressCountry": "PK" },
+    "openingHours": "Mo-Sa 09:00-21:00",
+    "sameAs": []
+  }
+  </script>
+
+  <style>
+/* ═══════════════════════════════════════════════════════════
+   ZAMAN COMPUTER — Premium Dark & Gold Design System
+   ═══════════════════════════════════════════════════════════ */
+:root{
+  --bg:#0b0b0d; --bg-2:#111114; --surface:#16161a; --card:#1a1a20; --card-2:#1f1f27;
+  --border:#26262e; --border-gold:rgba(212,175,55,.35);
+  --gold:#d4af37; --gold-2:#f0d675; --gold-3:#8a6d1f;
+  --gold-grad:linear-gradient(135deg,#f7e08e 0%,#d4af37 45%,#9a7b2d 100%);
+  --text:#f5f5f5; --muted:#b8b8c6; --green:#25d366; --red:#ff6b6b;
+  --radius:16px; --shadow:0 18px 45px rgba(0,0,0,.55);
+  --gold-glow:0 0 0 1px var(--border-gold),0 14px 40px rgba(212,175,55,.12);
+  --font-display:'Playfair Display',Georgia,serif; --font-body:'Poppins',system-ui,sans-serif;
+  --nav-h:72px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-weight:300;line-height:1.6;overflow-x:hidden}
+::selection{background:var(--gold);color:#111}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:var(--bg-2)}
+::-webkit-scrollbar-thumb{background:#3a3a44;border-radius:6px}
+::-webkit-scrollbar-thumb:hover{background:var(--gold)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
+img{max-width:100%;display:block}
+button{font-family:inherit;cursor:pointer}
+input,select,textarea{font-family:inherit}
+.container{width:min(1240px,100% - 2.5rem);margin-inline:auto}
+section{scroll-margin-top:calc(var(--nav-h) + 20px)}
+.skip-link{position:absolute;top:-60px;left:1rem;z-index:2000;background:var(--gold);color:#111;padding:.6rem 1.2rem;border-radius:8px;font-weight:600;text-decoration:none;transition:top .25s}
+.skip-link:focus{top:10px}
+
+/* ═══ Announcement ticker ═══ */
+.ticker{background:linear-gradient(90deg,#151103,#1f1a06 30%,#151103);border-bottom:1px solid var(--border-gold);overflow:hidden;height:38px;display:flex;align-items:center}
+.ticker-track{white-space:nowrap;display:inline-flex;animation:tickerMove 32s linear infinite;will-change:transform}
+.ticker span{color:var(--gold-2);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;padding:0 1.4rem}
+.ticker b{color:#fff;font-weight:600}
+@keyframes tickerMove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ticker:hover .ticker-track{animation-play-state:paused}
+
+/* ═══ Buttons ═══ */
+.btn{display:inline-flex;align-items:center;gap:.55rem;border:none;border-radius:999px;padding:.85rem 1.7rem;font-size:.9rem;font-weight:600;letter-spacing:.02em;text-decoration:none;transition:transform .25s,box-shadow .25s,background .25s,color .25s;white-space:nowrap}
+.btn:active{transform:scale(.97)}
+.btn svg{width:18px;height:18px;flex:0 0 auto}
+.btn-gold{background:var(--gold-grad);color:#1a1408;box-shadow:0 10px 30px rgba(212,175,55,.28)}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 14px 38px rgba(212,175,55,.4)}
+.btn-ghost{background:rgba(255,255,255,.04);color:var(--gold-2);border:1px solid var(--border-gold)}
+.btn-ghost:hover{background:rgba(212,175,55,.12);transform:translateY(-2px)}
+.btn-wa{background:linear-gradient(135deg,#25d366,#128c4a);color:#06280f}
+.btn-wa:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(37,211,102,.3)}
+.btn-ink{background:#1c1c22;color:var(--gold-2);border:1px solid var(--border)}
+.btn-ink:hover{border-color:var(--border-gold);transform:translateY(-2px)}
+.btn-sm{padding:.55rem 1.1rem;font-size:.8rem}
+.btn-block{width:100%;justify-content:center}
+
+/* ═══ Navbar ═══ */
+.navbar{position:sticky;top:0;z-index:1000;background:rgba(11,11,13,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid transparent;transition:border-color .3s,box-shadow .3s}
+.navbar.scrolled{border-bottom-color:var(--border);box-shadow:0 8px 30px rgba(0,0,0,.45)}
+.nav-inner{height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.logo{display:flex;align-items:center;gap:.7rem;text-decoration:none}
+.logo svg{width:46px;height:46px;flex:0 0 auto}
+.logo-text{display:flex;flex-direction:column;line-height:1.15}
+.logo-text .brand{font-family:var(--font-display);font-size:1.28rem;font-weight:800;letter-spacing:.02em;color:#fff}
+.logo-text .brand em{font-style:normal;color:var(--gold)}
+.logo-text .tag{font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--muted)}
+.nav-links{display:flex;align-items:center;gap:1.4rem;list-style:none}
+.nav-links a{color:#cfcfd8;text-decoration:none;font-size:.85rem;font-weight:500;position:relative;padding:.35rem .05rem}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:-2px;height:2px;width:0;background:var(--gold-grad);transition:width .3s}
+.nav-links a:hover,.nav-links a.active{color:var(--gold-2)}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.nav-cta{display:flex;align-items:center;gap:.6rem}
+.hamburger{display:none;background:none;border:1px solid var(--border);border-radius:10px;width:44px;height:44px;color:var(--gold-2);align-items:center;justify-content:center}
+.mobile-panel{display:none;flex-direction:column;gap:.2rem;background:rgba(15,15,18,.98);border-bottom:1px solid var(--border);padding:1rem 1.25rem 1.5rem}
+.mobile-panel a{color:var(--text);text-decoration:none;padding:.75rem .5rem;border-radius:10px;font-weight:500;border-bottom:1px solid #1d1d24}
+.mobile-panel a:hover{background:#1c1c22;color:var(--gold-2)}
+.mobile-panel.open{display:flex}
+
+/* ═══ Hero ═══ */
+.hero{position:relative;min-height:92vh;display:flex;align-items:center;overflow:hidden;background:#000}
+.hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;animation:heroZoom 16s ease-in-out infinite alternate}
+@keyframes heroZoom{from{transform:scale(1.05)}to{transform:scale(1.12) translateX(-2%)}}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,5,7,.94) 0%,rgba(5,5,7,.78) 38%,rgba(5,5,7,.15) 75%),linear-gradient(0deg,#0b0b0d 0%,transparent 26%)}
+.hero-inner{position:relative;z-index:2;padding:5rem 0 6rem}
+.eyebrow{display:inline-flex;align-items:center;gap:.6rem;font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:1.1rem}
+.eyebrow::before{content:"";width:36px;height:1px;background:var(--gold);display:inline-block}
+.hero h1{font-family:var(--font-display);font-weight:900;font-size:clamp(2.5rem,6.2vw,4.3rem);line-height:1.08;color:#fff;max-width:15ch;letter-spacing:-.01em}
+.hero h1 span{background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p.lead{margin:1.4rem 0 2rem;font-size:1.12rem;color:#d7d7de;max-width:48ch;font-weight:300}
+.hero p.lead strong{color:#fff;font-weight:500}
+.hero-ctas{display:flex;gap:.9rem;flex-wrap:wrap;margin-bottom:2.6rem}
+.hero-stats{display:flex;gap:2.4rem;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.14);padding-top:1.6rem}
+.hstat b{display:block;font-family:var(--font-display);font-size:1.55rem;color:#fff}
+.hstat b i{font-style:normal;color:var(--gold)}
+.hstat small{color:var(--muted);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase}
+.hero-badge{position:absolute;right:4%;bottom:16%;z-index:2;background:rgba(20,20,26,.72);backdrop-filter:blur(10px);border:1px solid var(--border-gold);border-radius:18px;padding:1rem 1.3rem;box-shadow:var(--gold-glow);animation:floatCard 5s ease-in-out infinite}
+@keyframes floatCard{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+.hero-badge small{color:var(--muted);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase}
+.hero-badge b{color:#fff;font-size:.92rem;display:block;margin:.15rem 0}
+.hero-badge .price{color:var(--gold-2);font-weight:600}
+.pulse-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#35e08a;margin-right:.4rem;animation:pulse 1.6s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(53,224,138,.6)}60%{box-shadow:0 0 0 7px rgba(53,224,138,0)}}
+.scroll-hint{position:absolute;left:50%;bottom:1.2rem;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:.35rem;color:var(--muted);font-size:.65rem;letter-spacing:.3em;text-transform:uppercase}
+.scroll-hint .wheel{width:22px;height:34px;border:2px solid #55565f;border-radius:12px;display:flex;justify-content:center;padding-top:6px}
+.scroll-hint .wheel::after{content:"";width:3px;height:7px;border-radius:2px;background:var(--gold);animation:wheel 1.8s ease infinite}
+@keyframes wheel{0%{opacity:0;transform:translateY(0)}30%{opacity:1}80%,100%{opacity:0;transform:translateY(10px)}}
+
+/* ═══ Section scaffolding ═══ */
+.section{padding:5.2rem 0;background:var(--bg)}
+.section.alt{background:var(--bg-2)}
+.section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:1.5rem;margin-bottom:2.4rem}
+.section-head h2{font-family:var(--font-display);font-size:clamp(1.7rem,3.4vw,2.5rem);font-weight:800;line-height:1.15;color:#fff}
+.section-head h2 em{font-style:italic;color:var(--gold)}
+.section-head p{color:var(--muted);max-width:52ch;margin-top:.5rem;font-size:.92rem}
+.text-link{color:var(--gold-2);text-decoration:none;font-size:.85rem;font-weight:600;display:inline-flex;align-items:center;gap:.4rem;border-bottom:1px solid var(--border-gold);padding-bottom:.15rem;white-space:nowrap}
+.text-link:hover{color:#fff}
+/* ═══ Product grids & cards ═══ */
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+.product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem}
+.product-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;transition:transform .35s,box-shadow .35s,border-color .35s;position:relative}
+.product-card:hover{transform:translateY(-6px);border-color:var(--border-gold);box-shadow:var(--shadow),var(--gold-glow)}
+.product-media{position:relative;aspect-ratio:4/3;overflow:hidden;background:#000}
+.product-media img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.2,.7,.3,1)}
+.product-card:hover .product-media img{transform:scale(1.07)}
+.badge{position:absolute;font-size:.62rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.3rem .7rem;border-radius:999px;backdrop-filter:blur(6px)}
+.badge-new{top:.7rem;left:.7rem;background:var(--gold-grad);color:#1a1408}
+.badge-used{top:.7rem;left:.7rem;background:#2b3a55;color:#bcd2ff;border:1px solid #3f517f}
+.badge-featured{top:.7rem;right:.7rem;background:rgba(11,11,13,.72);color:var(--gold-2);border:1px solid var(--border-gold)}
+.badge-stock{bottom:.7rem;left:.7rem;background:rgba(11,11,13,.72);display:inline-flex;align-items:center;gap:.35rem;color:#c9f5d8}
+.badge-stock .dot{width:7px;height:7px;border-radius:50%;background:#35e08a}
+.badge-stock.out{color:#f5c9c9}
+.badge-stock.out .dot{background:var(--red)}
+.product-body{padding:1rem 1.05rem 1.15rem;display:flex;flex-direction:column;gap:.3rem;flex:1}
+.product-brand{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:600}
+.product-name{font-size:.98rem;font-weight:600;color:#fff;line-height:1.35;min-height:2.7em}
+.product-specs{font-size:.74rem;color:var(--muted);min-height:2.2em}
+.product-foot{margin-top:auto;padding-top:.55rem;border-top:1px dashed var(--border)}
+.price-row{display:flex;align-items:baseline;gap:.6rem;margin-bottom:.55rem;flex-wrap:wrap}
+.price{font-family:var(--font-display);font-size:1.22rem;font-weight:800;color:var(--gold-2)}
+.old-price{font-size:.8rem;color:#a6a6b3;text-decoration:line-through}
+.save-chip{font-size:.62rem;background:rgba(53,224,138,.12);color:#4ee39b;border:1px solid rgba(53,224,138,.35);padding:.15rem .45rem;border-radius:6px;font-weight:600}
+.inquire{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;width:100%;border:none;border-radius:10px;padding:.68rem .75rem;font-size:.8rem;font-weight:600;background:linear-gradient(135deg,#25d366,#128c4a);color:#04220f;transition:transform .25s,box-shadow .25s}
+.inquire:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(37,211,102,.35)}
+.inquire[disabled]{background:#26262e;color:#8d8d99;cursor:not-allowed;transform:none;box-shadow:none}
+
+/* ═══ Category tiles ═══ */
+.cat-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:1rem}
+.cat-tile{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.3rem .8rem 1.1rem;text-align:center;display:flex;flex-direction:column;align-items:center;gap:.55rem;transition:transform .3s,border-color .3s,background .3s;color:inherit;text-decoration:none;font:inherit;cursor:pointer}
+.cat-tile:hover{transform:translateY(-4px);border-color:var(--border-gold);background:var(--card-2)}
+.cat-icon{width:56px;height:56px;border-radius:14px;background:linear-gradient(160deg,#241f10,#151310);border:1px solid var(--border-gold);display:flex;align-items:center;justify-content:center;color:var(--gold)}
+.cat-tile b{color:#fff;font-size:.8rem;font-weight:600}
+.cat-tile small{color:var(--muted);font-size:.66rem;letter-spacing:.04em}
+
+/* ═══ Why choose ═══ */
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+.why-card{background:linear-gradient(180deg,var(--card),#17171d);border:1px solid var(--border);border-radius:var(--radius);padding:1.6rem;position:relative;overflow:hidden;transition:transform .3s,border-color .3s}
+.why-card:hover{transform:translateY(-4px);border-color:var(--border-gold)}
+.why-card::after{content:"";position:absolute;top:-40px;right:-40px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(212,175,55,.14),transparent 70%)}
+.why-icon{width:52px;height:52px;border-radius:12px;background:var(--gold-grad);display:flex;align-items:center;justify-content:center;color:#1a1408;margin-bottom:.9rem}
+.why-card h3{font-size:1.02rem;color:#fff;font-weight:600;margin-bottom:.35rem}
+.why-card p{font-size:.84rem;color:var(--muted)}
+
+/* ═══ Offer coupons ═══ */
+.offer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+.coupon{border:1.5px dashed var(--border-gold);border-radius:var(--radius);padding:1.5rem 1.4rem;background:linear-gradient(160deg,#1d1a0e,#141310);position:relative;overflow:hidden}
+.coupon::before,.coupon::after{content:"";position:absolute;top:50%;width:26px;height:26px;border-radius:50%;background:var(--bg);transform:translateY(-50%)}
+.coupon::before{left:-14px}.coupon::after{right:-14px}
+.coupon small{color:var(--gold);letter-spacing:.2em;text-transform:uppercase;font-size:.62rem;font-weight:600}
+.coupon h3{font-family:var(--font-display);color:#fff;font-size:1.45rem;margin:.4rem 0 .3rem}
+.coupon p{color:var(--muted);font-size:.82rem;margin-bottom:.7rem}
+.coupon code{display:inline-block;background:#0d0d10;border:1px solid var(--border-gold);color:var(--gold-2);border-radius:8px;padding:.3rem .8rem;letter-spacing:.18em;font-size:.8rem}
+
+/* ═══ Testimonials ═══ */
+.testimonial-viewport{overflow:hidden;border-radius:var(--radius)}
+.testimonial-track{display:flex;gap:1.2rem;transition:transform .45s ease}
+.t-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.8rem;min-width:100%;box-sizing:border-box}
+@media(min-width:900px){.t-card{min-width:calc(50% - .6rem)}}
+@media(min-width:1240px){.t-card{min-width:calc(33.333% - .8rem)}}
+.t-stars{color:var(--gold);letter-spacing:.15em;margin-bottom:.6rem}
+.t-text{color:#d9d9e2;font-size:.92rem;font-style:italic}
+.t-foot{display:flex;align-items:center;gap:.7rem;margin-top:1rem;border-top:1px solid var(--border);padding-top:.9rem}
+.t-avatar{width:44px;height:44px;border-radius:50%;background:var(--gold-grad);color:#1a1408;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem}
+.t-foot b{color:#fff;font-size:.88rem;display:block}
+.t-foot small{color:var(--muted);font-size:.72rem}
+.t-dots{display:flex;gap:.5rem;justify-content:center;margin-top:1.3rem}
+.t-dot{width:24px;height:24px;border-radius:50%;border:1px solid var(--border-gold);background:transparent;position:relative;transition:transform .2s}
+.t-dot::after{content:"";position:absolute;inset:6px;border-radius:50%;background:transparent;transition:background .3s}.t-dot.active::after{background:var(--gold)}.t-dot.active{transform:scale(1.15)}
+
+/* ═══ Services & prices ═══ */
+.services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.1rem}
+.service-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.35rem 1.2rem 1.25rem;display:flex;flex-direction:column;gap:.4rem;transition:transform .3s,border-color .3s}
+.service-card:hover{transform:translateY(-5px);border-color:var(--border-gold);box-shadow:var(--gold-glow)}
+.service-icon{width:46px;height:46px;border-radius:12px;border:1px solid var(--border-gold);color:var(--gold);display:flex;align-items:center;justify-content:center;background:#151310}
+.service-card h3{font-size:.92rem;color:#fff;font-weight:600}
+.service-card p{font-size:.74rem;color:var(--muted);flex:1}
+.service-price{border-top:1px solid var(--border);padding-top:.6rem;display:flex;align-items:baseline;justify-content:space-between;gap:.4rem}
+.service-price b{color:var(--gold-2);font-size:1.02rem;font-weight:600}
+.service-price span{font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
+.service-card .btn{margin-top:.3rem;font-size:.72rem;padding:.5rem .6rem}
+
+/* ═══ Shop toolbar ═══ */
+.shop-toolbar{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;margin-bottom:1.2rem;background:var(--surface);border:1px solid var(--border);padding:.9rem;border-radius:var(--radius)}
+.search-box{flex:1 1 240px;position:relative}
+.search-box svg{position:absolute;left:.85rem;top:50%;transform:translateY(-50%);width:18px;height:18px;color:var(--muted)}
+.search-box input{width:100%;background:var(--card-2);border:1px solid var(--border);border-radius:12px;padding:.72rem .9rem .72rem 2.5rem;color:var(--text);font-size:.9rem;transition:border-color .25s}
+.search-box input::placeholder{color:#6f6f7c}
+.search-box input:focus{outline:none;border-color:var(--gold)}
+.chip-row{display:flex;gap:.45rem;flex-wrap:wrap;margin-bottom:.6rem}
+.chip{background:var(--card-2);border:1px solid var(--border);color:#c9c9d4;border-radius:999px;padding:.45rem 1rem;font-size:.78rem;font-weight:500;transition:all .25s}
+.chip:hover{border-color:var(--border-gold);color:var(--gold-2)}
+.chip.active{background:var(--gold-grad);color:#1a1408;border-color:transparent;font-weight:600}
+.select{background:var(--card-2);border:1px solid var(--border);color:var(--text);border-radius:12px;padding:.7rem .8rem;font-size:.85rem}
+.checkline{display:inline-flex;align-items:center;gap:.4rem;font-size:.8rem;color:#c9c9d4;user-select:none;padding:.25rem .2rem;min-height:24px}
+.checkline input{accent-color:var(--gold);width:16px;height:16px}
+.result-count{font-size:.78rem;color:var(--muted);margin:.2rem .1rem 1rem}
+.empty-state{text-align:center;padding:3rem 1rem;border:1px dashed var(--border);border-radius:var(--radius);color:var(--muted)}
+.empty-state b{color:#fff;display:block;margin-bottom:.3rem}
+.load-wrap{display:flex;justify-content:center;margin-top:1.8rem}
+
+/* ═══ Gallery ═══ */
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:210px;gap:.9rem;grid-auto-flow:dense}
+.g-item{position:relative;overflow:hidden;border-radius:var(--radius);border:1px solid var(--border);cursor:zoom-in;background:#000;padding:0;text-align:left}
+.g-item img{width:100%;height:100%;object-fit:cover;transition:transform .6s;opacity:.92}
+.g-item:hover img{transform:scale(1.06);opacity:1}
+.g-item figcaption{position:absolute;left:0;right:0;bottom:0;padding:.7rem .85rem;background:linear-gradient(0deg,rgba(0,0,0,.78),transparent);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:#f2e6bd}
+.g-wide{grid-column:span 2}.g-tall{grid-row:span 2}
+.lightbox{position:fixed;inset:0;z-index:1500;background:rgba(4,4,6,.92);display:none;align-items:center;justify-content:center;opacity:0;transition:opacity .3s}
+.lightbox.open{display:flex;opacity:1}
+.lb-img{max-width:min(1100px,92vw);max-height:74vh;border-radius:12px;border:1px solid var(--border-gold);box-shadow:var(--shadow)}
+.lb-cap{position:absolute;bottom:5.4rem;left:50%;transform:translateX(-50%);color:var(--gold-2);font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;text-align:center;width:90%}
+.lb-count{position:absolute;bottom:2.7rem;left:50%;transform:translateX(-50%);color:var(--muted);font-size:.75rem}
+.lb-btn{position:absolute;background:rgba(20,20,26,.75);border:1px solid var(--border-gold);color:var(--gold-2);width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background .25s}
+.lb-btn:hover{background:rgba(212,175,55,.2)}
+.lb-prev{left:3%;top:50%;transform:translateY(-50%)}
+.lb-next{right:3%;top:50%;transform:translateY(-50%)}
+.lb-close{top:4%;right:4%}
+
+/* ═══ Forms ═══ */
+.form-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.6rem}
+.field{display:flex;flex-direction:column;gap:.32rem;margin-bottom:.9rem}
+.field label{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.field label b{color:var(--gold)}
+.field input,.field select,.field textarea{background:var(--card-2);border:1px solid var(--border);border-radius:10px;padding:.75rem .85rem;color:var(--text);font-size:.92rem;transition:border-color .25s}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--gold)}
+.field textarea{resize:vertical;min-height:96px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.form-note{font-size:.75rem;color:var(--muted);margin-bottom:.8rem}
+
+/* ═══ Booking split ═══ */
+.book-wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:1.6rem;align-items:stretch}
+.book-info{background:linear-gradient(160deg,#1c190c,#12110c);border:1px solid var(--border-gold);border-radius:var(--radius);padding:1.8rem;display:flex;flex-direction:column;gap:1.1rem}
+.book-info h3{font-family:var(--font-display);font-size:1.35rem;color:#fff}
+.book-info ul{list-style:none;display:flex;flex-direction:column;gap:.65rem}
+.book-info li{display:flex;gap:.6rem;align-items:flex-start;font-size:.86rem;color:#d9d9e2}
+.book-info li svg{color:var(--gold);flex:0 0 auto;margin-top:.15rem}
+.book-steps{display:flex;flex-direction:column;gap:.4rem}
+.book-step{display:flex;gap:.6rem;align-items:center;font-size:.78rem;color:var(--muted)}
+.book-step b{color:var(--gold-2);font-family:var(--font-display)}
+
+/* ═══ Contact ═══ */
+.contact-wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:1.6rem}
+.info-list{display:flex;flex-direction:column;gap:.9rem;margin:1.1rem 0}
+.info-item{display:flex;gap:.8rem;align-items:flex-start}
+.info-icon{flex:0 0 44px;width:44px;height:44px;border-radius:12px;border:1px solid var(--border-gold);color:var(--gold);display:flex;align-items:center;justify-content:center;background:#151310}
+.info-item b{color:#fff;font-size:.85rem;display:block}
+.info-item span,.info-item a{color:var(--muted);font-size:.85rem;text-decoration:none}
+.info-item a:hover{color:var(--gold-2)}
+.fbr-box{border:1px solid var(--border-gold);border-radius:var(--radius);background:linear-gradient(160deg,#1b180c,#121109);padding:1.1rem 1.2rem;margin-top:.6rem}
+.fbr-box h4{display:flex;align-items:center;gap:.5rem;color:var(--gold-2);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.55rem}
+.fbr-box dl{display:grid;grid-template-columns:auto 1fr;gap:.18rem 1rem;font-size:.78rem}
+.fbr-box dt{color:var(--muted)}
+.fbr-box dd{color:#fff;margin:0}
+.hours{width:100%;border-collapse:collapse;font-size:.83rem;margin-top:.4rem}
+.hours td,.hours th{padding:.42rem .5rem;border-bottom:1px solid #22222a;text-align:left}
+.hours tr:last-child td,.hours tr:last-child th{border-bottom:none}
+.hours .open{color:#4ee39b}
+.map-frame{width:100%;border:1px solid var(--border);border-radius:var(--radius);min-height:240px}
+
+/* ═══ Invoice & QR center ═══ */
+.invoice-tabs{display:flex;gap:.5rem;margin-bottom:1.2rem;border-bottom:1px solid var(--border)}
+.invoice-tab{background:transparent;border:1px solid transparent;color:#c9c9d4;border-radius:12px 12px 0 0;border-bottom:none;padding:.65rem 1.3rem;font-size:.85rem;font-weight:600;margin-bottom:-1px}
+.invoice-tab.active{background:var(--card-2);color:var(--gold-2);border-color:var(--border-gold);border-bottom-color:var(--card-2)}
+.invoice-wrap{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:start}
+.line-items{width:100%;border-collapse:collapse;font-size:.8rem;margin:.6rem 0}
+.line-items th,.line-items td{border-bottom:1px solid #23232b;padding:.4rem .4rem;text-align:left}
+.line-items th{color:var(--gold);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase}
+.line-items td.num,.line-items th.num{text-align:right}
+.line-items .rm{background:none;border:none;color:var(--red);font-size:1.1rem;line-height:1;padding:.3rem .5rem;min-width:28px;min-height:28px}
+.qty-input{width:56px;background:var(--card-2);border:1px solid var(--border);border-radius:8px;color:var(--text);padding:.35rem .3rem;text-align:center}
+.totals{display:flex;flex-direction:column;gap:.28rem;border-top:1px solid var(--border);padding-top:.6rem;font-size:.86rem}
+.totals .row{display:flex;justify-content:space-between;align-items:center;color:#c9c9d4}
+.totals .grand{border-top:1px dashed var(--border-gold);padding-top:.35rem;margin-top:.1rem;color:#fff;font-weight:700;font-size:1.02rem}
+.totals .grand span:last-child{color:var(--gold-2)}
+.invoice-paper, .invoice-paper *{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+.invoice-paper{background:#fdfcf8;color:#1a1a1a;border-radius:12px;padding:1.3rem 1.3rem;box-shadow:var(--shadow)}
+.invoice-paper h3{font-family:var(--font-display);font-size:1.3rem;margin:0;color:#111}
+.inv-shop small{display:block;color:#8f8f8a;font-size:.62rem;margin-top:.3rem;line-height:1.65}
+.inv-shop h3{font-family:var(--font-display);font-size:1.35rem;margin:0;color:#fff}
+.inv-head{display:flex;justify-content:space-between;align-items:center;gap:1rem;background:#111;color:#fdfcf8;border-radius:12px 12px 0 0;padding:.8rem 1.1rem .7rem;border-bottom:2.5px solid #c8a12e;margin:-1.3rem -1.3rem 0 -1.3rem}
+.inv-shop{flex:0 1 auto}
+.inv-qr{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:.32rem}
+.inv-right{flex:0 1 auto;display:flex;flex-direction:column;align-items:flex-end;gap:.4rem}
+.inv-title{display:inline-block;background:#c8a12e;color:#111;font-size:.62rem;letter-spacing:.28em;padding:.28rem .75rem;border-radius:3px;font-weight:700}
+.inv-copy{font-size:.5rem;letter-spacing:.22em;color:#8f8f8a;text-transform:uppercase}
+.inv-qr canvas{width:58px;height:58px;background:#fff;border-radius:5px;padding:2px}
+.inv-paycap{font-size:.5rem;letter-spacing:.16em;text-transform:uppercase;color:#b9b9b0;text-align:center;line-height:1.6}
+.inv-paycap b{color:#f0d675;letter-spacing:.08em}
+.inv-metastrip{display:grid;grid-template-columns:repeat(5,1fr);background:#171407;border-bottom:2px solid #c8a12e;margin:0 -1.3rem .8rem -1.3rem}
+.inv-metastrip>div{padding:.45rem .6rem;border-left:1px solid #2c2712}
+.inv-metastrip>div:first-child{border-left:none}
+.inv-metastrip b{display:block;font-size:.52rem;letter-spacing:.14em;color:#c8a12e;text-transform:uppercase}
+.inv-metastrip span{color:#fff;font-size:.72rem}
+.inv-parties{display:flex;justify-content:space-between;gap:1rem;font-size:.72rem;margin-bottom:.6rem}
+.inv-parties b{display:block;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:#8a6d1f;margin-bottom:.15rem}
+.inv-table{width:100%;border-collapse:collapse;font-size:.68rem;margin-bottom:.5rem}
+.inv-table th{background:#111;color:#f0d675;padding:.35rem .4rem;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;text-align:left}
+.inv-table td{border-bottom:1px solid #e3e0d2;padding:.3rem .4rem}
+.inv-table .num{text-align:right}
+.inv-bottom{display:flex;justify-content:space-between;gap:1rem;align-items:flex-end;border-top:1.5px dashed #c8a12e;padding-top:.55rem;margin-top:.45rem}
+.inv-totals{font-size:.7rem;min-width:180px}
+.inv-totals div{display:flex;justify-content:space-between;gap:1rem;padding:.12rem 0;color:#333}
+.inv-totals .grand{border-top:1px solid #c8a12e;margin-top:.25rem;padding-top:.25rem;font-weight:700;color:#000;font-size:.82rem}
+.inv-terms{font-size:.58rem;color:#666;max-width:250px}
+.inv-ntn{font-size:.6rem;color:#555;margin-top:.45rem;border-top:1px solid #e3e0d2;padding-top:.4rem;text-align:center}
+.barcode-row{display:flex;justify-content:center;margin:.4rem 0}
+.barcode-row canvas{max-width:100%}
+
+
+/* ═══ Footer ═══ */
+.footer{background:#0d0d10;border-top:1px solid var(--border)}
+.footer-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:2rem;padding:3.5rem 0 2rem}
+.footer h3[data-fthead]{color:var(--gold-2);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:.8rem}
+.footer ul{list-style:none;display:flex;flex-direction:column;gap:.4rem}
+.footer a{color:var(--muted);text-decoration:none;font-size:.85rem}
+.footer a:hover{color:var(--gold-2)}
+.footer-brand{display:flex;gap:.6rem;align-items:center;margin-bottom:.7rem}
+.footer p{color:var(--muted);font-size:.83rem}
+.socials{display:flex;gap:.5rem;margin-top:.8rem}
+.socials a{width:38px;height:38px;border:1px solid var(--border);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--gold-2);transition:all .25s}
+.socials a:hover{border-color:var(--border-gold);background:#1b1b12;transform:translateY(-2px)}
+.footer-bottom{border-top:1px solid #1d1d24;padding:1.1rem 0;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;font-size:.75rem;color:#7c7c88}
+.install-app{display:none}
+.install-app.visible{display:inline-flex}
+
+/* ═══ Floating actions & toast ═══ */
+.float-wa{position:fixed;right:1.1rem;bottom:1.4rem;z-index:1200;display:flex;align-items:center;gap:.55rem}
+.float-wa .wa-btn{width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,#25d366,#128c4a);display:flex;align-items:center;justify-content:center;border:none;position:relative;animation:waPulse 2.4s infinite}
+@keyframes waPulse{0%{box-shadow:0 10px 28px rgba(18,140,74,.45),0 0 0 0 rgba(37,211,102,.5)}70%{box-shadow:0 10px 28px rgba(18,140,74,.45),0 0 0 16px rgba(37,211,102,0)}100%{box-shadow:0 10px 28px rgba(18,140,74,.45),0 0 0 0 rgba(37,211,102,0)}}
+.float-wa .wa-btn svg{width:30px;height:30px;stroke:#04220f}
+.wa-tip{background:#111;border:1px solid var(--border-gold);color:var(--gold-2);font-size:.7rem;padding:.4rem .7rem;border-radius:8px;opacity:0;transform:translateX(8px);transition:all .3s;pointer-events:none;white-space:nowrap}
+.float-wa:hover .wa-tip{opacity:1;transform:translateX(0)}
+.back-top{position:fixed;right:1.35rem;bottom:5.6rem;z-index:1200;width:48px;height:48px;border-radius:12px;background:rgba(20,20,26,.85);border:1px solid var(--border-gold);color:var(--gold-2);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transform:translateY(10px);transition:all .35s;backdrop-filter:blur(6px)}
+.back-top.show{opacity:1;pointer-events:auto;transform:translateY(0)}
+.toast{position:fixed;left:50%;bottom:1.6rem;transform:translate(-50%,16px);z-index:1300;background:#17170f;border:1px solid var(--border-gold);color:var(--gold-2);padding:.65rem 1.3rem;border-radius:10px;font-size:.83rem;opacity:0;pointer-events:none;transition:all .35s;max-width:min(90vw,440px);text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* ═══ Print sheets (invoice / QR label) ═══ */
+#printSheet{display:none}
+@media print{
+  @page{ size: A4; margin: 9mm; }
+  body > *:not(#printSheet){ display:none !important; }
+  #printSheet, #printSheet *{ visibility:visible; }
+  #printSheet{ display:block !important; position:static; width:100%; }
+  .invoice-paper{ page-break-inside:avoid; box-shadow:none !important; border:none !important; border-radius:0 !important; }
+  .invoice-paper, .invoice-paper *{ print-color-adjust:exact; -webkit-print-color-adjust:exact; }
+}
+
+/* ═══ Market rates line & price editor ═══ */
+.market-line{font-size:.74rem;color:var(--muted);margin:.1rem .1rem -.1rem;display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.market-line b{color:var(--gold-2);font-weight:600}
+.link-btn{background:none;border:none;color:var(--gold-2);font-size:.72rem;font-weight:600;border-bottom:1px dashed var(--border-gold);padding:.1rem .1rem;cursor:pointer}
+.link-btn:hover{color:#fff}
+.pe-overlay{position:fixed;inset:0;z-index:1400;background:rgba(4,4,6,.78);display:flex;align-items:center;justify-content:center;padding:1rem}
+.pe-overlay[hidden]{display:none}
+.pe-card{background:var(--surface);border:1px solid var(--border-gold);border-radius:var(--radius);width:min(760px,100%);max-height:84vh;display:flex;flex-direction:column;box-shadow:var(--shadow)}
+.pe-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem 1.3rem;border-bottom:1px solid var(--border)}
+.pe-head h3{font-family:var(--font-display);color:#fff;font-size:1.15rem}
+.pe-close{background:none;border:1px solid var(--border);border-radius:10px;width:40px;height:40px;color:var(--gold-2);font-size:1.3rem}
+.pe-close:hover{border-color:var(--border-gold)}
+.pe-list{overflow-y:auto;padding:.6rem 1.3rem;display:flex;flex-direction:column}
+.pe-row{display:grid;grid-template-columns:1fr auto;gap:.8rem;align-items:center;padding:.45rem .2rem;border-bottom:1px solid #1e1e25}
+.pe-row:last-child{border-bottom:none}
+.pe-info b{display:block;font-size:.8rem;color:#e9e9ee;font-weight:500;line-height:1.4}
+.pe-info small{color:var(--muted);font-size:.65rem;letter-spacing:.04em}
+.pe-input{display:flex;align-items:center;gap:.35rem}
+.pe-input em{color:var(--muted);font-style:normal;font-size:.75rem}
+.pe-input input{width:110px;background:var(--card-2);border:1px solid var(--border);border-radius:8px;color:var(--gold-2);padding:.4rem .5rem;text-align:right;font-weight:600}
+.pe-input input:focus{outline:none;border-color:var(--gold)}
+.pe-foot{display:flex;justify-content:space-between;gap:.7rem;padding:.9rem 1.3rem;border-top:1px solid var(--border)}
+.pct-input{width:64px !important;text-align:center !important}
+
+/* ═══ Responsive ═══ */
+@media (max-width:1100px){
+  .grid-4,.product-grid{grid-template-columns:repeat(3,1fr)}
+  .services-grid{grid-template-columns:repeat(3,1fr)}
+  .cat-grid{grid-template-columns:repeat(4,1fr)}
+  .footer-top{grid-template-columns:repeat(2,1fr)}
+  .hero-badge{display:none}
+}
+@media (max-width:980px){
+  .nav-links,.nav-cta{display:none}
+  .hamburger{display:flex}
+  .why-grid,.grid-3{grid-template-columns:repeat(2,1fr)}
+  .offer-grid{grid-template-columns:1fr}
+  .book-wrap,.contact-wrap,.invoice-wrap{grid-template-columns:1fr}
+  .gallery-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:180px}
+}
+@media (max-width:640px){
+  .grid-4,.product-grid,.services-grid,.cat-grid,.why-grid,.grid-3{grid-template-columns:1fr 1fr;gap:.7rem}
+  .product-name{min-height:auto}
+  .product-specs{display:none}
+  .form-row{grid-template-columns:1fr}
+  .section{padding:3.4rem 0}
+  .section-head{flex-direction:column;align-items:flex-start}
+  .hero-stats{gap:1.2rem}
+  .gallery-grid{grid-auto-rows:150px}
+  .footer-top{grid-template-columns:1fr;gap:1.4rem;padding:2.2rem 0 1.4rem}
+  .ticker span{font-size:.62rem}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#shop">Skip to shop</a>
+
+<!-- Announcement ticker -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track" id="tickerTrack">
+    <span>✦ <b>Free Windows installation</b> on every desktop</span><span>✦ <b>10% OFF</b> RAM &amp; SSD upgrades</span><span>✦ <b>Free pickup &amp; drop</b> within city limits</span><span>✦ <b>Custom PC builds</b> with 1-year shop warranty</span><span>✦ <b>Genuine &amp; boxed</b> products — warranty card provided</span><span>✦ <b>Easy installments</b> on laptops &amp; gaming PCs</span>
+  </div>
+</div>
+
+<!-- Navigation -->
+<header class="navbar" id="navbar">
+  <div class="container nav-inner">
+    <a class="logo" href="#home">
+      <svg viewBox="0 0 64 64" role="img" aria-label="Zaman Computer logo">
+        <defs><linearGradient id="lg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f7e08e"/><stop offset=".45" stop-color="#d4af37"/><stop offset="1" stop-color="#8a6d1f"/></linearGradient></defs>
+        <rect x="2" y="2" width="60" height="60" rx="14" fill="#111" stroke="url(#lg1)" stroke-width="2.4"/>
+        <text x="32" y="43" text-anchor="middle" font-family="Georgia,serif" font-weight="700" font-size="30" fill="url(#lg1)">Z</text>
+      </svg>
+      <span class="logo-text">
+        <span class="brand">Zaman <em>Computer</em></span>
+        <span class="tag">Computers · Laptops · Parts</span>
+      </span>
+    </a>
+    <nav aria-label="Primary navigation">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" class="active">Home</a></li>
+        <li><a href="#shop">Shop</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#invoice">Invoice</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="nav-cta">
+      <!-- EDIT: wa.me number -->
+      <a class="btn btn-wa btn-sm" href="https://wa.me/923084608380?text=Hello%20Zaman%20Computer!" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 11.91a16 16 0 0 0 6 6l3.27-1.27a2 2 0 0 1 2.11.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span class="wa-label">0308-4608380</span>
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobilePanel">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-panel" id="mobilePanel">
+    <a href="#home">Home</a><a href="#shop">Shop / Products</a><a href="#services">Services &amp; Prices</a><a href="#gallery">Gallery</a><a href="#invoice">Invoice &amp; Barcode</a><a href="#book">Book Appointment</a><a href="#contact">Contact</a>
+  </div>
+</header>
+
+<main id="home">
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero" aria-label="Zaman Computer hero">
+  <div class="hero-bg" role="img" aria-label="Premium laptop glowing in the dark"></div>
+  <div class="hero-overlay"></div>
+  <div class="container hero-inner">
+    <span class="eyebrow">Premium Computer &amp; Laptop Store</span>
+    <h1>Your Trusted <span>Technology Partner</span></h1>
+    <p class="lead"><strong>Quality computers, laptops &amp; accessories at the best prices.</strong> New and used systems, gaming rigs, genuine parts, expert repairs and custom PC building — all under one roof in Lahore.</p>
+    <div class="hero-ctas">
+      <a href="#shop" class="btn btn-gold">Shop Now <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></a>
+      <a href="https://wa.me/923084608380?text=Hello%20Zaman%20Computer!%20I%20want%20to%20know%20more%20about%20your%20products." target="_blank" rel="noopener" class="btn btn-wa">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 11.91a16 16 0 0 0 6 6l3.27-1.27a2 2 0 0 1 2.11.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Contact on WhatsApp
+      </a>
+    </div>
+    <div class="hero-stats" aria-label="Shop at a glance">
+      <div class="hstat"><b>10<i>+</i></b><small>Years in Business</small></div>
+      <div class="hstat"><b>25<i>k</i>+</b><small>Happy Customers</small></div>
+      <div class="hstat"><b>5<i>k</i>+</b><small>Products in Stock</small></div>
+      <div class="hstat"><b>4.9<i>★</i></b><small>Average Rating</small></div>
+    </div>
+  </div>
+  <aside class="hero-badge" aria-hidden="true">
+    <small><span class="pulse-dot"></span>Featured Build</small>
+    <b>Zaman Predator — RTX 4060 · i7-14700KF</b>
+    <span class="price">Rs. 385,000</span>
+  </aside>
+  <div class="scroll-hint" aria-hidden="true"><div class="wheel"></div>Scroll</div>
+</section>
+<!-- ═══════════ FEATURED PRODUCTS ═══════════ -->
+<section class="section" id="featured" aria-labelledby="featuredTitle">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Handpicked</span>
+        <h2 id="featuredTitle">Featured <em>Products</em></h2>
+      </div>
+      <a class="text-link" href="#shop">View all products <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+    <div class="grid-4" id="featuredGrid"></div>
+  </div>
+</section>
+
+<!-- ═══════════ POPULAR CATEGORIES ═══════════ -->
+<section class="section alt" id="categories" aria-labelledby="catTitle">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Browse Catalog</span>
+        <h2 id="catTitle">Popular <em>Categories</em></h2>
+      </div>
+    </div>
+    <div class="cat-grid" id="catGrid"></div>
+  </div>
+</section>
+
+<!-- ═══════════ WHY CHOOSE US ═══════════ -->
+<section class="section" id="why" aria-labelledby="whyTitle">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">The Zaman Advantage</span>
+        <h2 id="whyTitle">Why Choose <em>Zaman Computer?</em></h2>
+      </div>
+    </div>
+    <div class="why-grid">
+      <article class="why-card"><div class="why-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-3.5 8-10V5l-8-3-8 3v7c0 6.5 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div><h3>Genuine &amp; Boxed</h3><p>Every product comes sealed with official warranty card, serial number verification and purchase invoice.</p></article>
+      <article class="why-card"><div class="why-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h3>10+ Years Expertise</h3><p>A decade of hands-on experience building, repairing and upgrading computers for homes and offices.</p></article>
+      <article class="why-card"><div class="why-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6"/><path d="M12 2v13"/><path d="M7 10l5 5 5-5"/></svg></div><h3>Best Price Guarantee</h3><p>Competitive market prices with extra discount on bank transfer and easy installment plans available.</p></article>
+      <article class="why-card"><div class="why-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4.5 4.5 0 0 0-6 6L3 18l3 3 5.7-5.7a4.5 4.5 0 0 0 6-6L13.5 10z"/></svg></div><h3>Expert Repair Lab</h3><p>Chip-level repair, data recovery, virus removal, cleaning &amp; upgrades — with quick turnaround time.</p></article>
+      <article class="why-card"><div class="why-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg></div><h3>After-Sales Support</h3><p>Free installation guidance, driver setup, software help and warranty claim assistance — even after purchase.</p></article>
+      <article class="why-card"><div class="why-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></div><h3>All Under One Roof</h3><p>Sales, repairs, upgrades, custom builds, networking, UPS/printer support — everything in one shop.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ LATEST ARRIVALS ═══════════ -->
+<section class="section alt" id="latest" aria-labelledby="latestTitle">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Just Landed</span>
+        <h2 id="latestTitle">Latest <em>Arrivals</em></h2>
+      </div>
+      <a class="text-link" href="#shop">See everything <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+    <div class="grid-4" id="latestGrid"></div>
+  </div>
+</section>
+
+<!-- ═══════════ SPECIAL OFFERS ═══════════ -->
+<section class="section" id="offers" aria-labelledby="offersTitle">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Limited Time</span>
+        <h2 id="offersTitle">Special <em>Offers &amp; Discounts</em></h2>
+      </div>
+    </div>
+    <div class="offer-grid">
+      <div class="coupon"><small>RAM &amp; SSD Week</small><h3>10% OFF</h3><p>Upgrades on DDR4/DDR5 RAM and NVMe SSDs — installation FREE with every purchase.</p><code>UPGRADE10</code></div>
+      <div class="coupon"><small>Custom PC Builds</small><h3>FREE Labor</h3><p>Assembly charges waived on builds above Rs. 150,000 — cable management included.</p><code>BUILDFREE</code></div>
+      <div class="coupon"><small>Bank Transfer Deal</small><h3>Extra 5% OFF</h3><p>Instant discount when you pay via bank transfer — valid on complete desktops &amp; laptops.</p><code>BANKPAY5</code></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ TESTIMONIALS ═══════════ -->
+<section class="section alt" id="testimonials" aria-labelledby="testiTitle">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Customer Love</span>
+        <h2 id="testiTitle">What Our <em>Customers Say</em></h2>
+      </div>
+    </div>
+    <div class="testimonial-viewport" id="testimonialViewport" aria-live="polite">
+      <div class="testimonial-track" id="testimonialTrack"></div>
+    </div>
+    <div class="t-dots" id="tDots"></div>
+  </div>
+</section>
+
+<!-- ═══════════ SHOP / PRODUCT CATALOG ═══════════ -->
+<section class="section" id="shop" aria-labelledby="shopTitle">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Catalog</span>
+        <h2 id="shopTitle">Shop <em>Computers, Laptops &amp; Hardware</em></h2>
+        <p>Every price in Pakistani Rupees (Rs.). Search, filter and inquire on WhatsApp — new &amp; used stock.</p>
+      </div>
+    </div>
+
+    <div class="shop-toolbar" role="search">
+      <div class="search-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="search" id="shopSearch" placeholder="Search products, brands, specs… (e.g. RTX 4060, i5, Samsung)" aria-label="Search products">
+      </div>
+      <select class="select" id="condFilter" aria-label="Filter by condition">
+        <option value="all">Condition: All</option>
+        <option value="New">New Only</option>
+        <option value="Used">Used Only</option>
+      </select>
+      <select class="select" id="sortFilter" aria-label="Sort products">
+        <option value="featured">Sort: Featured</option>
+        <option value="price-asc">Price: Low → High</option>
+        <option value="price-desc">Price: High → Low</option>
+        <option value="name">Name: A → Z</option>
+      </select>
+      <label class="checkline"><input type="checkbox" id="stockOnly"> In stock only</label>
+    </div>
+    <div class="chip-row" id="categoryChips" role="tablist" aria-label="Product categories"></div>
+    <p class="market-line">Lahore market rates — refreshed daily · Last updated: <b id="pricesUpdated">13 Nov 2026</b> <button class="link-btn" id="openPriceEditor" type="button">Update prices (Owner)</button></p>
+    <p class="result-count" id="resultCount">Loading products…</p>
+    <div class="product-grid" id="productGrid"></div>
+    <div class="empty-state" id="emptyState" hidden><b>No products found</b>Try a different keyword, category or clear the filters.</div>
+    <div class="load-wrap"><button class="btn btn-ghost" id="loadMoreBtn">Load More Products <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button></div>
+  </div>
+</section>
+
+<!-- ═══════════ SERVICES & PRICES ═══════════ -->
+<section class="section alt" id="services" aria-labelledby="servicesTitle">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Repair &amp; Installation</span>
+        <h2 id="servicesTitle">Services &amp; <em>Prices</em></h2>
+        <p>Transparent labor rates in Rs. Final price depends on model &amp; parts — confirmed before any work begins. Tap any card to book on WhatsApp.</p>
+      </div>
+    </div>
+    <div class="services-grid" id="servicesGrid"></div>
+    <p class="form-note" style="margin-top:1rem;text-align:center">* Prices are labor only and exclude parts. Every service includes a written job sheet.</p>
+  </div>
+</section>
+
+<!-- ═══════════ GALLERY ═══════════ -->
+<section class="section" id="gallery" aria-labelledby="galleryTitle">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Inside The Shop</span>
+        <h2 id="galleryTitle">Our Work &amp; <em>Showroom</em></h2>
+        <p>Gaming builds, repairs, accessories wall and custom PCs — real photos from Zaman Computer. Click any image to zoom.</p>
+      </div>
+    </div>
+    <div class="gallery-grid" id="galleryGrid"></div>
+  </div>
+</section>
+<!-- ═══════════ BOOK APPOINTMENT ═══════════ -->
+<section class="section alt" id="book" aria-labelledby="bookTitle">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Reserve A Slot</span>
+        <h2 id="bookTitle">Book an <em>Appointment</em></h2>
+        <p>Fill the form — your booking request is sent instantly to us on WhatsApp. No account, no waiting.</p>
+      </div>
+    </div>
+    <div class="book-wrap">
+      <aside class="book-info">
+        <h3>How it works</h3>
+        <div class="book-steps">
+          <div class="book-step"><b>01</b> Choose the service &amp; preferred date/time</div>
+          <div class="book-step"><b>02</b> Tap “Book Appointment”</div>
+          <div class="book-step"><b>03</b> WhatsApp opens with your details pre-filled — just hit send</div>
+          <div class="book-step"><b>04</b> We confirm your slot within minutes</div>
+        </div>
+        <ul>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Chip-level diagnostics for laptops &amp; desktops</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Data recovery with confidentiality guaranteed</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Custom PC building, stress-tested &amp; cable-managed</li>
+        </ul>
+        <p class="form-note" style="margin:0">Prefer calling? <a href="tel:+923084608380" style="color:var(--gold-2);text-decoration:none">+92 308 4608380</a></p>
+      </aside>
+      <form class="form-card" id="bookForm" novalidate>
+        <div class="form-row">
+          <div class="field"><label for="bfName">Customer Name <b>*</b></label><input id="bfName" required placeholder="e.g. Ahmed Khan" autocomplete="name"></div>
+          <div class="field"><label for="bfPhone">Mobile Number <b>*</b></label><input id="bfPhone" required type="tel" inputmode="numeric" placeholder="03xx-xxxxxxx" autocomplete="tel"></div>
+        </div>
+        <div class="form-row">
+          <div class="field"><label for="bfService">Service Required <b>*</b></label><select id="bfService" required><option value="">Select a service…</option></select></div>
+          <div class="field"><label for="bfDevice">Product / Device Name</label><input id="bfDevice" placeholder="e.g. HP ProBook 440, PC, Printer"></div>
+        </div>
+        <div class="form-row">
+          <div class="field"><label for="bfDate">Preferred Date <b>*</b></label><input id="bfDate" required type="date"></div>
+          <div class="field"><label for="bfTime">Preferred Time</label><select id="bfTime"><option>09:00 AM</option><option>10:00 AM</option><option>11:00 AM</option><option>12:00 PM</option><option>01:00 PM</option><option>02:00 PM</option><option>03:00 PM</option><option>04:00 PM</option><option>05:00 PM</option><option>06:00 PM</option><option>07:00 PM</option><option>08:00 PM</option></select></div>
+        </div>
+        <div class="field"><label for="bfMsg">Additional Message</label><textarea id="bfMsg" placeholder="Describe the issue or what you need…"></textarea></div>
+        <button type="submit" class="btn btn-wa btn-block"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 11.91a16 16 0 0 0 6 6l3.27-1.27a2 2 0 0 1 2.11.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Book Appointment on WhatsApp</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CONTACT + FBR ═══════════ -->
+<section class="section" id="contact" aria-labelledby="contactTitle">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Visit The Shop</span>
+        <h2 id="contactTitle">Contact <em>Zaman Computer</em></h2>
+      </div>
+    </div>
+    <div class="contact-wrap">
+      <div class="form-card">
+        <h3 style="font-family:var(--font-display);font-size:1.3rem;color:#fff">Get in touch</h3>
+        <div class="info-list">
+          <div class="info-item"><div class="info-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><b>Shop Address</b><span>1, Mohal Street, Nazd Jamia Masjid Al Furqan, Gulberg Town, Raiwind, Lahore</span></div></div>
+          <div class="info-item"><div class="info-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 11.91a16 16 0 0 0 6 6l3.27-1.27a2 2 0 0 1 2.11.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div><div><b>Phone / WhatsApp</b><a href="tel:+923084608380">+92 308 4608380</a></div></div>
+          <div class="info-item"><div class="info-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 6L2 7"/></svg></div><div><b>Email</b><!-- EDIT: replace with the shop's real email --><a href="mailto:zamancomputer8@gmail.com">zamancomputer8@gmail.com</a></div></div>
+        </div>
+
+        <div class="fbr-box" aria-label="FBR registration details">
+          <h4><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-3.5 8-10V5l-8-3-8 3v7c0 6.5 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg> FBR Registration (Income Tax: Active)</h4>
+          <dl>
+            <dt>Proprietor</dt><dd>Muhammad Umer Ul Zaman</dd>
+            <dt>NTN (Reg. No)</dt><dd>3520269614193</dd>
+            <dt>Reference No</dt><dd>A669532-4</dd>
+            <dt>Registered On</dt><dd>13-JUL-2023 · RTO-I Lahore</dd>
+            <dt>Sales Tax</dt><dd>Not registered for Sales Tax</dd>
+            <dt>Status</dt><dd>Income Tax: Active</dd>
+            <dt>Principal Activity</dt><dd>478300 — Retail sale via Shop</dd>
+          </dl>
+        </div>
+
+        <table class="hours" aria-label="Business hours">
+          <tr><th>Day</th><th>Hours</th><th>Status</th></tr>
+          <tr><td>Mon – Thu, Sat</td><td>9:00 AM – 9:00 PM</td><td class="open">Open</td></tr>
+          <tr><td>Friday</td><td>9:00 AM – 1:00 PM · 2:30 PM – 9:00 PM</td><td class="open">Open</td></tr>
+          <tr><td>Sunday</td><td>11:00 AM – 7:00 PM</td><td class="open">Open</td></tr>
+        </table>
+        <iframe class="map-frame" title="Zaman Computer on Google Maps" style="margin-top:1rem" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=31.245179,74.213331&output=embed"></iframe>
+        <a class="btn btn-gold btn-block" style="margin-top:.7rem" href="https://maps.app.goo.gl/qvXyHwsVpv5DCeak7" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg> Navigate to Zaman Computer — 66W7+38G Raiwind</a>
+        <p class="form-note" style="margin:.45rem 0 0;text-align:center">Precise shop location (31.245179, 74.213331) — opens in Google Maps</p>
+      </div>
+      <form class="form-card" id="contactForm" novalidate>
+        <h3 style="font-family:var(--font-display);font-size:1.3rem;color:#fff">Send us a message</h3>
+        <p class="form-note">Your message opens directly in WhatsApp — no waiting for email replies.</p>
+        <div class="form-row">
+          <div class="field"><label for="cfName">Name <b>*</b></label><input id="cfName" required placeholder="Your name" autocomplete="name"></div>
+          <div class="field"><label for="cfPhone">Phone</label><input id="cfPhone" type="tel" inputmode="numeric" placeholder="03xx-xxxxxxx" autocomplete="tel"></div>
+        </div>
+        <div class="field"><label for="cfSubject">Subject <b>*</b></label><select id="cfSubject" required><option>Product inquiry</option><option>Repair / service estimate</option><option>Custom PC build quote</option><option>Bulk / corporate order</option><option>Warranty claim</option><option>Other</option></select></div>
+        <div class="field"><label for="cfMsg">Message <b>*</b></label><textarea id="cfMsg" required placeholder="Write your message…"></textarea></div>
+        <div style="display:flex;gap:.7rem;flex-wrap:wrap">
+          <button type="submit" class="btn btn-wa"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg> Send via WhatsApp</button>
+          <a class="btn btn-ink" href="https://wa.me/923084608380" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5c-1.5 0-3-.4-4.2-1.1L3 20l1.2-5.1A8.5 8.5 0 1 1 21 11.5z"/></svg> Direct Chat</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+<!-- ═══════════ INVOICE & QR CENTER ═══════════ -->
+<section class="section alt" id="invoice" aria-labelledby="invoiceTitle">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Shop Management</span>
+        <h2 id="invoiceTitle">Invoice &amp; <em>QR Code Center</em></h2>
+        <p>Bill customers in seconds — auto totals, amount in words, FBR/NTN footer and a printable bill. Also print QR labels for your stock. Works fully offline.</p>
+      </div>
+    </div>
+
+    <div class="invoice-tabs" role="tablist">
+      <button class="invoice-tab active" id="tabBtnInvoice" role="tab" aria-selected="true" aria-controls="tabInvoice" data-tab="tabInvoice">Create Invoice</button>
+      <button class="invoice-tab" id="tabBtnBarcode" role="tab" aria-selected="false" aria-controls="tabBarcode" data-tab="tabBarcode">QR Code</button>
+    </div>
+
+    <!-- TAB 1 · INVOICE BUILDER -->
+    <div class="tab-panel" id="tabInvoice" role="tabpanel" aria-labelledby="tabBtnInvoice">
+      <div class="invoice-wrap">
+        <form class="form-card" id="invoiceForm">
+          <div class="form-row">
+            <div class="field"><label for="invCustomer">Customer Name <b>*</b></label><input id="invCustomer" required placeholder="Walk-in customer / company"></div>
+            <div class="field"><label for="invPhone">Customer Phone <small style="color:var(--muted);text-transform:none;letter-spacing:0">(for WhatsApp — 03xx-xxxxxxx)</small></label><input id="invPhone" type="tel" inputmode="numeric" placeholder="0301-1234567"></div>
+          </div>
+          <div class="form-row">
+            <div class="field" style="grid-column:1/-1"><label for="invOrg">Customer Organization <small style="color:var(--muted);text-transform:none;letter-spacing:0">(optional — e.g. university, company)</small></label><input id="invOrg" placeholder="e.g. University of Lahore, XYZ (Pvt) Ltd"></div>
+          </div>
+          <div class="form-row">
+            <div class="field"><label for="invType">Bill Type</label><select id="invType"><option>Retail Sale</option><option>Service Job / Repair</option><option>Custom PC Build</option><option>Installation Service</option><option>CCTV Installation</option></select></div>
+            <div class="field"><label for="invPayment">Payment Method</label><select id="invPayment"><option>Cash</option><option>Bank Transfer</option><option>Easypaisa</option><option>JazzCash</option><option>Debit / Credit Card</option></select></div>
+          </div>
+          <div class="form-row">
+            <div class="field"><label for="invDate">Invoice Date</label><input id="invDate" type="date"></div>
+            <div class="field"><label for="invNo">Invoice No. (auto)</label><input id="invNo" readonly aria-readonly="true" style="opacity:.75"></div>
+          </div>
+
+          <div class="field">
+            <label for="invProduct">Add Product From Catalog</label>
+            <div style="display:flex;gap:.5rem">
+              <select id="invProduct" style="flex:1;background:var(--card-2);border:1px solid var(--border);border-radius:10px;color:var(--text);padding:.7rem .8rem;min-width:0"></select>
+              <input id="invQty" type="number" min="1" value="1" aria-label="Quantity" style="width:72px;background:var(--card-2);border:1px solid var(--border);border-radius:10px;color:var(--text);padding:.7rem .6rem;text-align:center">
+              <button type="button" class="btn btn-gold btn-sm" id="invAddProduct">Add</button>
+            </div>
+          </div>
+          <div class="field">
+            <label for="invCustomDesc">Or Add Custom Line (parts, labor, services)</label>
+            <div style="display:flex;gap:.5rem">
+              <input id="invCustomDesc" placeholder="e.g. Laptop keyboard replacement" style="flex:1;background:var(--card-2);border:1px solid var(--border);border-radius:10px;color:var(--text);padding:.7rem .8rem;min-width:0">
+              <input id="invCustomRate" type="number" min="0" placeholder="Rs." aria-label="Rate in rupees" style="width:110px;background:var(--card-2);border:1px solid var(--border);border-radius:10px;color:var(--text);padding:.7rem .6rem">
+              <button type="button" class="btn btn-ink btn-sm" id="invAddCustom">Add</button>
+            </div>
+          </div>
+
+          <table class="line-items" aria-label="Invoice line items">
+            <thead><tr><th>#</th><th>Item</th><th class="num">Qty</th><th class="num">Rate</th><th class="num">Amount</th><th></th></tr></thead>
+            <tbody id="invItemsBody"><tr id="invEmptyRow"><td colspan="6" style="color:var(--muted);text-align:center;padding:1.1rem">No items yet — add from catalog or a custom line.</td></tr></tbody>
+          </table>
+
+          <div class="totals">
+            <div class="row"><span>Subtotal</span><span id="invSubtotal">Rs. 0</span></div>
+            <div class="row"><span>Owner Discount</span><span style="display:flex;align-items:center;gap:.35rem"><input id="invDiscount" type="number" min="0" value="0" aria-label="Owner discount in rupees" style="width:104px;text-align:right;background:var(--card-2);border:1px solid var(--border);border-radius:8px;color:var(--text);padding:.2rem .5rem"><input id="invDiscountPct" class="pct-input" type="number" min="0" max="100" value="0" aria-label="Owner discount in percent" placeholder="%" style="background:var(--card-2);border:1px solid var(--border);border-radius:8px;color:var(--gold-2);padding:.2rem .35rem"></span></div>
+            <label class="checkline"><input type="checkbox" id="invTax"> Add Sales Tax 18% <small style="color:var(--muted)">(owner not registered for Sales Tax — leave off)</small></label>
+            <div class="row"><span>Sales Tax (GST)</span><span id="invTaxAmt">Rs. 0</span></div>
+            <div class="row grand"><span>Grand Total</span><span id="invGrand">Rs. 0</span></div>
+          </div>
+          <div class="field" style="margin-top:.6rem"><label for="invNotes">Notes / Warranty</label><textarea id="invNotes" rows="2" placeholder="e.g. 7-day shop warranty on repaired parts…"></textarea></div>
+          <div style="display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.2rem">
+            <button type="button" class="btn btn-gold" id="invPrint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg> Print Invoice</button>
+            <button type="button" class="btn btn-wa" id="invSharePdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg> Send PDF via WhatsApp</button>
+            <button type="button" class="btn btn-ink" id="invDownloadPdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg> Download PDF</button>
+            <button type="button" class="btn btn-ghost btn-sm" id="invWA"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5c-1.5 0-3-.4-4.2-1.1L3 20l1.2-5.1A8.5 8.5 0 1 1 21 11.5z"/></svg> Text Summary</button>
+            <button type="button" class="btn btn-ink btn-sm" id="invClear">Clear</button>
+          </div>
+        </form>
+
+        <div class="form-card" id="invoicePreviewWrap" aria-label="Invoice preview">
+          <div class="invoice-paper" id="invoicePreview"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2 · QR CODE -->
+    <div class="tab-panel" id="tabBarcode" role="tabpanel" aria-labelledby="tabBtnBarcode" hidden>
+      <div class="invoice-wrap">
+        <form class="form-card" id="barcodeForm">
+          <p class="form-note">Generates a QR code any phone camera scans instantly — product SKU, a warranty link, or any custom text (max 80 characters).</p>
+          <div class="field"><label for="bcProduct">From Catalog (uses SKU)</label><select id="bcProduct"><option value="">— custom code below —</option></select></div>
+          <div class="field"><label for="bcCustom">Or Custom Text</label><input id="bcCustom" placeholder="e.g. ZC-L001 · wa.me/923084608380" maxlength="80" spellcheck="false"></div>
+          <label class="checkline"><input type="checkbox" id="bcShowName" checked> Show product name</label>
+          <label class="checkline"><input type="checkbox" id="bcShowPrice" checked> Show price (Rs.)</label>
+          <div style="display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.8rem">
+            <button type="button" class="btn btn-gold" id="bcRender">Preview QR Code</button>
+            <button type="button" class="btn btn-ink" id="bcDownload">Download PNG</button>
+            <button type="button" class="btn btn-ghost" id="bcPrint">Print Label</button>
+          </div>
+        </form>
+        <div class="form-card barcode-lab-preview" style="display:flex;justify-content:center" aria-label="QR code label preview">
+          <div style="text-align:center;background:#fdfcf8;color:#111;border-radius:10px;padding:1.2rem 1.6rem;box-shadow:var(--shadow);width:100%;max-width:360px">
+            <div style="font-family:var(--font-display);font-weight:800;letter-spacing:.08em">ZAMAN COMPUTER</div>
+            <div id="bcLabelName" style="font-size:.78rem;margin:.15rem 0 .4rem;min-height:1.2em">—</div>
+            <div class="barcode-row"><canvas id="barcodeCanvas" aria-label="QR code preview"></canvas></div>
+            <div id="bcLabelPrice" style="font-weight:700;margin-top:.35rem;font-size:.95rem">—</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="footer" id="about">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">
+          <svg viewBox="0 0 64 64" width="44" height="44" role="img" aria-label="Zaman Computer"><rect x="2" y="2" width="60" height="60" rx="14" fill="#111" stroke="#d4af37" stroke-width="2.4"/><text x="32" y="43" text-anchor="middle" font-family="Georgia,serif" font-weight="700" font-size="30" fill="#d4af37">Z</text></svg>
+          <div class="logo-text"><span class="brand">Zaman <em>Computer</em></span><span class="tag">Computers · Laptops · Parts</span></div>
+        </div>
+        <p>Your trusted destination for genuine computers, laptops, gaming PCs, accessories and expert repairs — Raiwind, Lahore.</p>
+        <div class="socials" aria-label="Social media">
+          <a href="https://wa.me/923084608380" target="_blank" rel="noopener" aria-label="WhatsApp"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 11.91a16 16 0 0 0 6 6l3.27-1.27a2 2 0 0 1 2.11.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></a>
+          <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7h2.4l.4-3h-2.8V9.1c0-.9.3-1.5 1.6-1.5H16V5c-.4-.05-1.6-.15-3-.15-3 0-5 1.8-5 5.2V11H5.5v3H8v7h5.5z"/></svg></a>
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg></a>
+          <a href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.8-.5-5.6a2.9 2.9 0 0 0-2.2-2.1C18.6 3.8 12 3.8 12 3.8s-6.6 0-8.3.5A2.9 2.9 0 0 0 1.5 6.4C1 8.2 1 12 1 12s0 3.8.5 5.6a2.9 2.9 0 0 0 2.2 2.1c1.7.5 8.3.5 8.3.5s6.6 0 8.3-.5a2.9 2.9 0 0 0 2.2-2.1C23 15.8 23 12 23 12zM10.2 15.3V8.7l5.9 3.3-5.9 3.3z"/></svg></a>
+        </div>
+      </div>
+      <nav aria-label="Quick links">
+        <h3 data-fthead style="color:var(--gold-2);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:.8rem">Quick Links</h3>
+        <ul><li><a href="#home">Home</a></li><li><a href="#shop">Shop / Products</a></li><li><a href="#services">Services &amp; Prices</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#invoice">Invoice &amp; Barcode</a></li><li><a href="#book">Book Appointment</a></li></ul>
+      </nav>
+      <nav aria-label="Category links">
+        <h3 data-fthead style="color:var(--gold-2);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:.8rem">Categories</h3>
+        <ul id="footerCats"></ul>
+      </nav>
+      <div>
+        <h3 data-fthead style="color:var(--gold-2);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:.8rem">Shop Details</h3>
+        <ul>
+          <li>1, Mohal Street, Nazd Jamia Masjid Al Furqan, Gulberg Town, Raiwind, Lahore</li>
+          <li><a href="tel:+923084608380">+92 308 4608380</a></li>
+          <!-- EDIT: replace with shop email -->
+          <li><a href="mailto:zamancomputer8@gmail.com">zamancomputer8@gmail.com</a></li>
+          <li>Mon–Sat 9–9 · Sun 11–7</li>
+        </ul>
+        <p style="margin-top:.7rem;font-size:.72rem;color:#8d8d99">NTN: 3520269614193 · FBR Income Tax: Active · Reg. 13-JUL-2023 · RTO-I Lahore · Proprietor: Muhammad Umer Ul Zaman</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="footerYear"></span> Zaman Computer. All rights reserved.</span>
+      <span>Prices in PKR (Rs.) · New &amp; Used · Genuine products only</span>
+      <button class="btn btn-ghost btn-sm install-app" id="installAppBtn">⬇ Install App</button>
+    </div>
+  </div>
+</footer>
+
+<!-- Floating WhatsApp -->
+<div class="float-wa">
+  <span class="wa-tip">Chat with us — replies in minutes</span>
+  <a class="wa-btn" href="https://wa.me/923084608380?text=Hello%20Zaman%20Computer!" target="_blank" rel="noopener" aria-label="Chat with Zaman Computer on WhatsApp">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5c-1.5 0-3-.4-4.2-1.1L3 20l1.2-5.1A8.5 8.5 0 1 1 21 11.5z"/><path d="M9.5 9.5c.3 1.8 2 3.5 4 4l1-1c.3-.3.8-.4 1.2-.2l1.3.7"/></svg>
+  </a>
+</div>
+<button class="back-top" id="backTop" aria-label="Back to top"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg></button>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" aria-hidden="true">
+  <button class="lb-btn lb-close" id="lbClose" aria-label="Close gallery"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <button class="lb-btn lb-prev" id="lbPrev" aria-label="Previous image"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+  <img class="lb-img" id="lbImg" alt="">
+  <div class="lb-cap" id="lbCap"></div>
+  <div class="lb-count" id="lbCount"></div>
+  <button class="lb-btn lb-next" id="lbNext" aria-label="Next image"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
+</div>
+
+<!-- Price Manager (Owner) -->
+<div class="pe-overlay" id="priceEditor" hidden role="dialog" aria-modal="true" aria-labelledby="peTitle">
+  <div class="pe-card">
+    <div class="pe-head">
+      <h3 id="peTitle">Price Manager — Lahore Market</h3>
+      <button class="pe-close" id="closePriceEditor" aria-label="Close price manager">×</button>
+    </div>
+    <p class="form-note" style="padding:.7rem 1.3rem 0;margin:0">Enter today&rsquo;s market rates in PKR. Saved on this device and applied instantly across the shop, invoices and WhatsApp messages.</p>
+    <div class="pe-list" id="peList"></div>
+    <div class="pe-foot">
+      <button class="btn btn-ghost btn-sm" id="resetPricesBtn" type="button">Reset to defaults</button>
+      <button class="btn btn-gold" id="savePricesBtn" type="button">Save Today&rsquo;s Rates</button>
+    </div>
+  </div>
+</div>
+
+<!-- Print-only sheet (filled by JS before printing) -->
+<div id="printSheet" aria-hidden="true"></div>
+
+<script>
+/* ════════════════════════════════════════════════════════════
+   ZAMAN COMPUTER — Application Logic
+   Edit SHOP_CONFIG, PRODUCTS, SERVICES & GALLERY below.
+   Everything (catalog, QR codes, WhatsApp links) updates.
+   ════════════════════════════════════════════════════════════ */
+'use strict';
+
+/* ───────── 1. SHOP CONFIG — EDIT THESE ───────── */
+const SHOP = {
+  name: 'Zaman Computer',
+  proprietor: 'Muhammad Umer Ul Zaman',
+  ntn: '3520269614193',            // FBR Registration No
+  refNo: 'A669532-4',
+  registeredOn: '13-JUL-2023',
+  taxOffice: 'RTO-I Lahore',
+  fbrStatus: 'Income Tax: Active',
+  principals: '478300 — Retail sale via Shop',
+  address: '1, Mohal Street, Nazd Jamia Masjid Al Furqan, Gulberg Town, Raiwind, Lahore',
+  phoneDisplay: '+92 308 4608380',
+  phoneHref: 'tel:+923084608380',
+  whatsapp: '923084608380',        // wa.me number (no +, no dashes)
+  email: 'zamancomputer8@gmail.com',
+  /* ---- PAYMENT QR — printed on every invoice ------------------
+     EDIT THIS: replace qrText with the exact string from your
+     Raast / bank app (or keep the account details below — the
+     customer scans it and sees how to pay you).          */
+  payment: {
+    label: 'JazzCash · Easypaisa · Raast',
+    qrText: 'ZAMAN COMPUTER — MUHAMMAD UMER UL ZAMAN\nJazzCash: 03084608380\nEasypaisa: 03084608380\nRaast (bank, same account): 03084608380\nNTN: 3520269614193\nReference: your invoice number. Thank you!'
+  },
+  gstRate: 0.18,                   // GST - only applied when checkbox ticked
+  salesTaxRegistered: false        // owner is NOT registered for Sales Tax
+};
+
+const waLink = (msg) => 'https://wa.me/' + SHOP.whatsapp + '?text=' + encodeURIComponent(msg);
+/* Normalize any Pakistani mobile format (0301-1234567 / +92 301 1234567 / 00923…) → 92301… */
+function normalizePKPhone(raw){
+  let d = String(raw || '').replace(/\D/g, '');
+  if (!d) return null;
+  if (d.startsWith('0092')) d = d.slice(2);
+  if (d.startsWith('92')) { /* already international */ }
+  else if (d.startsWith('0')) d = '92' + d.slice(1);
+  else if (d.startsWith('3')) d = '92' + d;
+  return /^923\d{9}$/.test(d) ? d : null;
+}
+/* wa.me link to the CUSTOMER's number — sent from the owner's own WhatsApp */
+const waCustomerLink = (msg) => {
+  const n = normalizePKPhone($('#invPhone') ? $('#invPhone').value : '');
+  return n ? 'https://wa.me/' + n + '?text=' + encodeURIComponent(msg) : null;
+};
+/* Proper Case: "ahmed ali khan" → "Ahmed Ali Khan" (handles hyphens too) */
+const properCase = (s) => String(s || '').trim().replace(/\s+/g, ' ').toLowerCase()
+  .replace(/(^|\s|-)([a-z])/g, (m, sep, ch) => sep + ch.toUpperCase());
+const fmtRs  = (n)   => 'Rs. ' + Math.round(Number(n) || 0).toLocaleString('en-PK');
+const u      = (id, w = 800) => 'https://images.unsplash.com/' + id + '?auto=format&fit=crop&w=' + w + '&q=80';
+const $      = (sel, ctx) => (ctx || document).querySelector(sel);
+const $$     = (sel, ctx) => Array.from((ctx || document).querySelectorAll(sel));
+const esc    = (s) => String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+
+/* ───────── 2. PRODUCTS (EDIT / ADD YOUR STOCK) ───────── */
+const PRODUCTS = [
+  /* Desktops & Systems */
+  { sku:'ZC-D001', name:'Office Computer Package — i3 + 22″ LED', brand:'Zaman Build', specs:'Core i3-12100 · 8GB DDR4 · 512GB NVMe · 22″ LED · Win 11', price:95000, cat:'desktops', cond:'New', stock:true, img:u('photo-1587831990711-23ca6441447b') },
+  { sku:'ZC-D002', name:'HP ProDesk 400 G9 — Core i5', brand:'HP', specs:'i5-12500 · 16GB DDR4 · 512GB NVMe · Win 11 Pro', price:145000, oldPrice:160000, cat:'desktops', cond:'New', stock:true, isNew:true, img:u('photo-1499951360447-b19be8fe80f5') },
+  { sku:'ZC-D003', name:'Lenovo ThinkCentre M710q Tiny (Used)', brand:'Lenovo', specs:'i5-7500T · 8GB DDR4 · 256GB NVMe · Win 11', price:32000, cat:'desktops', cond:'Used', stock:true, img:u('photo-1518770660439-4636190af475') },
+  { sku:'ZC-D004', name:'Zaman Predator — RTX 4060 Gaming PC', brand:'Zaman Predator', specs:'i7-14700KF · RTX 4060 8GB · 16GB RGB · 1TB NVMe', price:385000, oldPrice:420000, cat:'desktops', cond:'New', stock:true, featured:true, img:u('photo-1587202372775-e229f172b9d7') },
+  { sku:'ZC-D005', name:'Alienware Aurora R16 — i9 + RTX 4080', brand:'Alienware', specs:'i9-14900KF · RTX 4080 16GB · 32GB RGB · 2TB', price:695000, cat:'desktops', cond:'New', stock:true, featured:true, img:u('photo-1593640408182-31c70c8268f5') },
+  { sku:'ZC-D006', name:'Custom Build — Ryzen 5 5600 + RX 6600', brand:'Zaman Custom', specs:'Ryzen 5 5600 · RX 6600 8GB · 16GB · 512GB NVMe', price:155000, cat:'desktops', cond:'New', stock:true, img:u('photo-1591799264318-7e6ef8ddb7ea') },
+  { sku:'ZC-D007', name:'iMac 24″ (M1, 2021)', brand:'Apple', specs:'M1 · 8GB unified · 256GB SSD · 24″ Retina 4.5K', price:289000, cat:'desktops', cond:'New', stock:true, isNew:true, img:u('photo-1527443224154-c4a3942d3acf') },
+  { sku:'ZC-D008', name:'Core i7 Creative Workstation', brand:'Zaman Workstation', specs:'i7-13700 · 16GB · RTX 3060 12GB · 1TB + 1TB HDD', price:235000, cat:'desktops', cond:'New', stock:true, img:u('photo-1626785774573-4b799315345d') },
+  { sku:'ZC-D009', name:'HP EliteDesk 800 G3 (Used) — Core i5', brand:'HP', specs:'i5-6500 · 8GB DDR4 · 512GB SSD · Win 10', price:28500, cat:'desktops', cond:'Used', stock:true, img:u('photo-1498049794561-7780e7231661') },
+  /* Laptops */
+  { sku:'ZC-L001', name:'HP ProBook 440 G10 — Core i5', brand:'HP', specs:'i5-1335U · 8GB DDR4 · 512GB NVMe · 14″ FHD', price:165000, cat:'laptops', cond:'New', stock:true, featured:true, img:u('photo-1618424181497-157f25b6ddd5') },
+  { sku:'ZC-L002', name:'Dell Latitude 5420 (Used) — Core i5', brand:'Dell', specs:'i5-1145G7 · 8GB · 256GB NVMe · 14″ FHD', price:78000, cat:'laptops', cond:'Used', stock:true, img:u('photo-1593642632823-8f785ba67e45', 700) },
+  { sku:'ZC-L003', name:'Lenovo ThinkPad E14 G4 — Core i5', brand:'Lenovo', specs:'i5-1235U · 16GB · 512GB NVMe · Backlit keyboard', price:178000, oldPrice:192000, cat:'laptops', cond:'New', stock:true, img:u('photo-1531297484001-80022131f5a1') },
+  { sku:'ZC-L004', name:'Acer Aspire 5 — Ryzen 5', brand:'Acer', specs:'Ryzen 5 7530U · 8GB · 512GB NVMe · 15.6″ FHD', price:135000, cat:'laptops', cond:'New', stock:true, isNew:true, img:u('photo-1525547719571-a2d4ac8945e2') },
+  { sku:'ZC-L005', name:'ASUS TUF Gaming F15 — RTX 4060', brand:'ASUS', specs:'i7-13620H · RTX 4060 8GB · 16GB · 1TB · 144Hz', price:285000, oldPrice:310000, cat:'laptops', cond:'New', stock:true, featured:true, img:u('photo-1542751371-adc38448a05e') },
+  { sku:'ZC-L006', name:'Apple MacBook Air 13″ M2', brand:'Apple', specs:'M2 · 8GB unified · 256GB SSD · 13.6″ Liquid Retina', price:265000, cat:'laptops', cond:'New', stock:true, featured:true, img:u('photo-1517336714731-489689fd1ca8') },
+  { sku:'ZC-L007', name:'Apple MacBook Pro 14″ M3', brand:'Apple', specs:'M3 · 16GB unified · 512GB SSD · ProMotion 120Hz', price:485000, cat:'laptops', cond:'New', stock:true, isNew:true, img:u('photo-1611186871348-b1ce696e52c9') },
+  { sku:'ZC-L008', name:'HP EliteBook 840 G5 (Used) — Core i7', brand:'HP', specs:'i7-8650U · 16GB · 512GB NVMe · 14″ FHD', price:85000, cat:'laptops', cond:'Used', stock:true, img:u('photo-1618424181497-157f25b6ddd5', 600) },
+  { sku:'ZC-L009', name:'Dell XPS 13 9310 (Used) — Core i5', brand:'Dell', specs:'i5-1135G7 · 16GB · 512GB NVMe · 13.4″ FHD+', price:210000, cat:'laptops', cond:'Used', stock:true, img:u('photo-1593642632823-8f785ba67e45') },
+  { sku:'ZC-L010', name:'Lenovo IdeaPad Slim 3 — Core i3', brand:'Lenovo', specs:'i3-1215U · 8GB · 256GB NVMe · 15.6″ FHD', price:98000, cat:'laptops', cond:'New', stock:true, img:u('photo-1531297484001-80022131f5a1', 700) },
+  /* Accessories */
+  { sku:'ZC-A001', name:'Logitech M330 Wireless Mouse', brand:'Logitech', specs:'SilentClick · 24-month battery · Unifying receiver', price:3800, cat:'accessories', cond:'New', stock:true, img:u('photo-1527814050087-3793815479db') },
+  { sku:'ZC-A002', name:'Pulsefire RGB Gaming Mouse', brand:'HyperX', specs:'16000 DPI · RGB · 6 buttons · Pixart sensor', price:7500, cat:'accessories', cond:'New', stock:true, img:u('photo-1615663245857-ac93bb7c39e7') },
+  { sku:'ZC-A003', name:'Logitech K380 Multi-Device Keyboard', brand:'Logitech', specs:'Bluetooth ×3 · 2×AAA · Compact · Win/Mac/Android', price:8500, cat:'accessories', cond:'New', stock:true, img:u('photo-1541140532154-b024d705b90a') },
+  { sku:'ZC-A004', name:'Apple Magic Keyboard (Used)', brand:'Apple', specs:'A1644 · Bluetooth · Rechargeable · Boxed', price:12000, cat:'accessories', cond:'Used', stock:true, img:u('photo-1587829741301-dc798b83add3') },
+  { sku:'ZC-A005', name:'Samsung 24″ S3 LED Monitor', brand:'Samsung', specs:'24″ · 1920×1080 · 75Hz · IPS · HDMI', price:32000, cat:'accessories', cond:'New', stock:true, img:u('photo-1614624532983-4ce03382d63d') },
+  { sku:'ZC-A006', name:'Alienware 24″ 240Hz Gaming Monitor', brand:'Alienware', specs:'24.5″ · 1920×1080 · 240Hz · 1ms · G-Sync', price:85000, oldPrice:95000, cat:'accessories', cond:'New', stock:true, featured:true, img:u('photo-1593640408182-31c70c8268f5', 700) },
+  { sku:'ZC-A007', name:'JBL Quantum 100 Gaming Headset', brand:'JBL', specs:'3.5mm · Signature sound · Detachable mic', price:6500, cat:'accessories', cond:'New', stock:true, img:u('photo-1505740420928-5e560c06d30e') },
+  { sku:'ZC-A008', name:'Sony WH-CH520 Wireless Headphones', brand:'Sony', specs:'Bluetooth · 50h battery · DSEE · Multipoint', price:24500, cat:'accessories', cond:'New', stock:true, img:u('photo-1583394838336-acd977736f90') },
+  { sku:'ZC-A009', name:'Acoustic 2.0 Desktop Speakers', brand:'Zaman Audio', specs:'2.0 channel · 6W RMS · USB powered · AUX in', price:8500, cat:'accessories', cond:'New', stock:true, img:u('photo-1545454675-3531b543be5d') },
+  { sku:'ZC-A010', name:'SanDisk 64GB Ultra USB 3.0', brand:'SanDisk', specs:'100 MB/s read · Genuine · Lifetime warranty', price:1500, cat:'accessories', cond:'New', stock:true, img:u('photo-1518770660439-4636190af475', 560) },
+  { sku:'ZC-A011', name:'Gaming Combo — Mouse + Headset + Mat', brand:'Zaman Bundle', specs:'RGB mouse · Bass headset · XL desk mat', price:15000, oldPrice:21000, cat:'accessories', cond:'New', stock:true, img:u('photo-1526738549149-8e07eca6c147') },
+  /* Hardware & Components */
+  { sku:'ZC-H001', name:'G.Skill Ripjaws V 16GB DDR4 3200MHz', brand:'G.Skill', specs:'1×16GB · CL16 · XMP 2.0 · Lifetime warranty', price:12500, cat:'hardware', cond:'New', stock:true, featured:true, img:u('photo-1518770660439-4636190af475', 700) },
+  { sku:'ZC-H002', name:'Samsung 980 1TB NVMe PCIe 3.0', brand:'Samsung', specs:'3500 MB/s · TLC V-NAND · 5-yr warranty', price:22500, oldPrice:26000, cat:'hardware', cond:'New', stock:true, featured:true, isNew:true, img:u('photo-1518770660439-4636190af475', 630) },
+  { sku:'ZC-H003', name:'GeForce RTX 4060 8GB GDDR6', brand:'NVIDIA', specs:'8GB GDDR6 · DLSS 3 · 128-bit · Dual fan', price:88000, oldPrice:98000, cat:'hardware', cond:'New', stock:true, featured:true, img:u('photo-1591488320449-011701bb6704') },
+  { sku:'ZC-H004', name:'MSI B760M Mortar WiFi', brand:'MSI', specs:'LGA1700 · DDR5 · M.2 ×3 · WiFi 6E · 2.5G LAN', price:45000, cat:'hardware', cond:'New', stock:true, img:u('photo-1591799264318-7e6ef8ddb7ea', 700) },
+  { sku:'ZC-H005', name:'AMD Ryzen 5 7600', brand:'AMD', specs:'6C/12T · 3.8–5.1GHz · 32MB L3 · AM5 · 65W', price:52000, cat:'hardware', cond:'New', stock:true, img:u('photo-1591799264318-7e6ef8ddb7ea', 640) },
+  { sku:'ZC-H006', name:'TP-Link 16-Port Gigabit Switch', brand:'TP-Link', specs:'16×1000Mbps · Fanless · Rackmount · Steel case', price:16000, cat:'hardware', cond:'New', stock:true, img:u('photo-1544197150-b99a580bb7a8') },
+  { sku:'ZC-H007', name:'GeForce RTX 4070 12GB GDDR6X', brand:'NVIDIA', specs:'12GB GDDR6X · DLSS 3 · 192-bit · Triple fan', price:125000, cat:'hardware', cond:'New', stock:false, featured:true, img:u('photo-1591488320449-011701bb6704', 630) },
+  /* CCTV & Security */
+  { sku:'ZC-S001', name:'Hikvision 2MP Dome Camera DS-2CE56D0T', brand:'Hikvision', specs:'2MP · IR 30m · 4-in-1 TVI/CVI/AHD/CVBS', price:4800, cat:'security', cond:'New', stock:true, img:u('photo-1557597774-9d273605dfa9') },
+  { sku:'ZC-S002', name:'Hikvision 2MP Bullet Camera DS-2CE16D0T', brand:'Hikvision', specs:'2MP · IR 30m · Metal body · Outdoor', price:5200, cat:'security', cond:'New', stock:true, img:u('photo-1557597774-9d273605dfa9', 640) },
+  { sku:'ZC-S003', name:'Dahua 2MP Eyeball Camera HAC-HDW', brand:'Dahua', specs:'2MP · IR 40m · IP67 · 3.6mm lens', price:4600, cat:'security', cond:'New', stock:true, img:u('photo-1557597774-9d273605dfa9', 560) },
+  { sku:'ZC-S004', name:'Hikvision 8CH Turbo HD DVR + 4×2MP Kit', brand:'Hikvision', specs:'8CH · 4×2MP cameras · 1TB HDD · Power + cable', price:88000, cat:'security', cond:'New', stock:true, featured:true, isNew:true, img:u('photo-1557597774-9d273605dfa9', 700) },
+  { sku:'ZC-S005', name:'Hikvision 16CH Turbo HD DVR', brand:'Hikvision', specs:'16CH · 8MP recording · H.265+ · Mobile view', price:34500, cat:'security', cond:'New', stock:true, img:u('photo-1557597774-9d273605dfa9', 760) },
+  { sku:'ZC-S006', name:'Seagate SkyHawk 1TB Surveillance HDD', brand:'Seagate', specs:'1TB · 64MB · 24/7 surveillance rated · 3-yr wrty', price:15500, cat:'security', cond:'New', stock:true, img:u('photo-1518770660439-4636190af475') },
+  { sku:'ZC-S007', name:'CCTV 12V/10A Metal Power Supply Box', brand:'Zaman Security', specs:'12V 10A · 10-channel output · Surge protected', price:4200, cat:'security', cond:'New', stock:true, img:u('photo-1557597774-9d273605dfa9', 600) },
+  { sku:'ZC-S008', name:'CCTV Power + Video Combo Cable (90m)', brand:'Zaman Security', specs:'75Ω coax + DC · 90m roll · Pre-made ends', price:2600, cat:'security', cond:'New', stock:true, img:u('photo-1557597774-9d273605dfa9', 680) },
+  { sku:'ZC-S009', name:'BNC + DC Connector Pack (10pc)', brand:'Zaman Security', specs:'10× BNC male + 10× DC plug · Crimp type', price:750, cat:'security', cond:'New', stock:true, img:u('photo-1557597774-9d273605dfa9', 620) },
+  { sku:'ZC-S010', name:'TP-Link TL-SF1008P 8-Port PoE+ Switch', brand:'TP-Link', specs:'8× PoE+ · 64W · For IP cameras · Fanless', price:8900, cat:'security', cond:'New', stock:true, img:u('photo-1544197150-b99a580bb7a8') },
+  /* Used desktops */
+  { sku:'ZC-D010', name:'Used Core i3 System — 2nd/3rd Gen Complete', brand:'Assorted', specs:'i3 · 8GB DDR3 · 512GB SSD · Monitor optional', price:22000, cat:'desktops', cond:'Used', stock:true, img:u('photo-1518770660439-4636190af475', 720) },
+  { sku:'ZC-D011', name:'Used Core i5 System — 4th Gen Complete', brand:'Assorted', specs:'i5-4570 · 8GB DDR3 · 512GB SSD · Win 10', price:30000, cat:'desktops', cond:'Used', stock:true, img:u('photo-1591799264318-7e6ef8ddb7ea', 720) },
+  { sku:'ZC-D012', name:'Used Dell OptiPlex 9020 — Core i7', brand:'Dell', specs:'i7-4770 · 8/16GB · 512GB SSD · SFF/MT · Boxed', price:40000, cat:'desktops', cond:'Used', stock:true, img:u('photo-1498049794561-7780e7231661', 640) },
+  { sku:'ZC-D013', name:'Used HP ProDesk 600 G1 USDT — Core i5', brand:'HP', specs:'i5-4570T · 8GB · 256GB SSD · Ultra slim · Tiny', price:18000, cat:'desktops', cond:'Used', stock:true, img:u('photo-1518770660439-4636190af475', 610) },
+  /* Used laptops */
+  { sku:'ZC-L011', name:'Used Core i3 Laptop — 2nd/4th Gen', brand:'Assorted', specs:'i3 · 4/8GB · 256/512GB SSD · Battery OK · Grade A/B', price:26000, cat:'laptops', cond:'Used', stock:true, img:u('photo-1531297484001-80022131f5a1', 660) },
+  { sku:'ZC-L012', name:'Used HP EliteBook — 6th Gen i5', brand:'HP', specs:'i5-6300U · 8GB · 256GB SSD · 14″ · Tested', price:42000, cat:'laptops', cond:'Used', stock:true, img:u('photo-1618424181497-157f25b6ddd5', 680) },
+  { sku:'ZC-L013', name:'Used Dell Latitude — 7th Gen i5', brand:'Dell', specs:'i5-7200U · 8GB · 512GB SSD · 14″ · Grade A', price:48000, cat:'laptops', cond:'Used', stock:true, img:u('photo-1593642632823-8f785ba67e45', 660) },
+  { sku:'ZC-L014', name:'Used Apple MacBook Air 2017 (i5)', brand:'Apple', specs:'i5-5250U · 8GB · 256GB SSD · 13.3″ · Cycle count low', price:105000, cat:'laptops', cond:'Used', stock:true, img:u('photo-1611186871348-b1ce696e52c9', 700) },
+  { sku:'ZC-L015', name:'Used Dell Inspiron — 8th Gen i7', brand:'Dell', specs:'i7-8550U · 16GB · 512GB SSD · 15.6″ FHD · Grade A', price:62000, cat:'laptops', cond:'Used', stock:true, img:u('photo-1525547719571-a2d4ac8945e2', 660) },
+  /* LCD & LED monitors — new and used */
+  { sku:'ZC-A012', name:'Used 19″ Samsung LCD Monitor', brand:'Samsung', specs:'19″ · 1280×1024 · VGA/DVI · Tested pixels', price:6500, cat:'accessories', cond:'Used', stock:true, img:u('photo-1614624532983-4ce03382d63d', 620) },
+  { sku:'ZC-A013', name:'Used 22″ Dell LCD Monitor', brand:'Dell', specs:'22″ · 1680×1050 · VGA/DVI · Grade A', price:9500, cat:'accessories', cond:'Used', stock:true, img:u('photo-1587831990711-23ca6441447b', 650) },
+  { sku:'ZC-A014', name:'New 22″ LED Monitor FHD', brand:'Zaman View', specs:'22″ · 1920×1080 · 75Hz · HDMI + VGA · 1-yr wrty', price:21500, cat:'accessories', cond:'New', stock:true, img:u('photo-1614624532983-4ce03382d63d', 700) },
+  { sku:'ZC-A015', name:'Used 24″ LED Monitor 75Hz', brand:'Assorted', specs:'24″ · 1920×1080 · HDMI · Grade A/B · Tested', price:14000, cat:'accessories', cond:'Used', stock:true, img:u('photo-1614624532983-4ce03382d63d', 580) },
+  { sku:'ZC-A016', name:'New 27″ LED Monitor FHD IPS', brand:'Samsung', specs:'27″ · 1920×1080 · IPS · HDMI/DP/VGA · 1-yr wrty', price:48000, cat:'accessories', cond:'New', stock:true, isNew:true, img:u('photo-1614624532983-4ce03382d63d', 640) },
+  /* Printers — new and used */
+  { sku:'ZC-A017', name:'HP LaserJet Pro MFP M135w — New', brand:'HP', specs:'Print/Scan/Copy · Wi-Fi · 22 ppm · Boxed', price:62000, cat:'accessories', cond:'New', stock:true, isNew:true, img:u('photo-1499951360447-b19be8fe80f5', 620) },
+  { sku:'ZC-A018', name:'Canon PIXMA G3411 InkTank — New', brand:'Canon', specs:'Print/Scan/Copy · Wi-Fi · Refillable tanks', price:33500, cat:'accessories', cond:'New', stock:true, isNew:true, img:u('photo-1587831990711-23ca6441447b', 700) },
+  { sku:'ZC-A019', name:'Used HP LaserJet P1102 Pro', brand:'HP', specs:'Mono laser · 19 ppm · USB · Tested · Toner low', price:16500, cat:'accessories', cond:'Used', stock:true, img:u('photo-1498049794561-7780e7231661', 660) },
+  { sku:'ZC-A020', name:'Used Epson L120 InkTank', brand:'Epson', specs:'Inkjet · 12 ppm mono · USB · Low print count', price:14500, cat:'accessories', cond:'Used', stock:true, img:u('photo-1499951360447-b19be8fe80f5', 700) }
+];
+const CAT_LABEL = { desktops:'Desktops & Systems', laptops:'Laptops', accessories:'Accessories', hardware:'Hardware & Components', security:'CCTV & Security' };
+
+/* ───── 2B. MARKET PRICES — Lahore rates, refreshed daily ─────
+   Default prices are baked into PRODUCTS above (PKR, Lahore market).
+   The Owner can override any price daily via the Price Manager;
+   overrides persist in this browser and stamp today's date.      */
+const PRICE_STORE = 'zaman_price_overrides';
+const DATE_STORE = 'zaman_prices_updated';
+function applyPriceOverrides(){
+  try {
+    const o = JSON.parse(localStorage.getItem(PRICE_STORE) || '{}');
+    PRODUCTS.forEach(p => { if (typeof o[p.sku] === 'number' && o[p.sku] > 0) p.price = o[p.sku]; });
+  } catch (e) { /* ignore corrupt cache */ }
+}
+applyPriceOverrides();
+const savedPriceDate = localStorage.getItem(DATE_STORE);
+if (savedPriceDate){
+  const priceDateEl = document.getElementById('pricesUpdated');
+  if (priceDateEl) priceDateEl.textContent = savedPriceDate;
+}
+
+/* ───────── 3. SERVICES & PRICES (EDIT PRICES HERE) ───────── */
+const ICONS = {
+  windows:'<rect x="3" y="4" width="18" height="16" rx="1.5"/><path d="M12 4v16M3 12h18"/>',
+  software:'<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="2.6"/>',
+  laptop:'<rect x="4" y="5" width="16" height="10.5" rx="1.5"/><path d="M2.5 19h19"/>',
+  desktop:'<rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M9 21h6M12 16v5"/>',
+  upgrade:'<path d="M12 20V9"/><path d="M7 14l5-5 5 5"/><path d="M5 4h14"/>',
+  ram:'<rect x="2" y="9" width="20" height="7" rx="1"/><path d="M6 16v3M10 16v3M14 16v3M18 16v3M6 9V6.5M10 9V6.5M14 9V6.5M18 9V6.5"/>',
+  ssd:'<rect x="3" y="8" width="18" height="8" rx="1.5"/><path d="M7 12h.01M11 12h.01M15.5 12H18"/>',
+  recovery:'<ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v12c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/><path d="M5 12c0 1.7 3.1 3 7 3s7-1.3 7-3"/>',
+  virus:'<path d="M12 22s8-3.5 8-10V5l-8-3-8 3v7c0 6.5 8 10 8 10z"/><path d="M9.5 12.4l1.8 1.8 3.7-4.2"/>',
+  cleaning:'<path d="M12 3l1.7 4.6L18.5 9l-4.8 1.4L12 15l-1.7-4.6L5.5 9l4.8-1.4z"/><path d="M18.5 14l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/>',
+  network:'<circle cx="5" cy="12" r="2.2"/><circle cx="19" cy="6" r="2.2"/><circle cx="19" cy="18" r="2.2"/><path d="M7.1 11l9.8-4M7.1 13l9.8 4"/>',
+  printer:'<path d="M7 8V3h10v5"/><rect x="3" y="8" width="18" height="9" rx="2"/><path d="M7 13h10v6H7z"/>',
+  assembly:'<path d="M21 16V8l-9-5-9 5v8l9 5 9-5z"/><path d="M3.5 8.5L12 13l8.5-4.5M12 13v9"/>',
+  build:'<rect x="6" y="2" width="12" height="20" rx="2"/><path d="M10 6.5h4M12 12.5h.01M9.5 16.5h5"/>'
+};
+const SERVICES = [
+  { icon:'windows',  name:'Windows Installation',          desc:'Fresh Windows 10/11 install with drivers, updates & activation support.', price:'Rs. 1,500',  note:'Flat' },
+  { icon:'software', name:'Software Installation',         desc:'MS Office, browsers, antivirus, PDF tools & other daily software.',     price:'Rs. 500',    note:'Per software' },
+  { icon:'laptop',   name:'Laptop Repairing',              desc:'Chip-level repair — keyboard, display, charging & no-boot issues.',      price:'from Rs. 2,000', note:'Labor only' },
+  { icon:'desktop',  name:'Desktop Computer Repairing',    desc:'Power, display, motherboard, SMPS & no-boot troubleshooting.',           price:'from Rs. 1,500', note:'Labor only' },
+  { icon:'upgrade',  name:'Hardware Upgrading',            desc:'Performance upgrades — RAM, storage, graphics & CPU swap.',              price:'from Rs. 1,000', note:'Labor only' },
+  { icon:'ram',      name:'RAM Installation',              desc:'DDR3/DDR4/DDR5 install, match & stress-test — FREE with RAM purchase.', price:'Rs. 500',    note:'Flat' },
+  { icon:'ssd',      name:'SSD / HDD Installation',        desc:'NVMe/SATA install + Windows clone & migration to the new drive.',        price:'Rs. 1,000',  note:'Incl. cloning' },
+  { icon:'recovery', name:'Data Recovery',                 desc:'Deleted files, corrupted drives, dead laptops — HDD / SSD / USB.',       price:'from Rs. 5,000', note:'Diagnostic FREE' },
+  { icon:'virus',    name:'Virus Removal',                 desc:'Malware, ransomware & browser hijack removal + protection setup.',       price:'Rs. 1,500',  note:'Flat' },
+  { icon:'cleaning', name:'Laptop Cleaning & Maintenance', desc:'Full teardown, fan cleaning, thermal paste & dust removal.',             price:'Rs. 2,000',  note:'45 min job' },
+  { icon:'network',  name:'Computer Networking',           desc:'LAN, Wi-Fi, routers, switches, IP cameras & file sharing.',              price:'from Rs. 3,000', note:'Per site visit' },
+  { icon:'printer',  name:'Printer Installation',          desc:'USB / Wi-Fi printer setup, drivers & test page.',                        price:'Rs. 1,000',  note:'Flat' },
+  { icon:'assembly', name:'Computer Assembly',             desc:'New / used tower assembly with full testing & cable management.',        price:'Rs. 2,500',  note:'Flat' },
+  { icon:'build',    name:'Custom PC Building',            desc:'Gaming & workstation builds — sourcing, BIOS tuning, stress test.',      price:'Rs. 3,000',  note:'Flat' }
+];
+
+/* ───────── 4. GALLERY ───────── */
+const GALLERY = [
+  { id:'photo-1587202372775-e229f172b9d7', cap:'Custom Gaming Build — Blue', cls:'g-tall' },
+  { id:'photo-1531297484001-80022131f5a1', cap:'Premium Laptops', cls:'' },
+  { id:'photo-1593640408182-31c70c8268f5', cap:'Alienware Corner', cls:'' },
+  { id:'photo-1591799264318-7e6ef8ddb7ea', cap:'Ryzen Hardware', cls:'' },
+  { id:'photo-1518770660439-4636190af475', cap:'Motherboards & Chipsets', cls:'' },
+  { id:'photo-1517336714731-489689fd1ca8', cap:'MacBook Pro', cls:'' },
+  { id:'photo-1611186871348-b1ce696e52c9', cap:'Business Laptops', cls:'' },
+  { id:'photo-1626785774573-4b799315345d', cap:'iMac Workstations', cls:'' },
+  { id:'photo-1544197150-b99a580bb7a8', cap:'Networking Solutions', cls:'' },
+  { id:'photo-1542751371-adc38448a05e', cap:'Gaming Culture', cls:'' },
+  { id:'photo-1526738549149-8e07eca6c147', cap:'Accessories Wall', cls:'g-wide' },
+  { id:'photo-1587831990711-23ca6441447b', cap:'Store-Quality Setups', cls:'' },
+  { id:'photo-1519389950473-47ba0277781c', cap:'Office & Business', cls:'' },
+  { id:'photo-1550745165-9bc0b252726f', cap:'Gamer’s Pride', cls:'' }
+];
+
+/* ───────── 5. CATEGORY TILES ───────── */
+const CAT_TILES = [
+  { cat:'desktops',    label:'Desktops & PCs',    sub:'New & Used',        icon:'<rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M9 21h6M12 16v5"/>' },
+  { cat:'laptops',     label:'Laptops',           sub:'All Brands',        icon:'<rect x="4" y="5" width="16" height="10.5" rx="1.5"/><path d="M2.5 19h19"/>' },
+  { cat:'', q:'gaming',label:'Gaming Gear',       sub:'PCs · GPUs · Mice', icon:'<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><path d="M12 1v5M12 18v5M1 12h5M18 12h5"/>' },
+  { cat:'accessories', label:'Accessories',       sub:'Audio · Keys · Mice', icon:'<path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="2" y="14" width="5" height="6" rx="2"/><rect x="17" y="14" width="5" height="6" rx="2"/>' },
+  { cat:'hardware',    label:'Hardware & Parts',  sub:'RAM · SSD · GPU',   icon:'<rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/>' },
+  { cat:'security',    label:'CCTV & Security',   sub:'Cameras · DVR · Parts', icon:'<path d="M12 3l8 3v5c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><circle cx="12" cy="10.5" r="2.3"/><path d="M12 12.8v2.6"/>' },
+  { cat:'', target:'#services', label:'Repair Services', sub:'From Rs. 500', icon:'<path d="M14.7 6.3a4.5 4.5 0 0 0-6 6L3 18l3 3 5.7-5.7a4.5 4.5 0 0 0 6-6L13.5 10z"/>' }
+];
+
+/* ───────── 6. TESTIMONIALS ───────── */
+const TESTIMONIALS = [
+  { name:'Ahmed Raza', area:'Lahore', stars:5, text:'Built my RTX 4060 gaming rig here — superb cable management and finished in one day. Best prices in Lahore, hands down.' },
+  { name:'Fatima Noor', area:'Raiwind', stars:5, text:'My HP laptop stopped charging and they fixed the charging port in hours. Honest pricing and they actually showed me the faulty part.' },
+  { name:'Usman Tariq', area:'Lahore', stars:5, text:'Bought a used ThinkPad in Mint condition with 3-month shop warranty. Genuine specs, proper invoice, very trustworthy shop.' },
+  { name:'Ayesha Khan', area:'Lahore', stars:5, text:'Data recovery from a dead SSD seemed impossible — Zaman Computer recovered everything. Professional and confidential.' },
+  { name:'Bilal Hussain', area:'Raiwind', stars:4, text:'Great collection of parts at fair rates. RAM upgrade done in 10 minutes while I waited. Highly recommended.' },
+  { name:'Sana Malik', area:'Lahore', stars:5, text:'Ordered 15 combo units for our office — bulk discount, doorstep delivery and after-sales support is excellent.' }
+];
+
+/* ───────── 7. PRODUCT CARD ───────── */
+function productCard(p){
+  const save = p.oldPrice && p.oldPrice > p.price ? Math.round((1 - p.price / p.oldPrice) * 100) : 0;
+  const waMsg = 'Hello Zaman Computer! I want to inquire about:\n• ' + p.name + ' (' + p.sku + ')\n• Brand: ' + p.brand + '\n• Price: ' + fmtRs(p.price) + ' (' + p.cond + ')\nIs it available?';
+  return '<article class="product-card" data-sku="' + esc(p.sku) + '">' +
+    '<div class="product-media">' +
+      '<img src="' + p.img + '" alt="' + esc(p.name) + '" loading="lazy" onerror="this.onerror=null;this.src=\'' + u('photo-1518770660439-4636190af475', 640) + '\'">' +
+      (p.cond === 'New' ? '<span class="badge badge-new">New</span>' : '<span class="badge badge-used">Used</span>') +
+      (p.featured ? '<span class="badge badge-featured">★ Featured</span>' : '') +
+      '<span class="badge badge-stock' + (p.stock ? '' : ' out') + '"><span class="dot"></span>' + (p.stock ? 'In Stock' : 'Out of Stock') + '</span>' +
+    '</div>' +
+    '<div class="product-body">' +
+      '<div class="product-brand">' + esc(p.brand) + ' · ' + esc(p.sku) + '</div>' +
+      '<h3 class="product-name">' + esc(p.name) + '</h3>' +
+      '<p class="product-specs">' + esc(p.specs) + '</p>' +
+      '<div class="price-row"><span class="price">' + fmtRs(p.price) + '</span>' +
+        (p.oldPrice ? '<span class="old-price">' + fmtRs(p.oldPrice) + '</span>' : '') +
+        (save ? '<span class="save-chip">SAVE ' + save + '%</span>' : '') +
+      '</div>' +
+      '<button class="inquire" data-wa-sku="' + esc(p.sku) + '" ' + (p.stock ? '' : 'disabled') + '>' +
+        (p.stock
+          ? '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5c-1.5 0-3-.4-4.2-1.1L3 20l1.2-5.1A8.5 8.5 0 1 1 21 11.5z"/></svg> Inquire on WhatsApp'
+          : 'Out of Stock') +
+      '</button>' +
+    '</div>' +
+  '</article>';
+}
+
+/* ───────── 8. TOAST ───────── */
+const toastEl = $('#toast');
+let toastTimer;
+function showToast(msg){
+  toastEl.textContent = msg;
+  toastEl.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toastEl.classList.remove('show'), 3400);
+}
+
+/* ───────── 9. SHOP LOGIC ───────── */
+const state = { cat:'all', q:'', cond:'all', sort:'featured', stockOnly:false, visible:8 };
+const PAGE = 8;
+
+function filteredProducts(){
+  let list = PRODUCTS.filter(p =>
+    (state.cat === 'all' || p.cat === state.cat) &&
+    (state.cond === 'all' || p.cond === state.cond) &&
+    (!state.stockOnly || p.stock) &&
+    (!state.q || (p.name + ' ' + p.brand + ' ' + p.specs + ' ' + p.sku).toLowerCase().includes(state.q))
+  );
+  switch (state.sort){
+    case 'price-asc':  list = list.slice().sort((a,b) => a.price - b.price); break;
+    case 'price-desc': list = list.slice().sort((a,b) => b.price - a.price); break;
+    case 'name':       list = list.slice().sort((a,b) => a.name.localeCompare(b.name)); break;
+    default:           list = list.slice().sort((a,b) => (b.featured?1:0) - (a.featured?1:0) || (b.isNew?1:0) - (a.isNew?1:0));
+  }
+  return list;
+}
+
+function renderProducts(){
+  const list = filteredProducts();
+  const grid = $('#productGrid');
+  const show = list.slice(0, state.visible);
+  grid.innerHTML = show.map(productCard).join('');
+  $('#resultCount').textContent = 'Showing ' + show.length + ' of ' + list.length + ' product' + (list.length === 1 ? '' : 's');
+  $('#emptyState').hidden = list.length !== 0;
+  $('#loadMoreBtn').style.visibility = list.length > state.visible ? 'visible' : 'hidden';
+}
+
+const CATEGORY_CHIPS = [['all','All'], ['desktops','Desktops & PCs'], ['laptops','Laptops'], ['accessories','Accessories'], ['hardware','Hardware & Parts'], ['security','CCTV & Security']];
+function renderChips(){
+  $('#categoryChips').innerHTML = CATEGORY_CHIPS.map(([v,l]) =>
+    '<button class="chip' + (state.cat === v ? ' active' : '') + '" role="tab" aria-selected="' + (state.cat === v) + '" data-chip="' + v + '">' + l + '</button>'
+  ).join('');
+}
+
+function setCategory(cat, scroll){
+  state.cat = cat; state.visible = PAGE;
+  renderChips(); renderProducts();
+  if (scroll) $('#shop').scrollIntoView({ behavior:'smooth' });
+}
+
+$('#shopSearch').addEventListener('input', e => { state.q = e.target.value.trim().toLowerCase(); state.visible = PAGE; renderProducts(); });
+$('#condFilter').addEventListener('change', e => { state.cond = e.target.value; state.visible = PAGE; renderProducts(); });
+$('#sortFilter').addEventListener('change', e => { state.sort = e.target.value; renderProducts(); });
+$('#stockOnly').addEventListener('change', e => { state.stockOnly = e.target.checked; state.visible = PAGE; renderProducts(); });
+$('#categoryChips').addEventListener('click', e => { const b = e.target.closest('[data-chip]'); if (b) setCategory(b.dataset.chip, false); });
+$('#loadMoreBtn').addEventListener('click', () => { state.visible += PAGE; renderProducts(); });
+document.addEventListener('click', e => {
+  const btn = e.target.closest('[data-wa-sku]');
+  if (!btn) return;
+  const p = PRODUCTS.find(x => x.sku === btn.dataset.waSku);
+  if (!p) return;
+  window.open(waLink('Hello Zaman Computer! I want to inquire about:\n• ' + p.name + ' (' + p.sku + ')\n• Brand: ' + p.brand + '\n• Price: ' + fmtRs(p.price) + ' (' + p.cond + ')\nIs it available?'), '_blank', 'noopener');
+});
+
+renderChips();
+renderProducts();
+
+/* Featured & latest */
+$('#featuredGrid').innerHTML = PRODUCTS.filter(p => p.featured).slice(0, 4).map(productCard).join('');
+$('#latestGrid').innerHTML   = PRODUCTS.filter(p => p.isNew).slice(0, 4).map(productCard).join('');
+
+/* ───────── 10. CATEGORY TILES ───────── */
+$('#catGrid').innerHTML = CAT_TILES.map(t =>
+  '<button class="cat-tile" data-cat="' + (t.cat || '') + '" data-q="' + (t.q || '') + '" data-target="' + (t.target || '') + '">' +
+    '<span class="cat-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">' + t.icon + '</svg></span>' +
+    '<b>' + t.label + '</b><small>' + t.sub + '</small>' +
+  '</button>'
+).join('');
+$('#catGrid').addEventListener('click', e => {
+  const tile = e.target.closest('.cat-tile'); if (!tile) return;
+  if (tile.dataset.target) { $(tile.dataset.target).scrollIntoView({ behavior:'smooth' }); return; }
+  if (tile.dataset.q) {
+    state.q = tile.dataset.q;
+    $('#shopSearch').value = tile.dataset.q;
+    setCategory('all', true);
+    return;
+  }
+  $('#shopSearch').value = ''; state.q = '';
+  setCategory(tile.dataset.cat || 'all', true);
+});
+
+/* Footer category links */
+$('#footerCats').innerHTML = ['desktops','laptops','accessories','hardware','security'].map(c =>
+  '<li><a href="#shop" data-footcat="' + c + '">' + CAT_LABEL[c] + '</a></li>').join('') +
+  '<li><a href="#services">Repair Services</a></li>';
+$('#footerCats').addEventListener('click', e => {
+  const a = e.target.closest('[data-footcat]'); if (!a) return;
+  e.preventDefault(); setCategory(a.dataset.footcat, true);
+});
+
+/* ───────── 11. SERVICES ───────── */
+function renderServices(){
+  $('#servicesGrid').innerHTML = SERVICES.map(s =>
+    '<article class="service-card">' +
+      '<div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">' + ICONS[s.icon] + '</svg></div>' +
+      '<h3>' + esc(s.name) + '</h3>' +
+      '<p>' + esc(s.desc) + '</p>' +
+      '<div class="service-price"><b>' + esc(s.price) + '</b><span>' + esc(s.note) + '</span></div>' +
+      '<button class="btn btn-ghost" data-book-service="' + esc(s.name) + '">Book on WhatsApp</button>' +
+    '</article>'
+  ).join('');
+}
+renderServices();
+
+/* Booking form service dropdown */
+$('#bfService').innerHTML = '<option value="">Select a service…</option>' +
+  SERVICES.map(s => '<option>' + esc(s.name) + '</option>').join('') +
+  '<option>Other / Not Listed</option>';
+$('#bfDate').min = new Date().toISOString().slice(0, 10);
+
+$('#servicesGrid').addEventListener('click', e => {
+  const btn = e.target.closest('[data-book-service]'); if (!btn) return;
+  $('#bfService').value = btn.dataset.bookService;
+  $('#book').scrollIntoView({ behavior:'smooth' });
+  showToast('Service selected — complete the form to book.');
+});
+
+/* ───────── 12. BOOKING FORM ───────── */
+$('#bookForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const f = e.target;
+  if (!f.checkValidity()) { f.reportValidity(); return; }
+  const msg = 'Hello Zaman Computer! I would like to book an appointment.\n\n' +
+    '• Name: ' + properCase($('#bfName').value) + '\n' +
+    '• Phone: ' + $('#bfPhone').value.trim() + '\n' +
+    '• Service: ' + $('#bfService').value + '\n' +
+    '• Device: ' + ($('#bfDevice').value.trim() || 'Not specified') + '\n' +
+    '• Date: ' + $('#bfDate').value + '\n' +
+    '• Time: ' + $('#bfTime').value + '\n' +
+    ($('#bfMsg').value.trim() ? '• Message: ' + $('#bfMsg').value.trim() : '');
+  window.open(waLink(msg), '_blank', 'noopener');
+  showToast('Opening WhatsApp with your booking details…');
+});
+
+/* ───────── 13. CONTACT FORM ───────── */
+$('#contactForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const f = e.target;
+  if (!f.checkValidity()) { f.reportValidity(); return; }
+  const msg = 'Hello Zaman Computer!\n\n• Name: ' + properCase($('#cfName').value) +
+    ($('#cfPhone').value.trim() ? '\n• Phone: ' + $('#cfPhone').value.trim() : '') +
+    '\n• Subject: ' + $('#cfSubject').value + '\n• Message: ' + $('#cfMsg').value.trim();
+  window.open(waLink(msg), '_blank', 'noopener');
+  showToast('Opening WhatsApp…');
+});
+/* ───────── 14. GALLERY ───────── */
+const galleryGrid = $('#galleryGrid');
+galleryGrid.innerHTML = GALLERY.map((g, i) =>
+  '<figure class="g-item ' + g.cls + '" data-lb="' + i + '" tabindex="0" role="button" aria-label="View: ' + esc(g.cap) + '">' +
+    '<img src="' + u(g.id, 900) + '" alt="' + esc(g.cap) + '" loading="lazy" onerror="this.onerror=null;this.src=\'' + u('photo-1531297484001-80022131f5a1', 700) + '\'">' +
+    '<figcaption>' + esc(g.cap) + '</figcaption>' +
+  '</figure>'
+).join('');
+
+const lightbox = $('#lightbox'), lbImg = $('#lbImg'), lbCap = $('#lbCap'), lbCount = $('#lbCount');
+let lbIndex = 0, lastFocus = null;
+
+function openLightbox(i){
+  lbIndex = (i + GALLERY.length) % GALLERY.length;
+  lbImg.src = u(GALLERY[lbIndex].id, 1600);
+  lbImg.alt = GALLERY[lbIndex].cap;
+  lbCap.textContent = GALLERY[lbIndex].cap;
+  lbCount.textContent = (lbIndex + 1) + ' / ' + GALLERY.length;
+  lastFocus = document.activeElement;
+  lightbox.classList.add('open');
+  lightbox.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  $('#lbClose').focus();
+}
+function closeLightbox(){
+  lightbox.classList.remove('open');
+  lightbox.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+  if (lastFocus) lastFocus.focus();
+}
+function stepLightbox(dir){ openLightbox(lbIndex + dir); }
+galleryGrid.addEventListener('click', e => { const f = e.target.closest('[data-lb]'); if (f) openLightbox(+f.dataset.lb); });
+galleryGrid.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { const f = e.target.closest('[data-lb]'); if (f) { e.preventDefault(); openLightbox(+f.dataset.lb); } } });
+$('#lbClose').addEventListener('click', closeLightbox);
+$('#lbPrev').addEventListener('click', () => stepLightbox(-1));
+$('#lbNext').addEventListener('click', () => stepLightbox(1));
+lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+document.addEventListener('keydown', e => {
+  if (!lightbox.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLightbox();
+  else if (e.key === 'ArrowLeft') stepLightbox(-1);
+  else if (e.key === 'ArrowRight') stepLightbox(1);
+});
+
+/* ───────── 15. TESTIMONIALS SLIDER ───────── */
+const track = $('#testimonialTrack');
+track.innerHTML = TESTIMONIALS.map(t =>
+  '<figure class="t-card"><div class="t-stars">' + '★'.repeat(t.stars) + '☆'.repeat(5 - t.stars) + '</div>' +
+    '<blockquote class="t-text">“' + esc(t.text) + '”</blockquote>' +
+    '<figcaption class="t-foot"><span class="t-avatar">' + esc(t.name.split(' ').map(w => w[0]).slice(0,2).join('').toUpperCase()) + '</span>' +
+      '<span><b>' + esc(t.name) + '</b><small>' + esc(t.area) + ' · Verified Customer</small></span></figcaption>' +
+  '</figure>'
+).join('');
+const dotsWrap = $('#tDots');
+let tIndex = 0, tTimer = null;
+const visibleCount = () => (window.innerWidth >= 1240 ? 3 : window.innerWidth >= 900 ? 2 : 1);
+const tMax = () => Math.max(0, TESTIMONIALS.length - visibleCount());
+function tRender(){
+  const card = track.children[0];
+  if (!card) return;
+  const gap = parseFloat(getComputedStyle(track).gap) || 19;
+  const step = card.getBoundingClientRect().width + gap;
+  tIndex = Math.min(tIndex, tMax());
+  track.style.transform = 'translateX(' + (-tIndex * step) + 'px)';
+  dotsWrap.innerHTML = Array.from({ length: tMax() + 1 }, (_, i) =>
+    '<button class="t-dot' + (i === tIndex ? ' active' : '') + '" data-dot="' + i + '" aria-label="Go to review ' + (i + 1) + '"></button>'
+  ).join('');
+}
+dotsWrap.addEventListener('click', e => { const d = e.target.closest('[data-dot]'); if (!d) return; tIndex = +d.dataset.dot; tRender(); tResetTimer(); });
+function tResetTimer(){ clearInterval(tTimer); tTimer = setInterval(() => { tIndex = (tIndex + 1) % (tMax() + 1); tRender(); }, 6500); }
+window.addEventListener('resize', tRender);
+$('#testimonialViewport').addEventListener('mouseenter', () => clearInterval(tTimer));
+$('#testimonialViewport').addEventListener('mouseleave', tResetTimer);
+tRender(); tResetTimer();
+
+/* ───────── 16. NAVBAR / SCROLL / HAMBURGER / BACKTOP ───────── */
+const navbar = $('#navbar'), backTop = $('#backTop');
+function onScroll(){
+  navbar.classList.toggle('scrolled', window.scrollY > 10);
+  backTop.classList.toggle('show', window.scrollY > 420);
+}
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
+backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+const hamburger = $('#hamburger'), mobilePanel = $('#mobilePanel');
+hamburger.addEventListener('click', () => {
+  const open = mobilePanel.classList.toggle('open');
+  hamburger.setAttribute('aria-expanded', String(open));
+});
+mobilePanel.addEventListener('click', e => { if (e.target.tagName === 'A') mobilePanel.classList.remove('open'); });
+
+/* Active nav link on scroll */
+const navMap = {};
+$$('.nav-links a').forEach(a => { navMap[a.getAttribute('href').slice(1)] = a; });
+const sections = ['home', 'shop', 'services', 'gallery', 'invoice', 'contact'].map(id => document.getElementById(id)).filter(Boolean);
+const navObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && navMap[entry.target.id]) {
+      Object.values(navMap).forEach(a => a.classList.remove('active'));
+      navMap[entry.target.id].classList.add('active');
+    }
+  });
+}, { rootMargin: '-35% 0px -60% 0px', threshold: 0 });
+sections.forEach(s => navObserver.observe(s));
+
+/* Duplicate ticker content for a seamless marquee */
+const tickerTrack = $('#tickerTrack');
+tickerTrack.innerHTML += tickerTrack.innerHTML;
+
+/* Footer year */
+$('#footerYear').textContent = new Date().getFullYear();
+/* ───────── 16B. PRICE MANAGER (Owner) ───────── */
+function openPriceEditor(){
+  const stored = localStorage.getItem(DATE_STORE);
+  if (stored) $('#pricesUpdated').textContent = stored;
+  $('#peList').innerHTML = PRODUCTS.map(p =>
+    '<label class="pe-row"><span class="pe-info"><b>' + esc(p.name) + '</b><small>' + esc(p.sku) + ' · ' + esc(p.cond) + ' · ' + esc(CAT_LABEL[p.cat]) + '</small></span>' +
+    '<span class="pe-input"><em>Rs.</em><input type="number" min="0" step="100" value="' + p.price + '" data-sku="' + esc(p.sku) + '" inputmode="numeric" aria-label="Price for ' + esc(p.name) + '"></span></label>'
+  ).join('');
+  $('#priceEditor').hidden = false;
+  document.body.style.overflow = 'hidden';
+}
+function closePriceEditor(){ $('#priceEditor').hidden = true; document.body.style.overflow = ''; }
+$('#openPriceEditor').addEventListener('click', openPriceEditor);
+$('#closePriceEditor').addEventListener('click', closePriceEditor);
+$('#priceEditor').addEventListener('click', e => { if (e.target === e.currentTarget) closePriceEditor(); });
+$('#savePricesBtn').addEventListener('click', () => {
+  const o = {};
+  $$('#peList input').forEach(inp => { const v = Math.round(Number(inp.value)); if (v > 0) o[inp.dataset.sku] = v; });
+  localStorage.setItem(PRICE_STORE, JSON.stringify(o));
+  const stamp = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+  localStorage.setItem(DATE_STORE, stamp);
+  PRODUCTS.forEach(p => { if (o[p.sku]) p.price = o[p.sku]; });
+  $('#pricesUpdated').textContent = stamp;
+  closePriceEditor();
+  renderProducts(); renderInvoice();
+  showToast('Market rates saved — ' + stamp);
+});
+$('#resetPricesBtn').addEventListener('click', () => {
+  localStorage.removeItem(PRICE_STORE);
+  localStorage.removeItem(DATE_STORE);
+  location.reload();
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && !$('#priceEditor').hidden) closePriceEditor(); });
+
+/* ───────── 17. QR CODE ENGINE — ISO/IEC 18004 · byte mode · EC level M ─────────
+   Straight transliteration of the reference encoder (qrcode, MIT):
+   Reed–Solomon ECC over GF(256), best-mask selection via penalty rules,
+   BCH format information. 100% offline, zero libraries.              */
+const QR = (() => {
+const RS_BLOCKS = [
+  /* v1 (L,M,Q,H) */ [[[1,26,19]],[[1,26,16]],[[1,26,13]],[[1,26,9]]],
+  /* v2 (L,M,Q,H) */ [[[1,44,34]],[[1,44,28]],[[1,44,22]],[[1,44,16]]],
+  /* v3 (L,M,Q,H) */ [[[1,70,55]],[[1,70,44]],[[2,35,17]],[[2,35,13]]],
+  /* v4 (L,M,Q,H) */ [[[1,100,80]],[[2,50,32]],[[2,50,24]],[[4,25,9]]],
+  /* v5 (L,M,Q,H) */ [[[1,134,108]],[[2,67,43]],[[2,33,15],[2,34,16]],[[2,33,11],[2,34,12]]],
+  /* v6 (L,M,Q,H) */ [[[2,86,68]],[[4,43,27]],[[4,43,19]],[[4,43,15]]],
+  /* v7 (L,M,Q,H) */ [[[2,98,78]],[[4,49,31]],[[2,32,14],[4,33,15]],[[4,39,13],[1,40,14]]],
+  /* v8 (L,M,Q,H) */ [[[2,121,97]],[[2,60,38],[2,61,39]],[[4,40,18],[2,41,19]],[[4,40,14],[2,41,15]]],
+  /* v9 (L,M,Q,H) */ [[[2,146,116]],[[3,58,36],[2,59,37]],[[4,36,16],[4,37,17]],[[4,36,12],[4,37,13]]],
+  /* v10 (L,M,Q,H) */ [[[2,86,68],[2,87,69]],[[4,69,43],[1,70,44]],[[6,43,19],[2,44,20]],[[6,43,15],[2,44,16]]],
+  /* v11 (L,M,Q,H) */ [[[4,101,81]],[[1,80,50],[4,81,51]],[[4,50,22],[4,51,23]],[[3,36,12],[8,37,13]]],
+  /* v12 (L,M,Q,H) */ [[[2,116,92],[2,117,93]],[[6,58,36],[2,59,37]],[[4,46,20],[6,47,21]],[[7,42,14],[4,43,15]]],
+  /* v13 (L,M,Q,H) */ [[[4,133,107]],[[8,59,37],[1,60,38]],[[8,44,20],[4,45,21]],[[12,33,11],[4,34,12]]],
+  /* v14 (L,M,Q,H) */ [[[3,145,115],[1,146,116]],[[4,64,40],[5,65,41]],[[11,36,16],[5,37,17]],[[11,36,12],[5,37,13]]],
+  /* v15 (L,M,Q,H) */ [[[5,109,87],[1,110,88]],[[5,65,41],[5,66,42]],[[5,54,24],[7,55,25]],[[11,36,12],[7,37,13]]],
+  /* v16 (L,M,Q,H) */ [[[5,122,98],[1,123,99]],[[7,73,45],[3,74,46]],[[15,43,19],[2,44,20]],[[3,45,15],[13,46,16]]],
+  /* v17 (L,M,Q,H) */ [[[1,135,107],[5,136,108]],[[10,74,46],[1,75,47]],[[1,50,22],[15,51,23]],[[2,42,14],[17,43,15]]],
+  /* v18 (L,M,Q,H) */ [[[5,150,120],[1,151,121]],[[9,69,43],[4,70,44]],[[17,50,22],[1,51,23]],[[2,42,14],[19,43,15]]],
+  /* v19 (L,M,Q,H) */ [[[3,141,113],[4,142,114]],[[3,70,44],[11,71,45]],[[17,47,21],[4,48,22]],[[9,39,13],[16,40,14]]],
+  /* v20 (L,M,Q,H) */ [[[3,135,107],[5,136,108]],[[3,67,41],[13,68,42]],[[15,54,24],[5,55,25]],[[15,43,15],[10,44,16]]],
+  /* v21 (L,M,Q,H) */ [[[4,144,116],[4,145,117]],[[17,68,42]],[[17,50,22],[6,51,23]],[[19,46,16],[6,47,17]]],
+  /* v22 (L,M,Q,H) */ [[[2,139,111],[7,140,112]],[[17,74,46]],[[7,54,24],[16,55,25]],[[34,37,13]]],
+  /* v23 (L,M,Q,H) */ [[[4,151,121],[5,152,122]],[[4,75,47],[14,76,48]],[[11,54,24],[14,55,25]],[[16,45,15],[14,46,16]]],
+  /* v24 (L,M,Q,H) */ [[[6,147,117],[4,148,118]],[[6,73,45],[14,74,46]],[[11,54,24],[16,55,25]],[[30,46,16],[2,47,17]]],
+  /* v25 (L,M,Q,H) */ [[[8,132,106],[4,133,107]],[[8,75,47],[13,76,48]],[[7,54,24],[22,55,25]],[[22,45,15],[13,46,16]]],
+  /* v26 (L,M,Q,H) */ [[[10,142,114],[2,143,115]],[[19,74,46],[4,75,47]],[[28,50,22],[6,51,23]],[[33,46,16],[4,47,17]]],
+  /* v27 (L,M,Q,H) */ [[[8,152,122],[4,153,123]],[[22,73,45],[3,74,46]],[[8,53,23],[26,54,24]],[[12,45,15],[28,46,16]]],
+  /* v28 (L,M,Q,H) */ [[[3,147,117],[10,148,118]],[[3,73,45],[23,74,46]],[[4,54,24],[31,55,25]],[[11,45,15],[31,46,16]]],
+  /* v29 (L,M,Q,H) */ [[[7,146,116],[7,147,117]],[[21,73,45],[7,74,46]],[[1,53,23],[37,54,24]],[[19,45,15],[26,46,16]]],
+  /* v30 (L,M,Q,H) */ [[[5,145,115],[10,146,116]],[[19,75,47],[10,76,48]],[[15,54,24],[25,55,25]],[[23,45,15],[25,46,16]]],
+  /* v31 (L,M,Q,H) */ [[[13,145,115],[3,146,116]],[[2,74,46],[29,75,47]],[[42,54,24],[1,55,25]],[[23,45,15],[28,46,16]]],
+  /* v32 (L,M,Q,H) */ [[[17,145,115]],[[10,74,46],[23,75,47]],[[10,54,24],[35,55,25]],[[19,45,15],[35,46,16]]],
+  /* v33 (L,M,Q,H) */ [[[17,145,115],[1,146,116]],[[14,74,46],[21,75,47]],[[29,54,24],[19,55,25]],[[11,45,15],[46,46,16]]],
+  /* v34 (L,M,Q,H) */ [[[13,145,115],[6,146,116]],[[14,74,46],[23,75,47]],[[44,54,24],[7,55,25]],[[59,46,16],[1,47,17]]],
+  /* v35 (L,M,Q,H) */ [[[12,151,121],[7,152,122]],[[12,75,47],[26,76,48]],[[39,54,24],[14,55,25]],[[22,45,15],[41,46,16]]],
+  /* v36 (L,M,Q,H) */ [[[6,151,121],[14,152,122]],[[6,75,47],[34,76,48]],[[46,54,24],[10,55,25]],[[2,45,15],[64,46,16]]],
+  /* v37 (L,M,Q,H) */ [[[17,152,122],[4,153,123]],[[29,74,46],[14,75,47]],[[49,54,24],[10,55,25]],[[24,45,15],[46,46,16]]],
+  /* v38 (L,M,Q,H) */ [[[4,152,122],[18,153,123]],[[13,74,46],[32,75,47]],[[48,54,24],[14,55,25]],[[42,45,15],[32,46,16]]],
+  /* v39 (L,M,Q,H) */ [[[20,147,117],[4,148,118]],[[40,75,47],[7,76,48]],[[43,54,24],[22,55,25]],[[10,45,15],[67,46,16]]],
+  /* v40 (L,M,Q,H) */ [[[19,148,118],[6,149,119]],[[18,75,47],[31,76,48]],[[34,54,24],[34,55,25]],[[20,45,15],[61,46,16]]],
+];
+const PATTERN_POSITION = [[],[6,18],[6,22],[6,26],[6,30],[6,34],[6,22,38],[6,24,42],[6,26,46],[6,28,50],[6,30,54],[6,32,58],[6,34,62],[6,26,46,66],[6,26,48,70],[6,26,50,74],[6,30,54,78],[6,30,56,82],[6,30,58,86],[6,34,62,90],[6,28,50,72,94],[6,26,50,74,98],[6,30,54,78,102],[6,28,54,80,106],[6,32,58,84,110],[6,30,58,86,114],[6,34,62,90,118],[6,26,50,74,98,122],[6,30,54,78,102,126],[6,26,52,78,104,130],[6,30,56,82,108,134],[6,34,60,86,112,138],[6,30,58,86,114,142],[6,34,62,90,118,146],[6,30,54,78,102,126,150],[6,24,50,76,102,128,154],[6,28,54,80,106,132,158],[6,32,58,84,110,136,162],[6,26,54,82,110,138,166],[6,30,58,86,114,142,170]];
+
+const EC_L = 1, EC_M = 0, EC_Q = 3, EC_H = 2;   /* error-correction level ids */
+const EC_SLOT = { 1: 0, 0: 1, 3: 2, 2: 3 };      /* EC id -> RS_BLOCKS slot (L,M,Q,H) */
+function rsBlocks(version, ec){
+  const groups = RS_BLOCKS[version - 1][EC_SLOT[ec]];
+  const blocks = [];
+  for (const [count, total, data] of groups)
+    for (let i = 0; i < count; i++) blocks.push({ total, data });
+  return blocks;
+}
+const BIT_LIMIT = [0, 1, 2, 3].map(ec => {
+  const arr = [0];
+  for (let v = 1; v <= 40; v++) arr.push(8 * rsBlocks(v, ec).reduce((s, b) => s + b.data, 0));
+  return arr;
+});
+const sizeClass = v => (v < 10 ? 0 : v < 27 ? 1 : 2);
+const modeByteBits = v => [8, 16, 16][sizeClass(v)];
+const PAD0 = 0xEC, PAD1 = 0x11;
+
+/* ---- GF(256) tables ---- */
+const EXP = new Array(512).fill(0), LOG = new Array(256).fill(0);
+EXP[0] = 1;
+for (let i = 1; i < 8; i++) EXP[i] = EXP[i - 1] << 1;
+for (let i = 8; i < 256; i++) EXP[i] = EXP[i - 4] ^ EXP[i - 5] ^ EXP[i - 6] ^ EXP[i - 8];
+for (let i = 0; i < 255; i++) LOG[EXP[i]] = i;
+const gexp = n => EXP[n % 255], glog = n => LOG[n];
+
+class Poly {
+  constructor(num, shift){
+    let offset = 0;
+    while (offset < num.length && num[offset] === 0) offset++;
+    this.num = num.slice(offset).concat(new Array(shift).fill(0));
+  }
+  get length(){ return this.num.length; }
+  mul(other){
+    const num = new Array(this.length + other.length - 1).fill(0);
+    for (let i = 0; i < this.length; i++)
+      for (let j = 0; j < other.length; j++)
+        num[i + j] ^= gexp(glog(this.num[i]) + glog(other.num[j]));
+    return new Poly(num, 0);
+  }
+  mod(other){
+    const difference = this.length - other.length;
+    if (difference < 0) return this;
+    const ratio = glog(this.num[0]) - glog(other.num[0]);
+    const num = new Array(other.length);
+    for (let i = 0; i < other.length; i++) num[i] = this.num[i] ^ gexp(glog(other.num[i]) + ratio);
+    return new Poly(num.concat(this.num.slice(other.length)), 0).mod(other);
+  }
+}
+
+class BitBuffer {
+  constructor(){ this.buffer = []; this.length = 0; }
+  put(num, len){ for (let i = len - 1; i >= 0; i--) this.putBit(((num >>> i) & 1) === 1); }
+  putBit(bit){
+    const idx = Math.floor(this.length / 8);
+    if (this.buffer.length <= idx) this.buffer.push(0);
+    if (bit) this.buffer[idx] |= 0x80 >>> (this.length % 8);
+    this.length++;
+  }
+}
+
+function createBytes(buffer, rsBlks){
+  let offset = 0, maxDc = 0, maxEc = 0;
+  const dcdata = [], ecdata = [];
+  for (const blk of rsBlks){
+    const dcCount = blk.data, ecCount = blk.total - blk.data;
+    maxDc = Math.max(maxDc, dcCount); maxEc = Math.max(maxEc, ecCount);
+    const currentDc = buffer.slice(offset, offset + dcCount).map(b => b & 0xff); offset += dcCount;
+    let rsPoly = new Poly([1], 0);
+    for (let i = 0; i < ecCount; i++) rsPoly = rsPoly.mul(new Poly([1, gexp(i)], 0));
+    const raw = new Poly(currentDc, rsPoly.length - 1);
+    const mod = raw.mod(rsPoly);
+    const currentEc = new Array(ecCount).fill(0);
+    const modOffset = mod.num.length - ecCount;
+    for (let i = 0; i < ecCount; i++){ const idx = i + modOffset; currentEc[i] = idx >= 0 ? mod.num[idx] : 0; }
+    dcdata.push(currentDc); ecdata.push(currentEc);
+  }
+  const data = [];
+  for (let i = 0; i < maxDc; i++) for (const dc of dcdata) if (i < dc.length) data.push(dc[i]);
+  for (let i = 0; i < maxEc; i++) for (const ec of ecdata) if (i < ec.length) data.push(ec[i]);
+  return data;
+}
+
+function createData(version, ec, dataBytes){
+  const buffer = new BitBuffer();
+  buffer.put(4, 4);                                   /* mode: byte */
+  buffer.put(dataBytes.length, modeByteBits(version));
+  for (const b of dataBytes) buffer.put(b, 8);
+  const blks = rsBlocks(version, ec);
+  const bitLimit = blks.reduce((s, b) => s + b.data * 8, 0);
+  for (let i = 0; i < Math.min(bitLimit - buffer.length, 4); i++) buffer.putBit(false);
+  while (buffer.length % 8) buffer.putBit(false);
+  const bytesToFill = (bitLimit - buffer.length) / 8;
+  for (let i = 0; i < bytesToFill; i++) buffer.put(i % 2 === 0 ? PAD0 : PAD1, 8);
+  return createBytes(buffer.buffer, blks);
+}
+
+const bitLen = n => { let d = 0; while (n !== 0){ d++; n >>>= 1; } return d; };
+const G15 = (1 << 10) | (1 << 8) | (1 << 5) | (1 << 4) | (1 << 2) | (1 << 1) | (1 << 0);
+const G18 = (1 << 12) | (1 << 11) | (1 << 10) | (1 << 9) | (1 << 8) | (1 << 5) | (1 << 2) | (1 << 0);
+const G15_MASK = (1 << 14) | (1 << 12) | (1 << 10) | (1 << 4) | (1 << 1);
+function bchTypeInfo(data){
+  let d = data << 10;
+  while (bitLen(d) - bitLen(G15) >= 0) d ^= G15 << (bitLen(d) - bitLen(G15));
+  return ((data << 10) | d) ^ G15_MASK;
+}
+function bchTypeNumber(data){
+  let d = data << 12;
+  while (bitLen(d) - bitLen(G18) >= 0) d ^= G18 << (bitLen(d) - bitLen(G18));
+  return (data << 12) | d;
+}
+const MASK_FNS = [
+  (i, j) => (i + j) % 2 === 0, (i, j) => i % 2 === 0, (i, j) => j % 3 === 0, (i, j) => (i + j) % 3 === 0,
+  (i, j) => (Math.floor(i / 2) + Math.floor(j / 3)) % 2 === 0, (i, j) => (i * j) % 2 + (i * j) % 3 === 0,
+  (i, j) => ((i * j) % 2 + (i * j) % 3) % 2 === 0, (i, j) => ((i * j) % 3 + (i + j) % 2) % 2 === 0
+];
+function buildBlank(version){
+  const size = version * 4 + 17;
+  const m = Array.from({ length: size }, () => new Array(size).fill(null));
+  const probe = (row, col) => {
+    for (let r = -1; r < 8; r++) for (let c = -1; c < 8; c++){
+      const rr = row + r, cc = col + c;
+      if (rr < 0 || rr >= size || cc < 0 || cc >= size) continue;
+      m[rr][cc] = (r >= 0 && r <= 6 && (c === 0 || c === 6)) ||
+                  (c >= 0 && c <= 6 && (r === 0 || r === 6)) ||
+                  (r >= 2 && r <= 4 && c >= 2 && c <= 4);
+    }
+  };
+  probe(0, 0); probe(0, size - 7); probe(size - 7, 0);
+  const pos = PATTERN_POSITION[version - 1];
+  for (const r of pos) for (const c of pos){
+    if (m[r][c] !== null) continue;
+    for (let dr = -2; dr <= 2; dr++) for (let dc = -2; dc <= 2; dc++){
+      if (Math.abs(dr) === 2 || Math.abs(dc) === 2 || (dr === 0 && dc === 0)) m[r + dr][c + dc] = true; else m[r + dr][c + dc] = false;
+    }
+  }
+  for (let i = 8; i < size - 8; i++){
+    if (m[i][6] === null) m[i][6] = i % 2 === 0;
+    if (m[6][i] === null) m[6][i] = i % 2 === 0;
+  }
+  return m;
+}
+function setupTypeInfo(m, ec, maskPattern, test){
+  const size = m.length;
+  const bits = bchTypeInfo((ec << 3) | maskPattern);
+  const bit = i => !test && ((bits >> i) & 1) === 1;
+  for (let i = 0; i < 15; i++){
+    const mod = bit(i);
+    if (i < 6) m[i][8] = mod; else if (i < 8) m[i + 1][8] = mod; else m[size - 15 + i][8] = mod;
+  }
+  for (let i = 0; i < 15; i++){
+    const mod = bit(i);
+    if (i < 8) m[8][size - i - 1] = mod; else if (i === 8) m[8][7] = mod; else m[8][14 - i] = mod;
+  }
+  m[size - 8][8] = !test;
+}
+function setupTypeNumber(m, version, test){
+  const size = m.length;
+  const bits = bchTypeNumber(version);
+  for (let i = 0; i < 18; i++){
+    const mod = !test && ((bits >> i) & 1) === 1;
+    m[Math.floor(i / 3)][i % 3 + size - 8 - 3] = mod;
+  }
+  for (let i = 0; i < 18; i++){
+    const mod = !test && ((bits >> i) & 1) === 1;
+    m[i % 3 + size - 8 - 3][Math.floor(i / 3)] = mod;
+  }
+}
+function mapData(m, data, maskPattern){
+  const size = m.length;
+  const maskFn = MASK_FNS[maskPattern];
+  let inc = -1, row = size - 1, bitIndex = 7, byteIndex = 0;
+  for (let col = size - 1; col > 0; col -= 2){
+    if (col <= 6) col--;
+    for (;;){
+      for (const c of [col, col - 1]){
+        if (m[row][c] === null){
+          let dark = false;
+          if (byteIndex < data.length) dark = ((data[byteIndex] >> bitIndex) & 1) === 1;
+          if (maskFn(row, c)) dark = !dark;
+          m[row][c] = dark;
+          bitIndex--;
+          if (bitIndex === -1){ byteIndex++; bitIndex = 7; }
+        }
+      }
+      row += inc;
+      if (row < 0 || row >= size){ row -= inc; inc = -inc; break; }
+    }
+  }
+}
+function buildModules(version, ec, dataCodewords, maskPattern, test){
+  const m = buildBlank(version);
+  setupTypeInfo(m, ec, maskPattern, test);
+  if (version >= 7) setupTypeNumber(m, version, test);
+  mapData(m, dataCodewords, maskPattern);
+  return m;
+}
+function lostPoint(m){
+  const n = m.length;
+  let lost = 0;
+  /* level 1: runs of 5+ same color */
+  for (let r = 0; r < n; r++){
+    let run = 1;
+    for (let c = 1; c < n; c++){
+      if (m[r][c] === m[r][c - 1]) run++;
+      else { if (run >= 5) lost += run - 2; run = 1; }
+    }
+    if (run >= 5) lost += run - 2;
+  }
+  for (let c = 0; c < n; c++){
+    let run = 1;
+    for (let r = 1; r < n; r++){
+      if (m[r][c] === m[r - 1][c]) run++;
+      else { if (run >= 5) lost += run - 2; run = 1; }
+    }
+    if (run >= 5) lost += run - 2;
+  }
+  /* level 2: 2x2 blocks */
+  for (let r = 0; r < n - 1; r++) for (let c = 0; c < n - 1; c++){
+    const v = m[r][c];
+    if (v === m[r][c + 1] && v === m[r + 1][c] && v === m[r + 1][c + 1]) lost += 3;
+  }
+  /* level 3: finder-like 1:1:3:1:1 patterns with quiet zone */
+  const P1 = [true, false, true, true, true, false, true, false, false, false, false];
+  const P2 = [false, false, false, false, true, false, true, true, true, false, true];
+  for (let r = 0; r < n; r++) for (let c = 0; c + 10 < n; c++){
+    const seg = [m[r][c], m[r][c+1], m[r][c+2], m[r][c+3], m[r][c+4], m[r][c+5], m[r][c+6], m[r][c+7], m[r][c+8], m[r][c+9], m[r][c+10]];
+    if (seg.every((v, i) => v === P1[i]) || seg.every((v, i) => v === P2[i])) lost += 40;
+  }
+  for (let c = 0; c < n; c++) for (let r = 0; r + 10 < n; r++){
+    const seg = [m[r][c], m[r+1][c], m[r+2][c], m[r+3][c], m[r+4][c], m[r+5][c], m[r+6][c], m[r+7][c], m[r+8][c], m[r+9][c], m[r+10][c]];
+    if (seg.every((v, i) => v === P1[i]) || seg.every((v, i) => v === P2[i])) lost += 40;
+  }
+  /* level 4: dark module proportion */
+  const dark = m.flat().filter(Boolean).length;
+  lost += Math.floor(Math.abs(dark * 100 / (n * n) - 50) / 5) * 10;
+  return lost;
+}
+function pickVersion(ec, byteLen){
+  for (let v = 1; v <= 40; v++){
+    if (BIT_LIMIT[ec][v] >= 4 + modeByteBits(v) + byteLen * 8) return v;
+  }
+  throw new Error('QR data too long');
+}
+function qrMatrix(text, ec){
+  ec = ec === undefined ? EC_M : ec;
+  const dataBytes = Array.from(new TextEncoder().encode(String(text)));
+  if (!dataBytes.length || dataBytes.length > 2953) throw new Error('QR: bad length');
+  const version = pickVersion(ec, dataBytes.length);
+  const dataCodewords = createData(version, ec, dataBytes);
+  let bestMask = 0, bestLost = Infinity;
+  for (let i = 0; i < 8; i++){
+    const test = buildModules(version, ec, dataCodewords, i, true);
+    const lost = lostPoint(test);
+    if (i === 0 || bestLost > lost){ bestLost = lost; bestMask = i; }
+  }
+  return buildModules(version, ec, dataCodewords, bestMask, false);
+}
+function drawQR(canvas, text, opts){
+  opts = opts || {};
+  const module = opts.module || 4, border = 4 * module;
+  let matrix;
+  try { matrix = qrMatrix(text, EC_M); } catch (e) { return false; }
+  const n = matrix.length;
+  canvas.width = n * module + border * 2;
+  canvas.height = n * module + border * 2;
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = '#111111';
+  for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) if (matrix[r][c]) ctx.fillRect(border + c * module, border + r * module, module, module);
+  return true;
+}
+return { qrMatrix, drawQR, EC_M, EC_L, EC_Q, EC_H };
+})();
+const drawQR = QR.drawQR, qrMatrix = QR.qrMatrix;
+
+/* ───────── 17. INVOICE SYSTEM ─────────
+   Rebuilt — catalog picker, custom lines, live totals, printable
+   bill, PDF-able preview and proper-case customer names.        */
+const invoicePreview = $('#invoicePreview');
+const invItemsBody = $('#invItemsBody');
+let invItems = [];
+let invSeq = parseInt(localStorage.getItem('zaman_inv_seq') || '1', 10);
+if (!Number.isFinite(invSeq) || invSeq < 1) invSeq = 1;
+
+const invDateEl = $('#invDate'), invNoEl = $('#invNo');
+invDateEl.value = new Date().toISOString().slice(0, 10);
+function nextInvoiceNo(){ return 'ZC-' + new Date().getFullYear() + '-' + String(invSeq).padStart(4, '0'); }
+function showInvoiceNo(){ invNoEl.value = nextInvoiceNo(); }
+
+/* Populate product dropdowns (grouped by category) */
+(function fillProductSelects(){
+  const groups = Object.keys(CAT_LABEL).map(cat =>
+    '<optgroup label="' + CAT_LABEL[cat] + '">' +
+      PRODUCTS.filter(p => p.cat === cat).map(p =>
+        '<option value="' + esc(p.sku) + '">' + esc(p.name) + ' — ' + fmtRs(p.price) + '</option>'
+      ).join('') + '</optgroup>'
+  ).join('');
+  $('#invProduct').innerHTML = groups;
+  $('#bcProduct').innerHTML = '<option value="">— custom text below —</option>' + groups;
+})();
+
+$('#invAddProduct').addEventListener('click', () => {
+  const sku = $('#invProduct').value;
+  const p = PRODUCTS.find(x => x.sku === sku);
+  if (!p) return;
+  const qty = Math.max(1, parseInt($('#invQty').value, 10) || 1);
+  invItems.push({ desc: p.name + ' (' + p.cond + ')', sku: p.sku, qty: qty, rate: p.price });
+  $('#invQty').value = 1;
+  renderInvoice();
+});
+$('#invAddCustom').addEventListener('click', () => {
+  const desc = $('#invCustomDesc').value.trim();
+  const rate = parseFloat($('#invCustomRate').value);
+  if (!desc || !Number.isFinite(rate) || rate <= 0) { showToast('Enter a description and a valid rate.'); return; }
+  invItems.push({ desc: desc, sku: 'CUSTOM', qty: 1, rate: rate });
+  $('#invCustomDesc').value = ''; $('#invCustomRate').value = '';
+  renderInvoice();
+});
+
+invItemsBody.addEventListener('input', e => {
+  const input = e.target.closest('[data-qty]');
+  if (!input) return;
+  invItems[+input.dataset.qty].qty = Math.max(1, parseInt(input.value, 10) || 1);
+  renderInvoice();
+});
+invItemsBody.addEventListener('click', e => {
+  const rm = e.target.closest('[data-rm]');
+  if (!rm) return;
+  invItems.splice(+rm.dataset.rm, 1);
+  renderInvoice();
+});
+const invSubtotalCalc = () => invItems.reduce((s, it) => s + it.qty * it.rate, 0);
+$('#invDiscount').addEventListener('input', () => {
+  const sub = invSubtotalCalc();
+  const d = Math.max(0, parseFloat($('#invDiscount').value) || 0);
+  $('#invDiscountPct').value = sub > 0 ? String(Math.round((d / sub) * 100)) : '0';
+  renderInvoice();
+});
+$('#invDiscountPct').addEventListener('input', () => {
+  const pct = Math.min(100, Math.max(0, parseFloat($('#invDiscountPct').value) || 0));
+  $('#invDiscount').value = String(Math.round(invSubtotalCalc() * pct / 100));
+  renderInvoice();
+});
+$('#invTax').addEventListener('change', renderInvoiceTotals);
+
+function invoiceTotals(){
+  const subtotal = invItems.reduce((s, it) => s + it.qty * it.rate, 0);
+  const discount = Math.max(0, parseFloat($('#invDiscount').value) || 0);
+  const taxable = Math.max(0, subtotal - discount);
+  const gst = $('#invTax').checked ? taxable * SHOP.gstRate : 0;
+  return { subtotal, discount, gst, grand: taxable + gst };
+}
+function renderInvoiceTotals(){
+  const t = invoiceTotals();
+  $('#invSubtotal').textContent = fmtRs(t.subtotal);
+  $('#invTaxAmt').textContent = fmtRs(t.gst);
+  $('#invGrand').textContent = fmtRs(t.grand);
+}
+
+/* Amount in words (Pakistani numbering: lakh / crore) */
+const ONES_W = ['','One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten','Eleven','Twelve','Thirteen','Fourteen','Fifteen','Sixteen','Seventeen','Eighteen','Nineteen'];
+const TENS_W = ['','','Twenty','Thirty','Forty','Fifty','Sixty','Seventy','Eighty','Ninety'];
+const twoW = n => n < 20 ? ONES_W[n] : TENS_W[Math.floor(n / 10)] + (n % 10 ? ' ' + ONES_W[n % 10] : '');
+const threeW = n => { const h = Math.floor(n / 100), r = n % 100; return (h ? ONES_W[h] + ' Hundred' + (r ? ' ' : '') : '') + (r ? twoW(r) : ''); };
+function amountToWords(n){
+  n = Math.floor(Math.abs(Number(n) || 0));
+  if (!n) return 'Zero';
+  const crore = Math.floor(n / 1e7), lakh = Math.floor((n % 1e7) / 1e5), thou = Math.floor((n % 1e5) / 1e3), rem = n % 1000;
+  let s = '';
+  if (crore) s += threeW(crore) + ' Crore ';
+  if (lakh)  s += threeW(lakh) + ' Lakh ';
+  if (thou)  s += threeW(thou) + ' Thousand ';
+  if (rem)   s += threeW(rem);
+  return s.trim();
+}
+
+function renderItemsTable(){
+  if (!invItems.length){
+    invItemsBody.innerHTML = '<tr id="invEmptyRow"><td colspan="6" style="color:var(--muted);text-align:center;padding:1.1rem">No items yet — add from catalog or a custom line.</td></tr>';
+    return;
+  }
+  invItemsBody.innerHTML = invItems.map((it, i) =>
+    '<tr><td>' + (i + 1) + '</td><td>' + esc(it.desc) + '<br><small style="color:var(--muted)">' + esc(it.sku) + '</small></td>' +
+    '<td class="num"><input class="qty-input" type="number" min="1" value="' + it.qty + '" data-qty="' + i + '" aria-label="Quantity"></td>' +
+    '<td class="num">' + fmtRs(it.rate) + '</td><td class="num">' + fmtRs(it.qty * it.rate) + '</td>' +
+    '<td><button class="rm" data-rm="' + i + '" aria-label="Remove item">×</button></td></tr>'
+  ).join('');
+}
+
+/* The scan-to-verify QR opens WhatsApp to the shop with the invoice details prefilled. */
+const verifyPayload = () => 'https://wa.me/' + SHOP.whatsapp + '?text=' + encodeURIComponent(
+  'Zaman Computer — Verify invoice ' + invNoEl.value + ' · Grand total: Rs ' +
+  Math.round(invoiceTotals().grand).toLocaleString('en-PK') + ' · Date: ' + invDateEl.value +
+  ' · Customer: ' + (properCase($('#invCustomer').value) || 'walk-in'));
+
+function buildInvoiceHTML(){
+  const t = invoiceTotals();
+  const d = new Date(invDateEl.value || Date.now());
+  const dateStr = d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+  const no = invNoEl.value;
+  const customer = properCase($('#invCustomer').value) || 'Walk-in Customer';
+  const org = $('#invOrg').value.trim();
+  const phone = $('#invPhone').value.trim();
+  const rows = invItems.map((it, i) =>
+    '<tr><td>' + (i + 1) + '</td><td>' + esc(it.desc) + '<br><small>' + esc(it.sku) + '</small></td>' +
+    '<td class="num">' + it.qty + '</td><td class="num">' + fmtRs(it.rate) + '</td><td class="num">' + fmtRs(it.qty * it.rate) + '</td></tr>'
+  ).join('') || '<tr><td colspan="5" style="text-align:center;color:#555;padding:.8rem">No items</td></tr>';
+  return '' +
+  '<div class="inv-head"><div class="inv-shop"><h3>Zaman <span style="color:#c8a12e">Computer</span></h3>' +
+    '<small>Proprietor: ' + esc(SHOP.proprietor) + '<br>NTN: ' + esc(SHOP.ntn) + ' · Ref: ' + esc(SHOP.refNo) + '<br>' + esc(SHOP.address) + '<br>' + esc(SHOP.phoneDisplay) + ' · ' + esc(SHOP.email) + '</small></div>' +
+    '<div class="inv-qr"><canvas id="invVerifyQrCv" aria-label="Invoice QR code"></canvas>' +
+      '<div class="inv-paycap"><span style="color:#fff;font-weight:600;letter-spacing:.18em">INVOICE</span><br><b>' + esc(no) + '</b></div></div>' +
+  '</div>' +
+  '<div class="inv-metastrip">' +
+    '<div><b>Invoice No</b><span>' + esc(no) + '</span></div>' +
+    '<div><b>Bill Type</b><span>' + esc($('#invType').value) + '</span></div>' +
+    '<div><b>Date</b><span>' + esc(dateStr) + '</span></div>' +
+    '<div><b>Payment</b><span>' + esc($('#invPayment').value) + '</span></div>' +
+    '<div><b>Status</b><span>FBR Active</span></div>' +
+  '</div>' +
+  '<div class="inv-parties"><div><b>Billed To</b>' + esc(customer) + (org ? '<br>' + esc(org) : '') + (phone ? '<br>' + esc(phone) : '') + '</div>' +
+    '<div style="text-align:right"><b>From</b>' + esc(SHOP.name) + '<br>Gulberg Town, Raiwind<br>Lahore, Pakistan</div></div>' +
+  '<table class="inv-table"><thead><tr><th>#</th><th>Description</th><th class="num">Qty</th><th class="num">Rate</th><th class="num">Amount</th></tr></thead><tbody>' + rows + '</tbody></table>' +
+  '<div class="inv-bottom"><div class="inv-terms"><b>In words:</b> Rupees ' + esc(amountToWords(t.grand)) + ' only<br><br><b>Terms:</b> Check items at the counter. Warranty only with this bill + stamp. Goods once sold are not taken back.' +
+    ($('#invNotes').value.trim() ? '<br><br><b>Note:</b> ' + esc($('#invNotes').value.trim()) : '') + '</div>' +
+    '<div class="inv-totals"><div><span>Subtotal</span><span>' + fmtRs(t.subtotal) + '</span></div>' +
+      '<div><span>Owner Discount</span><span>- ' + fmtRs(t.discount) + '</span></div>' +
+      '<div><span>Sales Tax (' + Math.round(SHOP.gstRate * 100) + '%)</span><span>' + fmtRs(t.gst) + '</span></div>' +
+      '<div class="grand"><span>Grand Total</span><span>' + fmtRs(t.grand) + '</span></div></div></div>' +
+  '<div class="inv-ntn">NTN: ' + esc(SHOP.ntn) + ' · FBR — ' + esc(SHOP.fbrStatus) + ' · Reg. ' + esc(SHOP.registeredOn) + ' · ' + esc(SHOP.taxOffice) + ' · ' + esc(SHOP.principals) + '<br>This is not a sales-tax invoice (business not registered for Sales Tax). Thank you for your business!</div>';
+}
+
+function renderInvoice(){
+  renderItemsTable();
+  renderInvoiceTotals();
+  const sub = invItems.reduce((s, it) => s + it.qty * it.rate, 0);
+  const d = Math.max(0, parseFloat($('#invDiscount').value) || 0);
+  $('#invDiscountPct').value = sub > 0 ? String(Math.round((d / sub) * 100)) : '0';
+  invoicePreview.innerHTML = buildInvoiceHTML();
+  const cv = invoicePreview.querySelector('#invVerifyQrCv');
+  if (cv) drawQR(cv, verifyPayload(), { module: 2 });
+}
+
+$('#invPrint').addEventListener('click', () => {
+  renderInvoice();
+  const sheet = $('#printSheet');
+  sheet.innerHTML = '<div class="invoice-paper">' + invoicePreview.innerHTML + '</div>';
+  ['#invVerifyQrCv'].forEach(sel => {
+    const src = invoicePreview.querySelector(sel);
+    const dst = sheet.querySelector(sel);
+    if (src && dst){ dst.width = src.width; dst.height = src.height; dst.getContext('2d').drawImage(src, 0, 0); }
+  });
+  window.print();
+  invSeq += 1;
+  localStorage.setItem('zaman_inv_seq', String(invSeq));
+  showInvoiceNo();
+  showToast('Invoice printed & saved. Next invoice: ' + invNoEl.value);
+});
+
+function buildInvoiceWhatsAppText(){
+  const t = invoiceTotals();
+  const d = new Date(invDateEl.value || Date.now());
+  const dateStr = d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+  const customer = properCase($('#invCustomer').value) || 'Walk-in Customer';
+  const org = $('#invOrg').value.trim();
+  const phone = $('#invPhone').value.trim();
+  const L = 50;                       /* overall width of the “paper” */
+  const hr  = '─'.repeat(L);
+  const dbl = '═'.repeat(L);
+  const row = (l, r) => (l + ' '.repeat(Math.max(1, L - l.length - r.length)) + r);
+  const lines = [];
+  lines.push('ZAMAN COMPUTER');
+  lines.push('Premium Computer & Laptop Store');
+  lines.push('1, Mohal Street, Nazd Jamia Masjid Al Furqan,');
+  lines.push('Gulberg Town, Raiwind, Lahore');
+  lines.push('NTN: ' + SHOP.ntn + '  ·  FBR Income Tax: Active');
+  lines.push('Prop: ' + SHOP.proprietor + '  ·  ' + SHOP.phoneDisplay);
+  lines.push(hr);
+  lines.push('INVOICE ' + invNoEl.value + '   ·   ' + dateStr);
+  lines.push('Bill Type: ' + $('#invType').value + '  ·  Payment: ' + $('#invPayment').value);
+  lines.push('Customer: ' + customer + (org ? '  ·  Org: ' + org : '') + (phone ? '  ·  ' + phone : ''));
+  lines.push(hr);
+  lines.push(' #  Description            Qty  Amount');
+  lines.push(hr);
+  const descW = 24;
+  const wrapDesc = (text, width) => {
+    const out = [];
+    let cur = '';
+    for (const word of text.split(' ')) {
+      if (word.length > width) {
+        if (cur) { out.push(cur); cur = ''; }
+        for (let s = 0; s < word.length; s += width) out.push(word.slice(s, s + width));
+        continue;
+      }
+      if (!cur) cur = word;
+      else if ((cur + ' ' + word).length <= width) cur += ' ' + word;
+      else { out.push(cur); cur = word; }
+    }
+    if (cur) out.push(cur);
+    return out;
+  };
+  invItems.forEach((it, i) => {
+    const desc = it.desc + (it.sku && it.sku !== 'CUSTOM' ? ' (' + it.sku + ')' : '');
+    const amt = fmtRs(it.qty * it.rate);
+    const dLines = wrapDesc(desc, descW);
+    dLines.forEach((dLine, li) => {
+      const num = li === 0 ? ' ' + String(i + 1).padStart(2, ' ') : '    ';
+      if (li < dLines.length - 1) lines.push(num + '  ' + dLine);
+      else lines.push(num + '  ' + dLine.padEnd(descW, ' ') + '  ' + String(it.qty).padStart(3, ' ') + '  ' + amt.padStart(L - descW - 9, ' '));
+    });
+  });
+  if (!invItems.length) lines.push('     (No items on this bill)');
+  lines.push(hr);
+  lines.push('AMOUNT IN WORDS: Rupees ' + amountToWords(t.grand) + ' only');
+  lines.push(hr);
+  lines.push(row(' Subtotal', fmtRs(t.subtotal)));
+  lines.push(row(' Owner Discount', '- ' + fmtRs(t.discount)));
+  lines.push(row(' Sales Tax (' + Math.round(SHOP.gstRate * 100) + '%)', fmtRs(t.gst)));
+  lines.push(dbl);
+  lines.push(row(' GRAND TOTAL', fmtRs(t.grand)));
+  lines.push(dbl);
+  lines.push('NTN: ' + SHOP.ntn + ' · FBR — ' + SHOP.fbrStatus + ' · RTO-I Lahore · 478300 Retail sale via Shop');
+  lines.push('This is not a sales-tax invoice (business not registered for Sales Tax).');
+  lines.push('Thank you for your business!  —  Zaman Computer');
+  lines.push('Shop: ' + SHOP.address);
+  lines.push('Verify: https://wa.me/' + SHOP.whatsapp + '?text=' + encodeURIComponent('Zaman Computer — Verify invoice ' + invNoEl.value + ' · Grand total: Rs ' + Math.round(invoiceTotals().grand).toLocaleString('en-PK')));
+  return lines.join('\n');
+}
+$('#invWA').addEventListener('click', () => {
+  const link = waCustomerLink(buildInvoiceWhatsAppText());
+  if (!link) {
+    showToast('Enter a valid customer mobile first (e.g. 0301-1234567)');
+    $('#invPhone').focus();
+    return;
+  }
+  window.open(link, '_blank', 'noopener');
+  showToast('Sending invoice to customer on WhatsApp…');
+});
+
+$('#invClear').addEventListener('click', () => {
+  invItems = [];
+  $('#invoiceForm').reset();
+  invDateEl.value = new Date().toISOString().slice(0, 10);
+  showInvoiceNo();
+  renderInvoice();
+});
+['invCustomer','invPhone','invOrg','invType','invPayment','invDate','invNotes'].forEach(id => $('#' + id).addEventListener('input', renderInvoice));
+/* Live Proper Case on customer-name fields */
+[['invCustomer'], ['bfName'], ['cfName']].forEach(([id]) => {
+  document.getElementById(id).addEventListener('blur', e => {
+    const v = properCase(e.target.value);
+    if (v !== e.target.value) {
+      e.target.value = v;
+      if (id === 'invCustomer') renderInvoice();
+    }
+  });
+});
+
+/* ───────── 19. QR CODE LABEL TAB ───────── */
+$('.invoice-tabs').addEventListener('click', e => {
+  const btn = e.target.closest('.invoice-tab');
+  if (!btn) return;
+  $$('.invoice-tab').forEach(b => { b.classList.toggle('active', b === btn); b.setAttribute('aria-selected', String(b === btn)); });
+  ['tabInvoice', 'tabBarcode'].forEach(id => { document.getElementById(id).hidden = id !== btn.dataset.tab; });
+});
+
+const bcCanvas = $('#barcodeCanvas');
+function renderBarcodeLabel(){
+  const sku = $('#bcProduct').value;
+  const product = PRODUCTS.find(p => p.sku === sku);
+  const custom = $('#bcCustom').value.trim();
+  const code = custom || (product ? product.sku : '');
+  if (!code) { showToast('Pick a product or type your own text.'); return; }
+  if (code.length > 80) { showToast('Text too long — keep it under 80 characters.'); return; }
+  const ok = drawQR(bcCanvas, code, { module: 5 });
+  if (!ok) { showToast('Could not encode this text.'); return; }
+  $('#bcLabelName').textContent = $('#bcShowName').checked ? (product ? product.name : custom) : '';
+  $('#bcLabelPrice').textContent = $('#bcShowPrice').checked ? (product ? fmtRs(product.price) : 'ZAMAN COMPUTER') : '';
+  return code;
+}
+$('#bcRender').addEventListener('click', renderBarcodeLabel);
+$('#bcProduct').addEventListener('change', () => { if ($('#bcProduct').value) $('#bcCustom').value = ''; renderBarcodeLabel(); });
+$('#bcDownload').addEventListener('click', () => {
+  const code = renderBarcodeLabel();
+  if (!code) return;
+  const a = document.createElement('a');
+  a.download = code.replace(/[^\w.-]+/g, '_') + '.png';
+  a.href = bcCanvas.toDataURL('image/png');
+  a.click();
+});
+$('#bcPrint').addEventListener('click', () => {
+  const code = renderBarcodeLabel();
+  if (!code) return;
+  const sheet = $('#printSheet');
+  sheet.innerHTML = '<div style="text-align:center;font-family:Poppins,sans-serif;padding:24mm 8mm 0">' +
+    '<div style="font-weight:800;letter-spacing:.12em;font-size:14pt">ZAMAN COMPUTER</div>' +
+    '<div style="font-size:10pt;margin:2mm 0 4mm;min-height:5mm">' + esc($('#bcLabelName').textContent) + '</div>' +
+    '<img src="' + bcCanvas.toDataURL('image/png') + '" alt="QR code ' + esc(code) + '" style="max-width:70mm">' +
+    '<div style="font-weight:700;font-size:12pt;margin-top:3mm">' + esc($('#bcLabelPrice').textContent) + '</div></div>';
+  window.print();
+});
+
+/* Initial invoice render */
+showInvoiceNo();
+renderInvoice();
+
+/* ───────── 17B. PDF INVOICE — generated in-browser, no libraries ─────────
+   Produces a vector A4 PDF identical in layout to the printed invoice:
+   black/gold header band, FBR/NTN strip, item table, QR code, totals,
+   amount in words (lakh/crore). Fully offline-capable.            */
+const PDFW = 595.28, PDFH = 841.89, PDFML = 40, PDFMR = PDFW - 40;
+const INK = [17,17,17], GOLD = [212,175,55], GOLD_L = [240,214,117], GOLD_D = [138,109,31];
+const CREAM = [251,249,241], GREYT = [88,88,100], LGREY = [201,201,209], PAPERW = [253,252,248];
+const measCtx = document.createElement('canvas').getContext('2d');
+const twPt = (s, size, bold) => { measCtx.font = (bold ? '700 ' : '400 ') + size + 'px Helvetica, Arial, sans-serif'; return measCtx.measureText(String(s)).width; };
+const f2 = n => Number(n).toFixed(2);
+const rgbStr = c => c.map(v => (v/255).toFixed(3)).join(' ');
+
+function pdfSanitize(s){
+  return String(s)
+    .replace(/[\u2013\u2014]/g, '-').replace(/[\u2018\u2019\u201A]/g, "'")
+    .replace(/[\u201C\u201D\u201E]/g, '"').replace(/\u2026/g, '...')
+    .replace(/\u00D7/g, 'x').replace(/[\u00B7\u2022\u25C6\u2605\u2606]/g, '-')
+    .replace(/[^\x20-\x7E]/g, '');
+}
+const pdfEscape = s => pdfSanitize(s).replace(/\\/g, '\\\\').replace(/\(/g, '\\(').replace(/\)/g, '\\)');
+const fitText = (s, maxW, size, bold) => {
+  let t = pdfSanitize(s);
+  if (twPt(t, size, bold) <= maxW) return t;
+  while (t.length > 3 && twPt(t + '...', size, bold) > maxW) t = t.slice(0, -1);
+  return t + '...';
+};
+
+function buildInvoicePdf(){
+  const pagesOps = [];
+  let ops = [];
+  const newPage = () => { ops = []; pagesOps.push(ops); };
+  const Y = t => PDFH - t; // top-origin helper
+
+  const fillRect = (x, yTop, w, h, color) => { ops.push(rgbStr(color) + ' rg', f2(x) + ' ' + f2(Y(yTop) - h) + ' ' + f2(w) + ' ' + f2(h) + ' re f'); };
+  const strokeRect = (x, yTop, w, h, color, lw) => { ops.push(rgbStr(color) + ' RG', f2(lw || 0.7) + ' w', f2(x) + ' ' + f2(Y(yTop) - h) + ' ' + f2(w) + ' ' + f2(h) + ' re S'); };
+  const hline = (yTop, color, lw, x1, x2) => { ops.push(rgbStr(color) + ' RG', f2(lw) + ' w', f2(x1 == null ? PDFML : x1) + ' ' + f2(Y(yTop)) + ' m ' + f2(x2 == null ? PDFMR : x2) + ' ' + f2(Y(yTop)) + ' l S'); };
+  const text = (s, x, yBaseTop, size, font, color, charSpace) => {
+    ops.push(rgbStr(color || INK) + ' rg');
+    ops.push('BT /' + font + ' ' + size + ' Tf ' + (charSpace || 0) + ' Tc 1 0 0 1 ' + f2(x) + ' ' + f2(Y(yBaseTop)) + ' Tm (' + pdfEscape(s) + ') Tj ET');
+  };
+  const rightText = (s, xRight, yBaseTop, size, font, color) => text(s, xRight - twPt(pdfSanitize(s), size, font === 'F2'), yBaseTop, size, font, color);
+  const centerText = (s, yBaseTop, size, font, color) => text(s, (PDFW - twPt(pdfSanitize(s), size, font === 'F2')) / 2, yBaseTop, size, font, color);
+
+  const t = invoiceTotals();
+  const d = new Date(invDateEl.value || Date.now());
+  const dateStr = d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+  const no = invNoEl.value;
+  const customer = properCase($('#invCustomer').value) || 'Walk-in Customer';
+  const org = $('#invOrg').value.trim();
+  const phone = $('#invPhone').value.trim();
+  const type = $('#invType').value, payment = $('#invPayment').value;
+
+  /* ───────── PAGE SCAFFOLD ───────── */
+  const BAND_H = 132;
+  const drawBand = () => {
+    fillRect(0, 0, PDFW, BAND_H, INK);
+    fillRect(0, BAND_H, PDFW, 2.6, GOLD);
+    text('ZAMAN COMPUTER', PDFML, 37, 22.5, 'F2', [255,255,255], 1.1);
+    text('PREMIUM  COMPUTER  &  LAPTOP  STORE', PDFML, 53, 5.6, 'F2', GOLD, 1.6);
+    text('1, Mohal Street, Nazd Jamia Masjid Al Furqan,', PDFML, 62, 6.9, 'F1', [196,196,203]);
+    text('Gulberg Town, Raiwind, Lahore', PDFML, 73, 6.9, 'F1', [196,196,203]);
+    text('Proprietor: ' + SHOP.proprietor, PDFML, 84, 6.9, 'F1', [196,196,203]);
+    text('NTN: ' + SHOP.ntn + '   |   Ref: ' + SHOP.refNo, PDFML, 95, 6.9, 'F1', [196,196,203]);
+    text(SHOP.phoneDisplay + '   |   ' + SHOP.email, PDFML, 106, 6.9, 'F1', [196,196,203]);
+    /* invoice number + QR on the right, parallel to the brand block */
+    const vMat = qrMatrix(verifyPayload(), QR.EC_M);
+    const mSize = 0.82, qs = 4 * mSize;
+    const qrSize = vMat.length * mSize, boxSize = qrSize + 2 * qs;
+    const bx = PDFMR - boxSize, by = 38;
+    fillRect(bx, by, boxSize, boxSize, [255, 255, 255]);
+    ops.push(rgbStr(INK) + ' rg');
+    for (let r = 0; r < vMat.length; r++) for (let c = 0; c < vMat.length; c++){
+      if (vMat[r][c]){
+        const x = bx + qs + c * mSize, top = by + qs + r * mSize;
+        ops.push(f2(x) + ' ' + f2(Y(top) - mSize) + ' ' + f2(mSize) + ' ' + f2(mSize) + ' re f');
+      }
+    }
+    rightText('INVOICE', PDFMR, by + boxSize + 8, 6.2, 'F2', GOLD_L, 1.6);
+    rightText(no, PDFMR, by + boxSize + 16.5, 6.4, 'F2', [255,255,255]);
+  };
+  const drawSlimHeader = (pageNo) => {
+    fillRect(0, 0, PDFW, 30, INK);
+    fillRect(0, 30, PDFW, 1.8, GOLD);
+    text('ZAMAN COMPUTER  -  INVOICE ' + no + '  (page ' + pageNo + ')', PDFML, 19, 8, 'F2', GOLD);
+    rightText(dateStr, PDFMR, 19, 8, 'F1', [225,225,225]);
+  };
+  const drawTableHeader = (yTop) => {
+    fillRect(PDFML, yTop, PDFMR - PDFML, 20, INK);
+    text('#', PDFML + 6, yTop + 13.5, 7.5, 'F2', GOLD_L);
+    text('DESCRIPTION', 74, yTop + 13.5, 7.5, 'F2', GOLD_L, 0.8);
+    rightText('QTY', 331, yTop + 13.5, 7.5, 'F2', GOLD_L, 0.8);
+    rightText('RATE', 441, yTop + 13.5, 7.5, 'F2', GOLD_L, 0.8);
+    rightText('AMOUNT', 551, yTop + 13.5, 7.5, 'F2', GOLD_L, 0.8);
+  };
+
+  newPage();
+  drawBand();
+
+  /* ───────── META STRIP (light band under the header) ───────── */
+  const META_TOP = 140, META_H = 34;
+  fillRect(0, META_TOP, PDFW, META_H, CREAM);
+  hline(META_TOP, LGREY, 0.5);
+  hline(META_TOP + META_H, LGREY, 0.5);
+  const CELL = 99, GAP = 4, CELL_MX = PDFML + 2;
+  const metaCells = [
+    ['INVOICE NO', no], ['BILL TYPE', type], ['INVOICE DATE', dateStr],
+    ['PAYMENT', payment], ['FBR STATUS', 'Income Tax: Active']
+  ];
+  metaCells.forEach(([k, v], i) => {
+    const cx = CELL_MX + i * (CELL + GAP);
+    text(k, cx, META_TOP + 12.5, 5.2, 'F2', GOLD_D, 0.9);
+    text(fitText(v, CELL - 10, 7.6, true), cx, META_TOP + 24.5, 7.6, 'F2', INK);
+    if (i > 0) fillRect(cx - GAP / 2 - 0.25, META_TOP + 7, 0.5, META_H - 14, LGREY);
+  });
+
+  /* ───────── BILLED TO / FROM ───────── */
+  const pY = META_TOP + META_H + 12;
+  fillRect(PDFML, pY, 247, 44, CREAM);
+  fillRect(308, pY, 247, 44, CREAM);
+  fillRect(PDFML, pY, 3, 44, GOLD);
+  fillRect(308, pY, 3, 44, GOLD);
+  text('BILLED TO', PDFML + 10, pY + 11, 6, 'F2', GOLD_D, 1.4);
+  text(fitText(customer, 225, 9.5, true), PDFML + 10, pY + 23, 9.5, 'F2', INK);
+  if (org) text(fitText(org, 225, 6.8, false), PDFML + 10, pY + 33, 6.8, 'F1', GREYT);
+  if (phone) text(phone, PDFML + 10, pY + (org ? 41.5 : 35), 6.5, 'F1', GREYT);
+  text('FROM', 318, pY + 12, 6, 'F2', GOLD_D, 1.4);
+  text(SHOP.name, 318, pY + 25, 9, 'F2', INK);
+  text('Gulberg Town, Raiwind, Lahore', 318, pY + 37, 7, 'F1', GREYT);
+
+  /* ───────── TABLE ───────── */
+  let yCursor = pY + 56;
+  drawTableHeader(yCursor);
+  yCursor += 20;
+  const rowH = 19.5;
+  invItems.forEach((it, i) => {
+    if (yCursor + rowH > PDFH - 190) { // move rows continuation to a new page
+      newPage();
+      drawSlimHeader(pagesOps.length);
+      yCursor = 46;
+      drawTableHeader(yCursor);
+      yCursor += 20;
+    }
+    if (i % 2 === 0) fillRect(PDFML, yCursor, PDFMR - PDFML, rowH, PAPERW);
+    const amt = it.qty * it.rate;
+    text(String(i + 1), PDFML + 6, yCursor + 13, 8, 'F1', GREYT);
+    text(fitText(it.desc, 220, 7.6, false), 74, yCursor + 13, 7.6, 'F1', INK);
+    rightText(String(it.qty), 331, yCursor + 13, 8, 'F1', INK);
+    rightText(fmtRs(it.rate), 441, yCursor + 13, 8, 'F1', INK);
+    rightText(fmtRs(amt), 551, yCursor + 13, 8, 'F2', INK);
+    hline(yCursor + rowH, [228,226,214], 0.5);
+    yCursor += rowH;
+  });
+  if (!invItems.length){ text('(No items on this bill)', PDFML + 10, yCursor + 14, 8, 'F3', GREYT); yCursor += rowH; }
+
+  /* ───────── TOTALS + AMOUNT IN WORDS ───────── */
+  if (yCursor + 108 > PDFH - 96) { // not enough room on this page — fresh page for totals
+    newPage();
+    drawSlimHeader(pagesOps.length);
+    yCursor = 46;
+  }
+  const tx = 320, tw2 = PDFMR - tx;
+  const words = ('Rupees ' + amountToWords(t.grand) + ' only').split(' ');
+  text('AMOUNT IN WORDS', PDFML, yCursor + 10, 5.6, 'F2', GOLD_D, 1.2);
+  let wLine = '', wy = yCursor + 23;
+  words.forEach(w => {
+    if (twPt(wLine + ' ' + w, 8.6, true) > 250) { text(wLine.trim(), PDFML, wy, 8.6, 'F2', INK); wy += 12; wLine = ''; }
+    wLine += ' ' + w;
+  });
+  text(wLine.trim(), PDFML, wy, 8.6, 'F2', INK);
+  text('TERMS: Check items at the counter.', PDFML, wy + 17, 6.2, 'F1', GREYT);
+  text('Warranty only with this invoice + stamp.', PDFML, wy + 26, 6.2, 'F1', GREYT);
+  text('Goods once sold will not be taken back.', PDFML, wy + 35, 6.2, 'F1', GREYT);
+  if ($('#invNotes').value.trim()) text(fitText('Note: ' + $('#invNotes').value.trim(), 250, 6.2, false), PDFML, wy + 45, 6.2, 'F3', GREYT);
+
+  const tRow = (label, value, bold, band) => {
+    if (band) fillRect(tx, yCursor, tw2, 21, INK);
+    text(label, tx + 8, yCursor + 14, band ? 8.5 : 7.6, band ? 'F2' : 'F1', band ? GOLD_L : GREYT);
+    rightText(value, PDFMR - 8, yCursor + 14, band ? 9.5 : 8, band ? 'F2' : 'F1', band ? GOLD_L : INK);
+    yCursor += band ? 21 : 16.5;
+  };
+  tRow('Subtotal', fmtRs(t.subtotal), false, false);
+  tRow('Owner Discount', '- ' + fmtRs(t.discount), false, false);
+  tRow('Sales Tax (' + Math.round(SHOP.gstRate * 100) + '%)', fmtRs(t.gst), false, false);
+  tRow('GRAND TOTAL', fmtRs(t.grand), true, true);
+
+  /* ───────── FBR / NTN FOOTER STRIP ───────── */
+  const fy = PDFH - 66;
+  hline(fy - 12, GOLD, 1.4);
+  centerText('NTN: ' + SHOP.ntn + '  -  FBR - ' + SHOP.fbrStatus + '  -  Reg. ' + SHOP.registeredOn + '  -  ' + SHOP.taxOffice + '  -  ' + SHOP.principals, fy - 1, 6.1, 'F1', GREYT);
+  centerText('This is not a sales-tax invoice (business not registered for Sales Tax).', fy + 9, 6.1, 'F3', GREYT);
+  centerText('Thank you for your business!  -  Zaman Computer', fy + 19, 6.8, 'F2', GOLD_D);
+
+  /* ───────── ASSEMBLE PDF FILE ───────── */
+  const objects = {};
+  const setObj = (id, body) => { objects[id] = body; };
+  pagesOps.forEach((pageOps, idx) => {
+    const cid = 100 + idx * 2, pid = 101 + idx * 2;
+    const stream = pageOps.join('\n');
+    setObj(cid, '<< /Length ' + stream.length + ' >>\nstream\n' + stream + '\nendstream');
+    setObj(pid, '<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ' + f2(PDFW) + ' ' + f2(PDFH) + '] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents ' + cid + ' 0 R >>');
+  });
+  setObj(1, '<< /Type /Catalog /Pages 2 0 R >>');
+  setObj(2, '<< /Type /Pages /Kids [' + pagesOps.map((_, i) => (101 + i * 2) + ' 0 R').join(' ') + '] /Count ' + pagesOps.length + ' >>');
+  setObj(3, '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>');
+  setObj(4, '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>');
+  setObj(5, '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Oblique >>');
+
+  let pdf = '%PDF-1.4\n';
+  const ids = Object.keys(objects).map(Number).sort((a, b) => a - b);
+  const maxId = ids[ids.length - 1];
+  const offsets = new Array(maxId + 1).fill(0);
+  ids.forEach(id => { offsets[id] = pdf.length; pdf += id + ' 0 obj\n' + objects[id] + '\nendobj\n'; });
+  const xref = pdf.length;
+  pdf += 'xref\n0 ' + (maxId + 1) + '\n';
+  pdf += '0000000000 65535 f \n';
+  for (let i = 1; i <= maxId; i++) pdf += String(offsets[i] || 0).padStart(10, '0') + ' 00000 n \n';
+  pdf += 'trailer\n<< /Size ' + (maxId + 1) + ' /Root 1 0 R >>\nstartxref\n' + xref + '\n%%EOF';
+  return pdf;
+}
+
+function invoicePdfBlob(){ return new Blob([buildInvoicePdf()], { type: 'application/pdf' }); }
+function downloadBlob(blob, filename){
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 4000);
+}
+function invoicePdfFilename(){ return 'Zaman-Computer-' + invNoEl.value + '.pdf'; }
+
+$('#invDownloadPdf').addEventListener('click', () => {
+  renderInvoice();
+  downloadBlob(invoicePdfBlob(), invoicePdfFilename());
+  showToast('Invoice PDF downloaded.');
+});
+$('#invSharePdf').addEventListener('click', async () => {
+  renderInvoice();
+  const filename = invoicePdfFilename();
+  const file = new File([invoicePdfBlob()], filename, { type: 'application/pdf' });
+  const customer = properCase($('#invCustomer').value) || 'Walk-in Customer';
+  const shareText = 'Zaman Computer — Invoice ' + invNoEl.value + ' — ' + customer + ' — Grand Total: ' + fmtRs(invoiceTotals().grand);
+  if (navigator.canShare && navigator.canShare({ files: [file] })) {
+    try {
+      await navigator.share({ files: [file], title: 'Zaman Computer — Invoice ' + invNoEl.value, text: shareText });
+      showToast('Invoice PDF shared via WhatsApp.');
+      return;
+    } catch (err) {
+      if (err && err.name === 'AbortError') return; // user cancelled the share sheet
+    }
+  }
+  /* Desktop / unsupported browsers: download the PDF, then open WhatsApp on the CUSTOMER's number */
+  downloadBlob(invoicePdfBlob(), filename);
+  const link = waCustomerLink(buildInvoiceWhatsAppText());
+  if (!link) {
+    showToast('PDF downloaded. Customer mobile invalid — attach it to the customer chat manually.');
+    return;
+  }
+  window.open(link, '_blank', 'noopener');
+  showToast('PDF downloaded — attach ' + filename + ' in the customer chat that just opened.');
+});
+
+/* ───────── 20. PWA — Service Worker & Install ───────── */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(err => console.warn('SW registration failed:', err));
+  });
+}
+let deferredPrompt = null;
+const installBtn = $('#installAppBtn');
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  deferredPrompt = e;
+  installBinstallBtn.classList.add('visible');
+});
+installBtn.addEventListener('click', async () => {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  await deferredPrompt.userChoice;
+  deferredPrompt = null;
+  installBtn.classList.remove('visible');
+});
+window.addEventListener('appinstalled', () => showToast('Zaman Computer installed on this device \u2713'));
+</script>
+</body>
+</html>
