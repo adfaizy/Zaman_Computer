@@ -484,6 +484,26 @@ section{scroll-margin-top:calc(var(--nav-h) + 20px)}
 
 /* ═══ Owner mode ═══ */
 [hidden]{display:none !important}
+/* In owner mode the page shows ONLY the Owner Dashboard + Invoice & QR Center.
+   Every customer-facing section (and the customer nav) is hidden. */
+body.is-owner .ticker,
+body.is-owner .hero,
+body.is-owner #featured,
+body.is-owner #categories,
+body.is-owner #why,
+body.is-owner #latest,
+body.is-owner #offers,
+body.is-owner #testimonials,
+body.is-owner #shop,
+body.is-owner #services,
+body.is-owner #gallery,
+body.is-owner #book,
+body.is-owner #contact,
+body.is-owner footer{display:none !important}
+body.is-owner .nav-links,
+body.is-owner .nav-cta,
+body.is-owner .hamburger,
+body.is-owner .mobile-panel{display:none !important}
 .owner-btn{background:rgba(212,175,55,.08);border:1px solid var(--border-gold);border-radius:10px;width:42px;height:42px;color:var(--gold-2);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;transition:all .25s}
 .owner-btn:hover{background:rgba(212,175,55,.18);transform:translateY(-1px)}
 .owner-btn.on{background:var(--gold-grad);color:#1a1408;border-color:transparent}
@@ -1853,6 +1873,7 @@ function injectOwnerUI(){
   wireOwnerUI();
   document.body.classList.add('is-owner');
   document.querySelectorAll('.owner-only').forEach(el => { el.hidden = false; });
+  window.scrollTo(0, 0);
   const nav = document.getElementById('ownerUnlockBtnNav');
   if (nav) nav.classList.add('on');
   renderOwnerTable();
