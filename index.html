@@ -512,6 +512,23 @@ body.is-owner .mobile-panel{display:none !important}
 .owner-stat b{display:block;font-family:var(--font-display);font-size:1.35rem;color:var(--gold-2)}
 .owner-stat small{color:var(--muted);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase}
 .owner-actions{display:flex;gap:.6rem;flex-wrap:wrap;margin:.9rem 0 1rem}
+/* Stock alarm + restock report (owner) */
+.lowstock-alarm{border:1px solid #7f3535;border-left:4px solid #ff6b6b;background:rgba(255,107,107,.08);border-radius:14px;padding:.9rem 1rem;margin-bottom:1rem}
+.lowstock-alarm .ls-head{display:flex;gap:.7rem;align-items:flex-start}
+.lowstock-alarm .ls-bell{font-size:1.3rem;animation:lsPulse 1.6s infinite}
+@keyframes lsPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.28)}}
+.lowstock-alarm b{color:#ff8a8a;display:block}
+.lowstock-alarm small{color:var(--muted)}
+.ls-scroll{overflow-x:auto;margin:.7rem 0}
+.ls-table{width:100%;border-collapse:collapse;font-size:.8rem;min-width:540px}
+.ls-table th{color:var(--muted);text-align:left;font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;padding:.35rem .5rem;border-bottom:1px solid var(--border)}
+.ls-table td{padding:.4rem .5rem;border-bottom:1px solid var(--border-2);color:var(--text)}
+.ls-table .zout{color:#ff6b6b;font-weight:700}
+.ls-table .zlow{color:#f0d675;font-weight:700}
+.ls-actions{display:flex;gap:.6rem;flex-wrap:wrap}
+.owner-stat.warn b{color:#ff8a8a}
+.ot-qty{width:64px;background:var(--card-2);border:1px solid var(--border);border-radius:8px;color:var(--gold-2);padding:.32rem .4rem;text-align:right;font-weight:600}
+.ot-qty:focus{outline:none;border-color:var(--gold)}
 .owner-publish{border:1px solid var(--border-gold);border-radius:var(--radius);padding:.7rem 1rem;margin-bottom:1rem;background:var(--panel-2)}
 .owner-publish summary{cursor:pointer;color:var(--gold-2);font-size:.85rem;display:flex;align-items:center;gap:.5rem;user-select:none}
 .owner-publish summary small{color:var(--muted)}
@@ -1157,6 +1174,21 @@ let PRODUCTS = JSON.parse(JSON.stringify(DEFAULT_PRODUCTS));
     if (Array.isArray(arr) && arr.length >= 8) PRODUCTS = arr;
   } catch (e) { /* ignore */ }
 })();
+
+/* Stock tracking - every product carries qty (pieces in stock).
+   Legacy products without a qty get one; stock flag follows qty. */
+const LOW_STOCK_AT = 2;
+function normalizeStock(){
+  let changed = false;
+  PRODUCTS.forEach(p => {
+    if (typeof p.qty !== 'number' || p.qty < 0){ p.qty = p.stock ? 10 : 0; changed = true; }
+    const should = p.qty > 0;
+    if (p.stock !== should){ p.stock = should; changed = true; }
+  });
+  if (changed) persistProducts();
+}
+function effQty(p){ return typeof p.qty === 'number' ? p.qty : (p.stock ? 10 : 0); }
+normalizeStock();
 function persistProducts(){
   try { localStorage.setItem(PRODUCT_STORE, JSON.stringify(PRODUCTS)); return true; }
   catch (e) { showToast('Device storage full — use Export JSON as backup.'); return false; }
@@ -1169,6 +1201,7 @@ async function loadPublishedProducts(){
     if (Array.isArray(arr) && arr.length >= 8 && arr.every(p => p.sku && p.name && typeof p.price === 'number')) {
       PRODUCTS = arr;
       applyPriceOverrides();
+      normalizeStock();
       renderFeatured(); renderLatest(); renderChips(); renderProducts(); renderInvSelects();
     }
   } catch (e) { /* offline — keep local catalog */ }
@@ -1275,7 +1308,7 @@ function productCard(p){
       '<img src="' + p.img + '" alt="' + esc(p.name) + '" loading="lazy" onerror="this.onerror=null;this.src=\'' + u('photo-1518770660439-4636190af475', 640) + '\'">' +
       (p.cond === 'New' ? '<span class="badge badge-new">New</span>' : '<span class="badge badge-used">Used</span>') +
       (p.featured ? '<span class="badge badge-featured">★ Featured</span>' : '') +
-      '<span class="badge badge-stock' + (p.stock ? '' : ' out') + '"><span class="dot"></span>' + (p.stock ? 'In Stock' : 'Out of Stock') + '</span>' +
+      '<span class="badge badge-stock' + (p.stock ? '' : ' out') + '"><span class="dot"></span>' + (p.stock ? (effQty(p) <= LOW_STOCK_AT ? 'Only ' + effQty(p) + ' left' : 'In Stock') : 'Out of Stock') + '</span>' +
     '</div>' +
     '<div class="product-body">' +
       '<div class="product-brand">' + esc(p.brand) + ' · ' + esc(p.sku) + '</div>' +
@@ -1639,6 +1672,7 @@ const OWNER_HTML = `<div id="ownerBundle">
       <button class="btn btn-ghost btn-sm" id="ownerSignOutBtn" type="button">Sign Out</button>
     </div>
 
+    <div id="lowStockAlarm" hidden></div>
     <div class="owner-stats" id="ownerStats" aria-live="polite"></div>
 
     <div class="owner-actions">
@@ -1669,7 +1703,7 @@ const OWNER_HTML = `<div id="ownerBundle">
 
     <div class="table-scroll">
       <table class="owner-table" aria-label="Edit product prices and stock">
-        <thead><tr><th>SKU</th><th>Product</th><th class="num">Price</th><th>Cond.</th><th>In Stock</th><th>★</th><th></th></tr></thead>
+        <thead><tr><th>SKU</th><th>Product</th><th class="num">Price</th><th class="num">Qty</th><th>Cond.</th><th>In Stock</th><th>★</th><th></th></tr></thead>
         <tbody id="ownerTableBody"></tbody>
       </table>
     </div>
@@ -1836,6 +1870,8 @@ const OWNER_HTML = `<div id="ownerBundle">
 function renderOwnerStats(){
   const total = PRODUCTS.length;
   const inStock = PRODUCTS.filter(p => p.stock).length;
+  const lowN = PRODUCTS.filter(p => effQty(p) <= LOW_STOCK_AT).length;
+  const pieces = PRODUCTS.reduce((s, p) => s + effQty(p), 0);
   const used = PRODUCTS.filter(p => p.cond === 'Used').length;
   const cats = new Set(PRODUCTS.map(p => p.cat)).size;
   const last = localStorage.getItem(LAST_PUBLISH) || 'never published';
@@ -1843,9 +1879,87 @@ function renderOwnerStats(){
   if (el) el.innerHTML =
     '<div class="owner-stat"><b>' + total + '</b><small>Products</small></div>' +
     '<div class="owner-stat"><b>' + inStock + '</b><small>In Stock</small></div>' +
+    '<div class="owner-stat' + (lowN ? ' warn' : '') + '"><b>' + lowN + '</b><small>Low / Out</small></div>' +
+    '<div class="owner-stat"><b>' + pieces + '</b><small>Pieces in Stock</small></div>' +
     '<div class="owner-stat"><b>' + used + '</b><small>Used Items</small></div>' +
     '<div class="owner-stat"><b>' + cats + '</b><small>Categories</small></div>' +
     '<div class="owner-stat" style="grid-column:1/-1"><b style="font-size:.95rem">Last published: ' + esc(last) + '</b><small>GitHub Pages rebuilds ~1 min after publish</small></div>';
+  renderLowStock();
+}
+
+/* ===== Stock alarm + restock report ===== */
+function lowStockItems(){
+  return PRODUCTS.filter(p => effQty(p) <= LOW_STOCK_AT).sort((a, b) => effQty(a) - effQty(b));
+}
+function alarmBeep(){
+  try {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return;
+    const ctx = new AC();
+    const t0 = ctx.currentTime;
+    [880, 660, 880].forEach((f, i) => {
+      const o = ctx.createOscillator(), g = ctx.createGain();
+      o.type = 'sine'; o.frequency.value = f;
+      g.gain.setValueAtTime(0.0001, t0 + i * 0.18);
+      g.gain.exponentialRampToValueAtTime(0.18, t0 + i * 0.18 + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, t0 + i * 0.18 + 0.16);
+      o.connect(g); g.connect(ctx.destination);
+      o.start(t0 + i * 0.18); o.stop(t0 + i * 0.18 + 0.17);
+    });
+    setTimeout(() => { try { ctx.close(); } catch (e) {} }, 1200);
+  } catch (e) { /* silent */ }
+}
+function restockReportText(){
+  const items = lowStockItems();
+  const lines = items.map((p, i) =>
+    (i + 1) + '. ' + p.sku + ' - ' + p.name + ' - ' +
+    (p.qty === 0 ? 'OUT OF STOCK' : 'only ' + p.qty + ' left') +
+    ' (order ~' + Math.max(10 - p.qty, 5) + ' pcs)');
+  return '*ZAMAN COMPUTER - RESTOCK REPORT*\n' +
+    new Date().toLocaleString('en-GB') + '\n' +
+    items.length + ' item(s) low or out of stock:\n\n' + lines.join('\n') +
+    '\n\nPlease arrange stock for the items above. - Zaman Computer';
+}
+function sendRestockWhatsApp(){
+  window.open('https://wa.me/' + SHOP.whatsapp + '?text=' + encodeURIComponent(restockReportText()), '_blank', 'noopener');
+  showToast('Restock report opened in WhatsApp.');
+}
+function copyRestockReport(){
+  const txt = restockReportText();
+  const done = () => showToast('Restock report copied - paste it to your supplier.');
+  const fail = () => showToast('Copy failed - use "Send on WhatsApp" instead.');
+  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(done, fail);
+  else fail();
+}
+function renderLowStock(){
+  const box = document.getElementById('lowStockAlarm');
+  if (!box) return;
+  const items = lowStockItems();
+  if (!items.length){ box.hidden = true; box.innerHTML = ''; return; }
+  const out = items.filter(p => p.qty === 0).length;
+  const low = items.length - out;
+  const rows = items.map(p =>
+    '<tr><td>' + esc(p.sku) + '</td><td>' + esc(p.name) + '</td>' +
+    '<td class="num"><b class="' + (p.qty === 0 ? 'zout' : 'zlow') + '">' + (p.qty === 0 ? 'OUT' : p.qty + ' left') + '</b></td>' +
+    '<td class="num">' + Math.max(10 - p.qty, 5) + ' pcs</td></tr>'
+  ).join('');
+  box.hidden = false;
+  box.innerHTML =
+    '<div class="lowstock-alarm" role="alert">' +
+      '<div class="ls-head"><span class="ls-bell">&#128276;</span><div>' +
+        '<b>Stock alarm - ' + items.length + ' item' + (items.length === 1 ? '' : 's') + ' need restocking</b>' +
+        '<small>' + out + ' out of stock &middot; ' + low + ' running low &middot; alarm threshold: ' + LOW_STOCK_AT + ' pcs</small>' +
+      '</div></div>' +
+      '<div class="ls-scroll"><table class="ls-table"><thead><tr><th>SKU</th><th>Item</th><th>Status</th><th>Suggested order</th></tr></thead><tbody>' + rows + '</tbody></table></div>' +
+      '<div class="ls-actions">' +
+        '<button type="button" class="btn btn-wa btn-sm" id="lsWaBtn">Send Restock Report on WhatsApp</button>' +
+        '<button type="button" class="btn btn-ghost btn-sm" id="lsCopyBtn">Copy Report</button>' +
+      '</div>' +
+    '</div>';
+  const wa = document.getElementById('lsWaBtn');
+  if (wa) wa.addEventListener('click', sendRestockWhatsApp);
+  const cp = document.getElementById('lsCopyBtn');
+  if (cp) cp.addEventListener('click', copyRestockReport);
 }
 function renderOwnerTable(){
   renderOwnerStats();
@@ -1854,6 +1968,7 @@ function renderOwnerTable(){
   tbody.innerHTML = PRODUCTS.map((p, i) =>
     '<tr data-i="' + i + '"><td>' + esc(p.sku) + '</td><td>' + esc(p.name) + '</td>' +
       '<td class="num"><input type="number" min="0" step="100" class="ot-price" value="' + p.price + '" inputmode="numeric" aria-label="Price for ' + esc(p.name) + '"></td>' +
+      '<td class="num"><input type="number" min="0" step="1" class="ot-qty" value="' + (typeof p.qty === 'number' ? p.qty : 0) + '" inputmode="numeric" aria-label="Stock quantity for ' + esc(p.name) + '"></td>' +
       '<td><button type="button" class="ot-stock' + (p.stock ? '' : ' out') + '" aria-pressed="' + p.stock + '">' + (p.stock ? 'In Stock' : 'Out') + '</button></td>' +
       '<td><select class="ot-cond"><option' + (p.cond === 'New' ? ' selected' : '') + '>New</option><option' + (p.cond === 'Used' ? ' selected' : '') + '>Used</option></select></td>' +
       '<td><label class="checkline"><input type="checkbox" class="ot-featured"' + (p.featured ? ' checked' : '') + ' aria-label="Featured"> ★</label></td>' +
@@ -1877,6 +1992,11 @@ function injectOwnerUI(){
   const nav = document.getElementById('ownerUnlockBtnNav');
   if (nav) nav.classList.add('on');
   renderOwnerTable();
+  const low = lowStockItems();
+  if (low.length){
+    showToast('STOCK ALARM: ' + low.length + ' item(s) need restocking.');
+    alarmBeep();
+  }
 }
 function signOutOwner(){ localStorage.removeItem(OWNER_KEY); location.reload(); }
 
@@ -2889,10 +3009,29 @@ const ownerRefresh = () => {
   renderOwnerTable();
 };
 ownerTableBody.addEventListener('input', e => {
-  if (!e.target.classList.contains('ot-price')) return;
   const tr = e.target.closest('tr');
+  if (!tr) return;
   const p = PRODUCTS[+tr.dataset.i];
-  if (p) p.price = Math.max(0, Math.round(parseFloat(e.target.value) || 0));
+  if (!p) return;
+  if (e.target.classList.contains('ot-price')){
+    p.price = Math.max(0, Math.round(parseFloat(e.target.value) || 0));
+    return;
+  }
+  if (e.target.classList.contains('ot-qty')){
+    const old = effQty(p);
+    const n = Math.max(0, Math.floor(parseFloat(e.target.value) || 0));
+    p.qty = n;
+    const wasStock = p.stock;
+    p.stock = n > 0;
+    if (p.stock !== wasStock){ refreshCatalog(); renderOwnerTable(); }
+    else { renderOwnerStats(); renderLowStock(); }
+    if (n < old && n <= LOW_STOCK_AT){
+      showToast(n === 0
+        ? 'STOCK ALARM: ' + p.name + ' is now OUT of stock.'
+        : 'STOCK ALARM: ' + p.name + ' - only ' + n + ' left. Restock soon.');
+      alarmBeep();
+    }
+  }
 });
 ownerTableBody.addEventListener('change', e => {
   const tr = e.target.closest('tr');
@@ -2901,7 +3040,7 @@ ownerTableBody.addEventListener('change', e => {
   if (!p) return;
   if (e.target.classList.contains('ot-cond')){ p.cond = e.target.value; ownerRefresh(); }
   if (e.target.classList.contains('ot-featured')){ p.featured = e.target.checked; ownerRefresh(); }
-  if (e.target.classList.contains('ot-price')) ownerRefresh();
+  if (e.target.classList.contains('ot-price') || e.target.classList.contains('ot-qty')) ownerRefresh();
 });
 ownerTableBody.addEventListener('click', e => {
   const tr = e.target.closest('tr');
@@ -2910,7 +3049,13 @@ ownerTableBody.addEventListener('click', e => {
   const p = PRODUCTS[idx];
   if (!p) return;
   if (e.target.classList.contains('ot-stock')){
-    p.stock = !p.stock; ownerRefresh();
+    if (!p.stock){ p.qty = Math.max(1, effQty(p)); p.stock = true; }
+    else {
+      p.qty = 0; p.stock = false;
+      showToast('STOCK ALARM: ' + p.name + ' marked OUT of stock.');
+      alarmBeep();
+    }
+    ownerRefresh();
   }
   if (e.target.classList.contains('ot-del')){
     if (!confirm('Delete "' + p.name + '" from the catalog?')) return;
@@ -2951,6 +3096,7 @@ $('#addProductForm').addEventListener('submit', e => {
   if (oldP > price) np.oldPrice = Math.round(oldP);
   if ($('#apFeatured').checked) np.featured = true;
   if ($('#apIsNew').checked) np.isNew = true;
+  np.qty = np.stock ? 5 : 0;
   PRODUCTS.push(np);
   ownerRefresh();
   e.target.reset();
