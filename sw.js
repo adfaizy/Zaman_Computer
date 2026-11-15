@@ -7,7 +7,7 @@
    static file. Old caches are removed automatically on activate.
    ============================================================ */
 
-const CACHE_VERSION = 'zaman-v1.20.0';
+const CACHE_VERSION = 'zaman-v1.21.0';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 

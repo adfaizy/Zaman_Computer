@@ -763,7 +763,7 @@ section{scroll-margin-top:calc(var(--nav-h) + 20px)}
       <label class="checkline"><input type="checkbox" id="stockOnly"> In stock only</label>
     </div>
     <div class="chip-row" id="categoryChips" role="tablist" aria-label="Product categories"></div>
-    <p class="market-line">Lahore market rates — refreshed daily · Last updated: <b id="pricesUpdated">13 Nov 2026</b> <button class="link-btn" id="openPriceEditor" type="button" hidden>Update prices (Owner)</button></p>
+    <p class="market-line">Lahore market rates — refreshed daily · Last updated: <b id="pricesUpdated">13 Nov 2026</b></p>
     <p class="result-count" id="resultCount">Loading products…</p>
     <div class="product-grid" id="productGrid"></div>
     <div class="empty-state" id="emptyState" hidden><b>No products found</b>Try a different keyword, category or clear the filters.</div>
@@ -1623,6 +1623,7 @@ const OWNER_HTML = `<div id="ownerBundle">
 
     <div class="owner-actions">
       <button class="btn btn-gold btn-sm" id="ownerAddBtn" type="button">+ Add Product</button>
+      <button class="btn btn-ink btn-sm" id="openPriceEditor" type="button">Market Rates</button>
       <button class="btn btn-ink btn-sm" id="ownerPublishBtn" type="button">&#11014; Publish to GitHub</button>
       <button class="btn btn-ghost btn-sm" id="ownerExportBtn" type="button">&#8681; Export JSON</button>
       <label class="btn btn-ghost btn-sm" for="ownerImportFile" style="cursor:pointer">&#8679; Import JSON</label>
@@ -1854,7 +1855,6 @@ function injectOwnerUI(){
   document.querySelectorAll('.owner-only').forEach(el => { el.hidden = false; });
   const nav = document.getElementById('ownerUnlockBtnNav');
   if (nav) nav.classList.add('on');
-  const pe = document.getElementById('openPriceEditor'); if (pe) pe.hidden = false;
   renderOwnerTable();
 }
 function signOutOwner(){ localStorage.removeItem(OWNER_KEY); location.reload(); }
