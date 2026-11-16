@@ -512,6 +512,9 @@ body.is-owner .mobile-panel{display:none !important}
 .owner-stat b{display:block;font-family:var(--font-display);font-size:1.35rem;color:var(--gold-2)}
 .owner-stat small{color:var(--muted);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase}
 .owner-actions{display:flex;gap:.6rem;flex-wrap:wrap;margin:.9rem 0 1rem}
+.owner-sec-row{display:flex;justify-content:space-between;align-items:center;gap:1rem;border:1px solid var(--border);border-radius:var(--radius);padding:.7rem .9rem;margin-bottom:1rem;background:var(--card-2);flex-wrap:wrap}
+.owner-sec-row b{display:block;color:var(--text);font-size:.85rem}
+.owner-sec-row small{color:var(--muted);font-size:.7rem;line-height:1.45;display:block;max-width:520px}
 /* Stock alarm + restock report (owner) */
 .lowstock-alarm{border:1px solid #7f3535;border-left:4px solid #ff6b6b;background:rgba(255,107,107,.08);border-radius:14px;padding:.9rem 1rem;margin-bottom:1rem}
 .lowstock-alarm .ls-head{display:flex;gap:.7rem;align-items:flex-start}
@@ -1662,6 +1665,98 @@ async function verifyOwnerPassword(pass){
 const getLock = () => { try { return JSON.parse(localStorage.getItem(LOCK_STORE) || '{"n":0,"until":0}'); } catch { return {n:0, until:0}; } };
 const setLock = o => localStorage.setItem(LOCK_STORE, JSON.stringify(o));
 
+/* Strong password policy: 10+ chars, upper & lower case, number, symbol */
+function strongPasswordError(p){
+  if (!p || p.length < 10) return 'Password must be at least 10 characters.';
+  if (!/[a-z]/.test(p)) return 'Add a lowercase letter (a-z).';
+  if (!/[A-Z]/.test(p)) return 'Add an uppercase letter (A-Z).';
+  if (!/[0-9]/.test(p)) return 'Add a number (0-9).';
+  if (!/[^A-Za-z0-9]/.test(p)) return 'Add a symbol (e.g. @ # $ !).';
+  return '';
+}
+function generateStrongPassword(){
+  const lower = 'abcdefghijkmnpqrstuvwxyz', upper = 'ABCDEFGHJKLMNPQRSTUVWXYZ',
+        nums = '23456789', syms = '@#$!%*&?';
+  const all = lower + upper + nums + syms;
+  const rnd = n => crypto.getRandomValues(new Uint32Array(n));
+  const pick = (set, n) => {
+    const out = [];
+    const buf = rnd(n);
+    for (let i = 0; i < n; i++) out.push(set[buf[i] % set.length]);
+    return out.join('');
+  };
+  let chars = (pick(lower, 3) + pick(upper, 2) + pick(nums, 3) + pick(syms, 2) + pick(all, 4)).split('');
+  for (let i = chars.length - 1; i > 0; i--){
+    const j = rnd(1)[0] % (i + 1);
+    const tmp = chars[i]; chars[i] = chars[j]; chars[j] = tmp;
+  }
+  return chars.join('');
+}
+function openChangePassword(){
+  if (document.getElementById('ownerChangeModal')) return;
+  const modal = document.createElement('div');
+  modal.className = 'pe-overlay';
+  modal.id = 'ownerChangeModal';
+  modal.setAttribute('role', 'dialog');
+  modal.setAttribute('aria-modal', 'true');
+  modal.setAttribute('aria-label', 'Change admin password');
+  modal.innerHTML =
+    '<div class="pe-card" style="max-width:430px">' +
+      '<div class="pe-head"><h3>Change Admin Password</h3>' +
+        '<button class="pe-close" data-close aria-label="Close">&times;</button></div>' +
+      '<div class="pe-list" style="padding-top:.8rem">' +
+        '<p class="form-note">Strong password rules: at least <b>10 characters</b>, with <b>upper &amp; lower case</b>, a <b>number</b> and a <b>symbol</b> (e.g. @ # $ !).</p>' +
+        '<label class="field" for="curPass"><span>Current password</span><input id="curPass" type="password" autocomplete="current-password" autocapitalize="off"></label>' +
+        '<label class="field" for="newPass"><span>New password</span><input id="newPass" type="password" autocomplete="new-password" autocapitalize="off" spellcheck="false"></label>' +
+        '<label class="field" for="newPass2"><span>Confirm new password</span><input id="newPass2" type="password" autocomplete="new-password" autocapitalize="off" spellcheck="false"></label>' +
+        '<div style="display:flex;gap:.5rem;flex-wrap:wrap">' +
+          '<button type="button" class="btn btn-ghost btn-sm" id="genPassBtn">Generate Strong Password</button>' +
+          '<button type="button" class="btn btn-ghost btn-sm" id="copyPassBtn" disabled>Copy</button>' +
+        '</div>' +
+        '<button class="btn btn-gold btn-block" id="changePassSubmit" type="button">Change Password</button>' +
+        '<p class="form-note" style="margin:0;text-align:center">Stored only as a PBKDF2-SHA256 hash on this device - not recoverable.</p>' +
+      '</div>' +
+    '</div>';
+  document.body.appendChild(modal);
+  const close = () => modal.remove();
+  modal.querySelector('[data-close]').addEventListener('click', close);
+  modal.addEventListener('click', e => { if (e.target === modal) close(); });
+
+  const cur = modal.querySelector('#curPass');
+  const np = modal.querySelector('#newPass');
+  const np2 = modal.querySelector('#newPass2');
+  const copyBtn = modal.querySelector('#copyPassBtn');
+
+  modal.querySelector('#genPassBtn').addEventListener('click', () => {
+    const pw = generateStrongPassword();
+    np.value = pw; np2.value = pw;
+    np.type = 'text'; np2.type = 'text';
+    copyBtn.disabled = false;
+    showToast('Strong password generated - copy it, store it somewhere safe.');
+  });
+  copyBtn.addEventListener('click', () => {
+    if (navigator.clipboard && navigator.clipboard.writeText)
+      navigator.clipboard.writeText(np.value).then(() => showToast('Password copied.'), () => showToast('Copy failed - type it down instead.'));
+    else showToast('Clipboard blocked - type it down instead.');
+  });
+  const submit = async () => {
+    const c = cur.value, p = np.value;
+    if (!c){ showToast('Enter your current password first.'); cur.focus(); return; }
+    const res = await verifyOwnerPassword(c);
+    if (res !== 'ok'){ showToast('Current password is wrong.'); cur.value = ''; cur.focus(); return; }
+    const err = strongPasswordError(p);
+    if (err){ showToast(err); np.focus(); return; }
+    if (p !== np2.value){ showToast('New passwords do not match.'); np2.focus(); return; }
+    if (c === p){ showToast('New password must be different from the current one.'); np.focus(); return; }
+    await createOwnerPassword(p);
+    modal.remove();
+    showToast('Admin password changed. Keep it safe - it cannot be recovered.');
+  };
+  modal.querySelector('#changePassSubmit').addEventListener('click', submit);
+  [cur, np, np2].forEach(el => el.addEventListener('keydown', e => { if (e.key === 'Enter') submit(); }));
+  setTimeout(() => cur.focus(), 60);
+}
+
 /* Owner bundle — exists here in SOURCE only as one string constant.
    Parsed into the DOM solely by injectOwnerUI() after authentication. */
 const OWNER_HTML = `<div id="ownerBundle">
@@ -1690,6 +1785,10 @@ const OWNER_HTML = `<div id="ownerBundle">
       <div class="owner-stats" id="ownerStats" aria-live="polite"></div>
 
       <p class="form-note" style="margin:0 0 1rem;color:#8fe08a">&#10004; Signed in as <b>Owner</b> &mdash; your admin password stays only on this device.</p>
+      <div class="owner-sec-row">
+        <div><b>Admin password</b><small>Strong password enforced: 10+ characters with upper &amp; lower case, a number and a symbol. Stored only as a PBKDF2-SHA256 hash on this device.</small></div>
+        <button class="btn btn-ghost btn-sm" id="ownerChangePassBtn" type="button">Change Password</button>
+      </div>
 
       <div class="owner-actions">
         <button class="btn btn-ink btn-sm" id="ownerPublishBtn" type="button">&#11014; Publish to GitHub</button>
@@ -2043,7 +2142,7 @@ function openOwnerGate(){
       '</div>' +
       '<div class="pe-list" style="padding-top:.8rem">' +
         '<p class="form-note">' + (setup
-          ? 'This unlocks invoice creation, product &amp; price editing and publishing. Customers never see these tools. Password stays only on this device.'
+          ? 'This unlocks invoice creation, product &amp; price editing and publishing. Use a strong password: 10+ characters with upper &amp; lower case, a number and a symbol. Stored only as a hash on this device.'
           : 'Enter the admin password to unlock the shop tools.') + '</p>' +
         (remaining ? '<p class="form-note" style="color:var(--red)">Too many attempts — locked for ' + remaining + 's.</p>' : '') +
         '<label class="field" for="gatePassword"><span>Password</span>' +
@@ -2073,7 +2172,7 @@ function openOwnerGate(){
     if (getLock().until && Date.now() < getLock().until) { showToast('Locked — wait 30 seconds.'); return; }
     const pass = passEl.value;
     if (setup) {
-      if (pass.length < 4) { showToast('Password must be at least 4 characters.'); return; }
+      const perr = strongPasswordError(pass); if (perr) { showToast(perr); return; }
       if (confirmEl && pass !== confirmEl.value) { showToast('Passwords do not match.'); return; }
       await createOwnerPassword(pass);
       localStorage.setItem(OWNER_KEY, '1');
@@ -3099,6 +3198,10 @@ ownerTableBody.addEventListener('click', e => {
     showToast('Product deleted. Publish to update the online catalog.');
   }
 });
+
+/* --- Change admin password --- */
+const cpBtn = $('#ownerChangePassBtn');
+if (cpBtn) cpBtn.addEventListener('click', openChangePassword);
 
 /* --- Sign out --- */
 $('#ownerSignOutBtn').addEventListener('click', signOutOwner);
