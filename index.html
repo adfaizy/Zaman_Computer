@@ -537,6 +537,7 @@ body.is-owner .mobile-panel{display:none !important}
 .owner-tab{flex:1 1 auto;background:transparent;border:1px solid transparent;border-bottom:none;color:var(--muted-2);border-radius:12px 12px 0 0;padding:.65rem 1.1rem;font-family:var(--font-body);font-size:.85rem;font-weight:600;cursor:pointer;transition:color .2s,background .2s}
 .owner-tab:hover{color:var(--gold-2)}
 .owner-tab.active{background:var(--card-2);color:var(--gold-2);border-color:var(--border-gold);border-bottom-color:var(--card-2)}
+.owner-signout-mini{align-self:center;white-space:nowrap;margin-left:.25rem}
 .owner-publish{border:1px solid var(--border-gold);border-radius:var(--radius);padding:.7rem 1rem;margin-bottom:1rem;background:var(--panel-2)}
 .owner-publish summary{cursor:pointer;color:var(--gold-2);font-size:.85rem;display:flex;align-items:center;gap:.5rem;user-select:none}
 .owner-publish summary small{color:var(--muted)}
@@ -1761,22 +1762,14 @@ function openChangePassword(){
    Parsed into the DOM solely by injectOwnerUI() after authentication. */
 const OWNER_HTML = `<div id="ownerBundle">
 <!-- ═══════════ OWNER DASHBOARD (Owner Mode only) ═══════════ -->
-<section class="section" id="ownerDash" aria-labelledby="ownerTitle">
+<section class="section" id="ownerDash" aria-label="Owner area">
   <div class="container">
-    <div class="section-head">
-      <div>
-        <span class="eyebrow">Owner Access</span>
-        <h2 id="ownerTitle">Owner <em>Area</em></h2>
-        <p>Everything you need to run the shop - catalog, stock, invoices and publishing in one place.</p>
-      </div>
-      <button class="btn btn-ghost btn-sm" id="ownerSignOutBtn" type="button">Sign Out</button>
-    </div>
-
     <!-- Three-tab owner menu -->
     <div class="owner-tabs" role="tablist" aria-label="Owner sections">
       <button class="owner-tab active" id="ownerTabDashboard" role="tab" aria-selected="true" aria-controls="ownerPaneDashboard" data-pane="ownerPaneDashboard" type="button">Dashboard</button>
       <button class="owner-tab" id="ownerTabProducts" role="tab" aria-selected="false" aria-controls="ownerPaneProducts" data-pane="ownerPaneProducts" type="button">Products</button>
       <button class="owner-tab" id="ownerTabInvoice" role="tab" aria-selected="false" aria-controls="invoice" data-pane="invoice" type="button">Invoice</button>
+      <button class="btn btn-ghost btn-sm owner-signout-mini" id="ownerSignOutBtn" type="button">Sign Out</button>
     </div>
 
     <!-- TAB 1 · DASHBOARD -->
